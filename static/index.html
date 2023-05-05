@@ -5,12 +5,22 @@
 <button id="ClickBeeButton">Click bee</button>
 
 
+
 <script type="text/javascript">
 
     const button = document.getElementById("ClickBeeButton");
 
     button.addEventListener("click", () => {
         console.log("BUZZZZZZZ")
+
+        let beeCount = localStorage.getItem("beeCount");
+        if (!beeCount) {
+            beeCount = { count:0 }
+        } else {
+            beeCount = JSON.parse(beeCount)
+        }
+        beeCount.count++
+        localStorage.setItem("beeCount", JSON.stringify(beeCount));
     })
 </script>
 </body>
