@@ -28,10 +28,12 @@
         }
     }
 
+    function updateCount() {
+        let sightings = getSightings();
+        displayCount.innerText = sightings.length;
+    }
 
-
-    let sightings = getSightings();
-    displayCount.innerText = sightings.length;
+    updateCount();
 
     button.addEventListener("click", () => {
         console.log("BUZZZZZZZ")
@@ -39,7 +41,7 @@
         let sightings = getSightings();
         sightings.push({species:speciesSelection.value})
         localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
-        displayCount.innerText = sightings.length;
+        updateCount();
     })
 </script>
 </body>
