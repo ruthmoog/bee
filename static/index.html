@@ -30,7 +30,17 @@
 
     function updateCount() {
         let sightings = getSightings();
-        displayCount.innerText = sightings.length;
+        const result = sightings.reduce((speciesCount, sighting) => {
+            const currentSpeciesCount = speciesCount[sighting.species];
+            if (!currentSpeciesCount) {
+                speciesCount[sighting.species] = 1;
+            } else {
+                speciesCount[sighting.species]++;
+            }
+            return speciesCount
+        }, {});
+        console.log(result)
+        displayCount.innerText = JSON.stringify(result);
     }
 
     updateCount();
