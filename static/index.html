@@ -12,23 +12,22 @@
     const button = document.getElementById("ClickBeeButton");
     const displayCount = document.getElementById("beeCount");
 
-    let beeCount = localStorage.getItem("beeCount");
-    if (!beeCount) {
-        beeCount = {count: 0};
-    } else {
-        beeCount = JSON.parse(beeCount);
+    function getBeeCount() {
+        let beeCount = localStorage.getItem("beeCount");
+        if (!beeCount) {
+            return {count: 0};
+        } else {
+            return JSON.parse(beeCount);
+        }
     }
+
+    let beeCount = getBeeCount();
     displayCount.innerText = beeCount.count;
 
     button.addEventListener("click", () => {
         console.log("BUZZZZZZZ")
 
-        let beeCount = localStorage.getItem("beeCount");
-        if (!beeCount) {
-            beeCount = {count: 0};
-        } else {
-            beeCount = JSON.parse(beeCount);
-        }
+        let beeCount = getBeeCount();
         beeCount.count++
         localStorage.setItem("beeCount", JSON.stringify(beeCount));
         displayCount.innerText = beeCount.count;
