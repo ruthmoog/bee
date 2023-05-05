@@ -4,23 +4,35 @@
 
 <button id="ClickBeeButton">Click bee</button>
 
+<h2>Number of bees: <span id="beeCount"></span></h2>
 
 
 <script type="text/javascript">
 
     const button = document.getElementById("ClickBeeButton");
+    const displayCount = document.getElementById("beeCount");
+
+    let beeCount = localStorage.getItem("beeCount");
+    if (!beeCount) {
+        beeCount = {count: 0};
+    } else {
+        beeCount = JSON.parse(beeCount);
+    }
+    displayCount.innerText = beeCount.count;
 
     button.addEventListener("click", () => {
         console.log("BUZZZZZZZ")
 
         let beeCount = localStorage.getItem("beeCount");
         if (!beeCount) {
-            beeCount = { count:0 }
+            beeCount = {count: 0};
         } else {
-            beeCount = JSON.parse(beeCount)
+            beeCount = JSON.parse(beeCount);
         }
         beeCount.count++
         localStorage.setItem("beeCount", JSON.stringify(beeCount));
+        displayCount.innerText = beeCount.count;
+
     })
 </script>
 </body>
