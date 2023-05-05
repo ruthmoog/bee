@@ -15,22 +15,23 @@
     function getBeeCount() {
         let beeCount = localStorage.getItem("beeCount");
         if (!beeCount) {
-            return {count: 0};
+            return [];
         } else {
             return JSON.parse(beeCount);
         }
     }
 
     let beeCount = getBeeCount();
-    displayCount.innerText = beeCount.count;
+    console.log(beeCount)
+    displayCount.innerText = beeCount.length;
 
     button.addEventListener("click", () => {
         console.log("BUZZZZZZZ")
 
-        let beeCount = getBeeCount();
-        beeCount.count++
-        localStorage.setItem("beeCount", JSON.stringify(beeCount));
-        displayCount.innerText = beeCount.count;
+        let sightings = getBeeCount();
+        sightings.push({species:"tree"})
+        localStorage.setItem("beeCount", JSON.stringify(sightings));
+        displayCount.innerText = sightings.length;
 
     })
 </script>
