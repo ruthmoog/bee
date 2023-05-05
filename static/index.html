@@ -9,28 +9,28 @@
 
 <script type="text/javascript">
 
+    const sightingsStorageKey = "sightings";
     const button = document.getElementById("ClickBeeButton");
     const displayCount = document.getElementById("beeCount");
 
-    function getBeeCount() {
-        let beeCount = localStorage.getItem("beeCount");
-        if (!beeCount) {
+    function getSightings() {
+        let sightings = localStorage.getItem(sightingsStorageKey);
+        if (!sightings) {
             return [];
         } else {
-            return JSON.parse(beeCount);
+            return JSON.parse(sightings);
         }
     }
 
-    let beeCount = getBeeCount();
-    console.log(beeCount)
-    displayCount.innerText = beeCount.length;
+    let sightings = getSightings();
+    displayCount.innerText = sightings.length;
 
     button.addEventListener("click", () => {
         console.log("BUZZZZZZZ")
 
-        let sightings = getBeeCount();
+        let sightings = getSightings();
         sightings.push({species:"tree"})
-        localStorage.setItem("beeCount", JSON.stringify(sightings));
+        localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
         displayCount.innerText = sightings.length;
 
     })
