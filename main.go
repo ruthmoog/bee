@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 )
@@ -14,5 +15,5 @@ func main() {
 	if port == "" {
 		port = "8080"
 	}
-	http.ListenAndServe(":"+port, nil)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
