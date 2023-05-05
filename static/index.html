@@ -2,6 +2,11 @@
 
 <body><h1>Hello World!</h1>
 
+<select id="species">
+    <option>Tree</option>
+    <option>Common Carder</option>
+    <option>Shrill Carder</option>
+</select>
 <button id="ClickBeeButton">Click bee</button>
 
 <h2>Number of bees: <span id="beeCount"></span></h2>
@@ -12,6 +17,7 @@
     const sightingsStorageKey = "sightings";
     const button = document.getElementById("ClickBeeButton");
     const displayCount = document.getElementById("beeCount");
+    const speciesSelection = document.getElementById("species");
 
     function getSightings() {
         let sightings = localStorage.getItem(sightingsStorageKey);
@@ -22,6 +28,8 @@
         }
     }
 
+
+
     let sightings = getSightings();
     displayCount.innerText = sightings.length;
 
@@ -29,10 +37,9 @@
         console.log("BUZZZZZZZ")
 
         let sightings = getSightings();
-        sightings.push({species:"tree"})
+        sightings.push({species:speciesSelection.value})
         localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
         displayCount.innerText = sightings.length;
-
     })
 </script>
 </body>
