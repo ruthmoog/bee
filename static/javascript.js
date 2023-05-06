@@ -1,6 +1,5 @@
 const sightingsStorageKey = "sightings";
 const button = document.getElementById("ClickBeeButton");
-const displayCount = document.getElementById("beeCount");
 const speciesSelection = document.getElementById("species");
 
 function getSightings() {
@@ -24,9 +23,6 @@ function renderCount() {
         }
         return speciesCount
     }, {});
-    console.log(result)
-    displayCount.innerText = JSON.stringify(result);
-
 
     const observations = document.getElementById("observations")
 
@@ -39,8 +35,6 @@ function renderCount() {
 
         speciesCell.innerHTML = species
         countCell.innerHTML = count
-
-        console.log(`xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ${species}: ${count}`);
     }
 
 
