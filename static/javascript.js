@@ -1,6 +1,7 @@
 const sightingsStorageKey = "sightings";
 const queenSpottedButton = document.getElementById("QueenSpotted");
 const workerSpottedButton = document.getElementById("WorkerSpotted");
+const maleSpottedButton = document.getElementById("MaleSpotted");
 const speciesSelection = document.getElementById("species");
 
 function getSightings() {
@@ -42,10 +43,12 @@ function renderCount() {
         const speciesCell = row.insertCell(0);
         const queensCell = row.insertCell(1);
         const workersCell = row.insertCell(2);
+        const malesCell = row.insertCell(3);
 
         speciesCell.innerHTML = species
         queensCell.innerHTML = casteCounts.queen ? casteCounts.queen : "";
         workersCell.innerHTML = casteCounts.worker ? casteCounts.worker : "";
+        malesCell.innerHTML = casteCounts.male ? casteCounts.male : "";
     }
 }
 
@@ -66,6 +69,15 @@ workerSpottedButton.addEventListener("click", () => {
 
     let sightings = getSightings();
     sightings.push({species: speciesSelection.value, caste: "worker"})
+    localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
+    renderCount();
+})
+
+maleSpottedButton.addEventListener("click", () => {
+    console.log("MALE")
+
+    let sightings = getSightings();
+    sightings.push({species: speciesSelection.value, caste: "male"})
     localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
     renderCount();
 })
