@@ -54,30 +54,22 @@ function renderCount() {
 
 renderCount();
 
-queenSpottedButton.addEventListener("click", () => {
-    console.log("BUZZZZZZZ")
-
+function addSighting(caste) {
     let sightings = getSightings();
-    sightings.push({species: speciesSelection.value, caste: "queen"})
+    sightings.push({species: speciesSelection.value, caste})
     localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
     renderCount();
+}
+
+queenSpottedButton.addEventListener("click", () => {
+    addSighting("worker");
 })
 
 
 workerSpottedButton.addEventListener("click", () => {
-    console.log("WORKER OMG")
-
-    let sightings = getSightings();
-    sightings.push({species: speciesSelection.value, caste: "worker"})
-    localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
-    renderCount();
+    addSighting("queen");
 })
 
 maleSpottedButton.addEventListener("click", () => {
-    console.log("MALE")
-
-    let sightings = getSightings();
-    sightings.push({species: speciesSelection.value, caste: "male"})
-    localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
-    renderCount();
+    addSighting("male");
 })
