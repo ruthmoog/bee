@@ -1,4 +1,5 @@
 const sightingsStorageKey = "sightings";
+const castesOfBees = ['queen', 'worker', 'male', 'unknown']
 const queenSpottedButton = document.getElementById("QueenSpotted");
 const workerSpottedButton = document.getElementById("WorkerSpotted");
 const maleSpottedButton = document.getElementById("MaleSpotted");
@@ -41,17 +42,11 @@ function renderCount() {
 
         const row = observations.insertRow(0);
 
-        const speciesCell = row.insertCell(0);
-        const queensCell = row.insertCell(1);
-        const workersCell = row.insertCell(2);
-        const malesCell = row.insertCell(3);
-        const unknownsCell = row.insertCell(4);
+        row.insertCell(0).innerHTML = species
 
-        speciesCell.innerHTML = species
-        queensCell.innerHTML = casteCounts.queen ? casteCounts.queen : "";
-        workersCell.innerHTML = casteCounts.worker ? casteCounts.worker : "";
-        malesCell.innerHTML = casteCounts.male ? casteCounts.male : "";
-        unknownsCell.innerHTML = casteCounts.unknown ? casteCounts.unknown : "";
+        castesOfBees.forEach((caste, i) => {
+            row.insertCell(i+1).innerText = casteCounts[caste] ? casteCounts[caste] : "";
+        })
     }
 }
 
@@ -65,11 +60,11 @@ function addSighting(caste) {
 }
 
 queenSpottedButton.addEventListener("click", () => {
-    addSighting("worker");
+    addSighting("queen");
 })
 
 workerSpottedButton.addEventListener("click", () => {
-    addSighting("queen");
+    addSighting("worker");
 })
 
 maleSpottedButton.addEventListener("click", () => {
