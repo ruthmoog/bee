@@ -30,13 +30,20 @@ function renderCount() {
 
     const observations = document.getElementById("observations")
 
-    const row = observations.insertRow(0);
+    for (const [species, count] of Object.entries(result)) {
 
-    const speciesCell = row.insertCell(0);
-    const countCell = row.insertCell(1);
+        const row = observations.insertRow(0);
 
-    speciesCell.innerHTML = "Honeybee"
-    countCell.innerHTML = "4"
+        const speciesCell = row.insertCell(0);
+        const countCell = row.insertCell(1);
+
+        speciesCell.innerHTML = species
+        countCell.innerHTML = count
+
+        console.log(`xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ${species}: ${count}`);
+    }
+
+
 }
 
 renderCount();
