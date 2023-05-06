@@ -12,8 +12,9 @@ function getSightings() {
     }
 }
 
-function updateCount() {
-    let sightings = getSightings();
+function renderCount() {
+    const sightings = getSightings();
+
     const result = sightings.reduce((speciesCount, sighting) => {
         const currentSpeciesCount = speciesCount[sighting.species];
         if (!currentSpeciesCount) {
@@ -27,7 +28,7 @@ function updateCount() {
     displayCount.innerText = JSON.stringify(result);
 }
 
-updateCount();
+renderCount();
 
 button.addEventListener("click", () => {
     console.log("BUZZZZZZZ")
@@ -35,5 +36,5 @@ button.addEventListener("click", () => {
     let sightings = getSightings();
     sightings.push({species: speciesSelection.value})
     localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
-    updateCount();
+    renderCount();
 })
