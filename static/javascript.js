@@ -26,6 +26,17 @@ function renderCount() {
     }, {});
     console.log(result)
     displayCount.innerText = JSON.stringify(result);
+
+
+    const observations = document.getElementById("observations")
+
+    const row = observations.insertRow(0);
+
+    const speciesCell = row.insertCell(0);
+    const countCell = row.insertCell(1);
+
+    speciesCell.innerHTML = "Honeybee"
+    countCell.innerHTML = "4"
 }
 
 renderCount();
