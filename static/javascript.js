@@ -1,9 +1,8 @@
 const sightingsStorageKey = "sightings";
 const castesOfBees = ['queen', 'worker', 'male', 'unknown']
-const queenSpottedButton = document.getElementById("QueenSpotted");
-const workerSpottedButton = document.getElementById("WorkerSpotted");
-const maleSpottedButton = document.getElementById("MaleSpotted");
-const unknownSpottedButton = document.getElementById("UnknownSpotted");
+const beeButtons = castesOfBees.map((caste) => (
+    {button: document.getElementById(caste + 'Spotted'), caste})
+)
 const speciesSelection = document.getElementById("species");
 
 function getSightings() {
@@ -59,18 +58,8 @@ function addSighting(caste) {
     renderCount();
 }
 
-queenSpottedButton.addEventListener("click", () => {
-    addSighting("queen");
-})
-
-workerSpottedButton.addEventListener("click", () => {
-    addSighting("worker");
-})
-
-maleSpottedButton.addEventListener("click", () => {
-    addSighting("male");
-})
-
-unknownSpottedButton.addEventListener("click", () => {
-    addSighting("unknown");
+beeButtons.forEach(({button, caste}) => {
+    button.addEventListener("click", () => {
+        addSighting(caste)
+    })
 })
