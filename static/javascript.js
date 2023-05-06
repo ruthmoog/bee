@@ -1,5 +1,6 @@
 const sightingsStorageKey = "sightings";
 const queenSpottedButton = document.getElementById("QueenSpotted");
+const workerSpottedButton = document.getElementById("WorkerSpotted");
 const speciesSelection = document.getElementById("species");
 
 function getSightings() {
@@ -17,14 +18,18 @@ function renderCount() {
     const result = sightings.reduce((speciesCount, sighting) => {
         const currentSpeciesCount = speciesCount[sighting.species];
         if (!currentSpeciesCount) {
-            speciesCount[sighting.species] = {queen: 1};
+            speciesCount[sighting.species] = {[sighting.caste]: 1};
         } else {
-            speciesCount[sighting.species].queen++;
+            if (!speciesCount[sighting.species][sighting.caste]) {
+                speciesCount[sighting.species][sighting.caste] = 1
+            } else {
+                speciesCount[sighting.species][sighting.caste]++;
+            }
         }
         return speciesCount
     }, {});
 
-    console.log(result)
+    console.log(JSON.stringify(result))
 
     const observations = document.getElementById("observations")
 
@@ -36,14 +41,12 @@ function renderCount() {
 
         const speciesCell = row.insertCell(0);
         const queensCell = row.insertCell(1);
-
-        console.log(casteCounts, "%%%%%%%%%%%%%%%%%%");
+        const workersCell = row.insertCell(2);
 
         speciesCell.innerHTML = species
-        queensCell.innerHTML = casteCounts.queen;
+        queensCell.innerHTML = casteCounts.queen ? casteCounts.queen : "";
+        workersCell.innerHTML = casteCounts.worker ? casteCounts.worker : "";
     }
-
-
 }
 
 renderCount();
@@ -53,6 +56,16 @@ queenSpottedButton.addEventListener("click", () => {
 
     let sightings = getSightings();
     sightings.push({species: speciesSelection.value, caste: "queen"})
+    localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
+    renderCount();
+})
+
+
+workerSpottedButton.addEventListener("click", () => {
+    console.log("WORKER OMG")
+
+    let sightings = getSightings();
+    sightings.push({species: speciesSelection.value, caste: "worker"})
     localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
     renderCount();
 })
