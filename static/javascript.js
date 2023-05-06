@@ -26,6 +26,8 @@ function renderCount() {
 
     const observations = document.getElementById("observations")
 
+    observations.innerHTML = "";
+
     for (const [species, count] of Object.entries(result)) {
 
         const row = observations.insertRow(0);
