@@ -2,6 +2,7 @@ const sightingsStorageKey = "sightings";
 const queenSpottedButton = document.getElementById("QueenSpotted");
 const workerSpottedButton = document.getElementById("WorkerSpotted");
 const maleSpottedButton = document.getElementById("MaleSpotted");
+const unknownSpottedButton = document.getElementById("UnknownSpotted");
 const speciesSelection = document.getElementById("species");
 
 function getSightings() {
@@ -44,11 +45,13 @@ function renderCount() {
         const queensCell = row.insertCell(1);
         const workersCell = row.insertCell(2);
         const malesCell = row.insertCell(3);
+        const unknownsCell = row.insertCell(4);
 
         speciesCell.innerHTML = species
         queensCell.innerHTML = casteCounts.queen ? casteCounts.queen : "";
         workersCell.innerHTML = casteCounts.worker ? casteCounts.worker : "";
         malesCell.innerHTML = casteCounts.male ? casteCounts.male : "";
+        unknownsCell.innerHTML = casteCounts.unknown ? casteCounts.unknown : "";
     }
 }
 
@@ -65,11 +68,14 @@ queenSpottedButton.addEventListener("click", () => {
     addSighting("worker");
 })
 
-
 workerSpottedButton.addEventListener("click", () => {
     addSighting("queen");
 })
 
 maleSpottedButton.addEventListener("click", () => {
     addSighting("male");
+})
+
+unknownSpottedButton.addEventListener("click", () => {
+    addSighting("unknown");
 })
