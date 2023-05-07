@@ -54,15 +54,23 @@ function renderCount() {
 
     observations.innerHTML = "";
 
-    for (const [species, casteCounts] of Object.entries(beeSightingsSummary)) {
+    for (const [section, sightings] of Object.entries(beeSightingsSummary)) {
 
-        const row = observations.insertRow(0);
+        console.log(sightings);
 
-        row.insertCell(0).innerHTML = species
+        for (const [species, casteCounts] of Object.entries(sightings)) {
 
-        castesOfBees.forEach((caste, i) => {
-            row.insertCell(i + 1).innerText = casteCounts[caste] ? casteCounts[caste] : "";
-        })
+            const row = observations.insertRow(0);
+
+            row.insertCell(0).innerHTML = section;
+            row.insertCell(1).innerHTML = species;
+
+            castesOfBees.forEach((caste, i) => {
+                row.insertCell(i + 2).innerText = casteCounts[caste] ? casteCounts[caste] : "";
+            })
+        }
+
+
     }
 }
 
