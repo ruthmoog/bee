@@ -62,8 +62,9 @@ function renderCount() {
 
             const row = observations.insertRow(0);
 
-            row.insertCell(0).innerHTML = section;
-            row.insertCell(1).innerHTML = species;
+            row.insertCell(0).innerHTML = species;
+            row.insertCell(1).innerHTML = section;
+
 
             castesOfBees.forEach((caste, i) => {
                 row.insertCell(i + 2).innerText = casteCounts[caste] ? casteCounts[caste] : "";
