@@ -4,8 +4,7 @@ const beeButtons = castesOfBees.map((caste) => (
     {button: document.getElementById(caste + 'Spotted'), caste})
 )
 const speciesSelection = document.getElementById("species");
-const sectionSelection = document.querySelector('input[name="section"]:checked');
-const comments = document.getElementById("comments");
+// const comments = document.getElementById("comments");
 
 function getSightings() {
     let sightings = localStorage.getItem(sightingsStorageKey);
@@ -83,7 +82,7 @@ function addSighting(caste) {
         section: document.querySelector('input[name="section"]:checked').value,
         species: speciesSelection.value,
         caste,
-        comments: comments.value
+        // comments: comments.value
     })
     localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
     renderCount();

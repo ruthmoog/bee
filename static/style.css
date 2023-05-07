@@ -1,0 +1,18 @@
+fieldset {
+    margin: 1em;
+}
+
+button {
+    width: 47%;
+    margin: 2% 1%;
+}
+
+select {
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+}
