@@ -19,34 +19,49 @@ function getSightings() {
 function renderCount() {
     const sightings = getSightings();
 
-    const result = sightings.reduce((speciesCount, sighting) => {
-        const currentSpeciesCount = speciesCount[sighting.species];
+    const beeSightingsSummary = sightings.reduce((summary, sighting) => {
+        // we need to update the section for the given sighting
+
+        // look up the section from the summary (or create a new section)
+        let currentSection = summary[sighting.section];
+        if (!currentSection) {
+            currentSection = {}
+        }
+        summary[sighting.section] = currentSection
+
+        // look up the species count in the current section
+        const currentSpeciesCount = currentSection[sighting.species];
+
         if (!currentSpeciesCount) {
-            speciesCount[sighting.species] = {[sighting.caste]: 1};
+            // if the species hasnt been seen in this section, add a record of it, with its caste
+            currentSection[sighting.species] = {[sighting.caste]: 1};
         } else {
-            if (!speciesCount[sighting.species][sighting.caste]) {
-                speciesCount[sighting.species][sighting.caste] = 1
+            // if we haven't seen this caste (but we have seen the species)
+            if (!currentSection[sighting.species][sighting.caste]) {
+                // add the caste
+                currentSection[sighting.species][sighting.caste] = 1
             } else {
-                speciesCount[sighting.species][sighting.caste]++;
+                // increment the caste
+                currentSection[sighting.species][sighting.caste]++;
             }
         }
-        return speciesCount
+        return summary
     }, {});
 
-    console.log(JSON.stringify(result))
+    console.log(JSON.stringify(beeSightingsSummary))
 
     const observations = document.getElementById("observations")
 
     observations.innerHTML = "";
 
-    for (const [species, casteCounts] of Object.entries(result)) {
+    for (const [species, casteCounts] of Object.entries(beeSightingsSummary)) {
 
         const row = observations.insertRow(0);
 
         row.insertCell(0).innerHTML = species
 
         castesOfBees.forEach((caste, i) => {
-            row.insertCell(i+1).innerText = casteCounts[caste] ? casteCounts[caste] : "";
+            row.insertCell(i + 1).innerText = casteCounts[caste] ? casteCounts[caste] : "";
         })
     }
 }
@@ -55,7 +70,12 @@ renderCount();
 
 function addSighting(caste) {
     let sightings = getSightings();
-    sightings.push({section: document.querySelector('input[name="section"]:checked').value, species: speciesSelection.value, caste, comments: comments.value})
+    sightings.push({
+        section: document.querySelector('input[name="section"]:checked').value,
+        species: speciesSelection.value,
+        caste,
+        comments: comments.value
+    })
     localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
     renderCount();
 }
