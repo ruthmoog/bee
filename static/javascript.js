@@ -4,6 +4,7 @@ const beeButtons = castesOfBees.map((caste) => (
     {button: document.getElementById(caste + 'Spotted'), caste})
 )
 const speciesSelection = document.getElementById("species");
+const clearButton = document.getElementById("clear");
 // const comments = document.getElementById("comments");
 
 function getSightings() {
@@ -92,4 +93,9 @@ beeButtons.forEach(({button, caste}) => {
     button.addEventListener("click", () => {
         addSighting(caste)
     })
+})
+
+clearButton.addEventListener("click", () => {
+    localStorage.clear();
+    renderCount();
 })
