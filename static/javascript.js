@@ -16,9 +16,7 @@ function getSightings() {
     }
 }
 
-function renderCount() {
-    const sightings = getSightings();
-
+function createBeeSightingsSummary(sightings) {
     const beeSightingsSummary = sightings.reduce((summary, sighting) => {
         // we need to update the section for the given sighting
 
@@ -47,6 +45,13 @@ function renderCount() {
         }
         return summary
     }, {});
+    return beeSightingsSummary;
+}
+
+function renderCount() {
+    const sightings = getSightings();
+
+    const beeSightingsSummary = createBeeSightingsSummary(sightings);
 
     console.log(JSON.stringify(beeSightingsSummary))
 
