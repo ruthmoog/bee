@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "rollup": "^3.21.5"
+  },
+  "watch": {
+    "build": "{src,test}/*.js"
+  },
+  "scripts": {
+    "build": "rollup --config",
+    "watch": "npm-watch"
+  },
+  "dependencies": {
+    "npm-watch": "^0.11.0"
+  }
+}
