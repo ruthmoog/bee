@@ -1,13 +1,10 @@
 export function createBeeSightingSummary (sightings) {
     const beeSightingsSummary = sightings.reduce((summary, sighting) => {
         // we need to update the section for the given sighting
-
         // look up the section from the summary (or create a new section)
-        let currentSection = summary[sighting.section];
-        if (!currentSection) {
-            currentSection = {}
-        }
-        summary[sighting.section] = currentSection
+
+        const currentSection = summary[sighting.section] || {}
+        summary[sighting.section] = currentSection;
 
         // look up the species count in the current section
         const currentSpeciesCount = currentSection[sighting.species];
