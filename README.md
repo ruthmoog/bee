@@ -10,7 +10,7 @@
 ### dependencies
 
 - go
-- nodejs
+- nodejs v20
 
 Run `npm i` to fetch dependencies
 

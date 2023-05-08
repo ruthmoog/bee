@@ -7,9 +7,11 @@
   },
   "scripts": {
     "build": "rollup --config",
+    "test": "node --test",
     "watch": "npm-watch"
   },
   "dependencies": {
     "npm-watch": "^0.11.0"
-  }
+  },
+  "type": "module"
 }
