@@ -5,7 +5,19 @@ const beeButtons = castesOfBees.map((caste) => (
 )
 const speciesSelection = document.getElementById("species");
 const clearButton = document.getElementById("clear");
-// const comments = document.getElementById("comments");
+
+renderSummary();
+
+beeButtons.forEach(({button, caste}) => {
+    button.addEventListener("click", () => {
+        addSighting(caste)
+    })
+})
+
+clearButton.addEventListener("click", () => {
+    localStorage.clear();
+    renderSummary();
+})
 
 function getSightings() {
     let sightings = localStorage.getItem(sightingsStorageKey);
@@ -48,12 +60,10 @@ function createBeeSightingsSummary(sightings) {
     return beeSightingsSummary;
 }
 
-function renderCount() {
+function renderSummary() {
     const sightings = getSightings();
 
     const beeSightingsSummary = createBeeSightingsSummary(sightings);
-
-    console.log(JSON.stringify(beeSightingsSummary))
 
     const observations = document.getElementById("observations")
 
@@ -61,15 +71,12 @@ function renderCount() {
 
     for (const [section, sightings] of Object.entries(beeSightingsSummary)) {
 
-        console.log(sightings);
-
         for (const [species, casteCounts] of Object.entries(sightings)) {
 
             const row = observations.insertRow(0);
 
             row.insertCell(0).innerHTML = species;
             row.insertCell(1).innerHTML = section;
-
 
             castesOfBees.forEach((caste, i) => {
                 row.insertCell(i + 2).innerText = casteCounts[caste] ? casteCounts[caste] : "";
@@ -80,8 +87,6 @@ function renderCount() {
     }
 }
 
-renderCount();
-
 function addSighting(caste) {
     let sightings = getSightings();
     sightings.push({
@@ -91,16 +96,5 @@ function addSighting(caste) {
         // comments: comments.value
     })
     localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
-    renderCount();
+    renderSummary();
 }
-
-beeButtons.forEach(({button, caste}) => {
-    button.addEventListener("click", () => {
-        addSighting(caste)
-    })
-})
-
-clearButton.addEventListener("click", () => {
-    localStorage.clear();
-    renderCount();
-})
