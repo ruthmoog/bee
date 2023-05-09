@@ -13,7 +13,7 @@ const clearButton = document.getElementById("clear");
 renderSummary();
 
 startButton.addEventListener("click", () => {
-    setStart(new Date().getTime());
+    setStart(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
 })
 
 beeButtons.forEach(({button, caste}) => {

@@ -52,8 +52,11 @@
 
     function setStart(time) {
         let startTime = getStartTime();
-        startTime.push({start: time,});
+        startTime.pop();
+        startTime.push({start: time});
         localStorage.setItem(startTimeStorageKey, JSON.stringify(startTime));
+        console.log("start",JSON.parse(localStorage.getItem(startTimeStorageKey)));
+
     }
 
     function getStartTime() {
@@ -77,7 +80,7 @@
     renderSummary();
 
     startButton.addEventListener("click", () => {
-        setStart(new Date().getTime());
+        setStart(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
     });
 
     beeButtons.forEach(({button, caste}) => {

@@ -22,8 +22,11 @@ export function getSightings() {
 
 export function setStart(time) {
     let startTime = getStartTime();
-    startTime.push({start: time,})
+    startTime.pop()
+    startTime.push({start: time})
     localStorage.setItem(startTimeStorageKey, JSON.stringify(startTime))
+    console.log("start",JSON.parse(localStorage.getItem(startTimeStorageKey)))
+
 }
 
 export function getStartTime() {
