@@ -5,7 +5,6 @@
         return sightings.reduce((summary, sighting) => {
             // we need to update the section for the given sighting
             // look up the section from the summary (or create a new section)
-
             const currentSection = summary[sighting.section] || {};
             summary[sighting.section] = currentSection;
 
@@ -16,13 +15,10 @@
             if (!currentSpeciesCount) {
                 // if the species hasnt been seen in this section, add a record of it, with its caste
                 currentSection[sighting.species] = {[sighting.caste]: 1};
-            } else if (!currentSection[sighting.species][sighting.caste]) {
-                // add the caste
-                currentSection[sighting.species][sighting.caste] = 1;
             } else {
-                // increment the caste
-                currentSection[sighting.species][sighting.caste]++;
+                currentSection[sighting.species][sighting.caste] = currentSection[sighting.species][sighting.caste] ? currentSection[sighting.species][sighting.caste] + 1 : 1;
             }
+
             return summary
         }, {});
     }
