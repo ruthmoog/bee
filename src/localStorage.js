@@ -1,4 +1,5 @@
 const sightingsStorageKey = "sightings";
+const startTimeStorageKey = "start-time";
 
 export function addSighting(caste, species, section) {
     let sightings = getSightings();
@@ -6,7 +7,6 @@ export function addSighting(caste, species, section) {
         section,
         species,
         caste,
-        // comments: comments.value
     })
     localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
 }
@@ -19,3 +19,20 @@ export function getSightings() {
         return JSON.parse(sightings);
     }
 }
+
+export function setStart(time) {
+    let startTime = getStartTime();
+    startTime.push({start: time,})
+    localStorage.setItem(startTimeStorageKey, JSON.stringify(startTime))
+}
+
+export function getStartTime() {
+    let startTime = localStorage.getItem(startTimeStorageKey);
+    if (!startTime) {
+        return [];
+    } else {
+        return JSON.parse(startTime);
+    }
+}
+
+

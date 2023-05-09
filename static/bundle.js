@@ -29,6 +29,7 @@
     }
 
     const sightingsStorageKey = "sightings";
+    const startTimeStorageKey = "start-time";
 
     function addSighting(caste, species, section) {
         let sightings = getSightings();
@@ -36,7 +37,6 @@
             section,
             species,
             caste,
-            // comments: comments.value
         });
         localStorage.setItem(sightingsStorageKey, JSON.stringify(sightings));
     }
@@ -50,6 +50,23 @@
         }
     }
 
+    function setStart(time) {
+        let startTime = getStartTime();
+        startTime.push({start: time,});
+        localStorage.setItem(startTimeStorageKey, JSON.stringify(startTime));
+    }
+
+    function getStartTime() {
+        let startTime = localStorage.getItem(startTimeStorageKey);
+        if (!startTime) {
+            return [];
+        } else {
+            return JSON.parse(startTime);
+        }
+    }
+
+    const startButton = document.getElementById("start");
+
     const castesOfBees = ['queen', 'worker', 'male', 'unknown'];
     const beeButtons = castesOfBees.map((caste) => (
         {button: document.getElementById(caste + 'Spotted'), caste})
@@ -58,6 +75,10 @@
     const clearButton = document.getElementById("clear");
 
     renderSummary();
+
+    startButton.addEventListener("click", () => {
+        setStart(new Date().getTime());
+    });
 
     beeButtons.forEach(({button, caste}) => {
         button.addEventListener("click", () => {

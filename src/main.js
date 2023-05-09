@@ -1,5 +1,7 @@
 import {createBeeSightingSummary} from "./beeSummary";
-import {addSighting, getSightings} from "./localStorage";
+import {addSighting, getSightings, setStart} from "./localStorage";
+
+const startButton = document.getElementById("start")
 
 const castesOfBees = ['queen', 'worker', 'male', 'unknown']
 const beeButtons = castesOfBees.map((caste) => (
@@ -9,6 +11,10 @@ const speciesSelection = document.getElementById("species");
 const clearButton = document.getElementById("clear");
 
 renderSummary();
+
+startButton.addEventListener("click", () => {
+    setStart(new Date().getTime());
+})
 
 beeButtons.forEach(({button, caste}) => {
     button.addEventListener("click", () => {
