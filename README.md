@@ -12,8 +12,14 @@
 - go
 - nodejs v20
 
-Run `npm i` to fetch dependencies
+Run `npm i` to fetch and install dependencies
 
 ### build
 
 `npm run watch`
+(or run from `package.json`)
+
+### run tests
+
+`npm test`
+(or run from `package.json`)
