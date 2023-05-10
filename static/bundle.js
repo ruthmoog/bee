@@ -29,7 +29,6 @@
     }
 
     const sightingsStorageKey = "sightings";
-    const startTimeStorageKey = "start-time";
 
     function addSighting(caste, species, section) {
         let sightings = getSightings();
@@ -51,24 +50,15 @@
     }
 
     function setStart(time) {
-        let startTime = getStartTime();
-        startTime.pop();
-        startTime.push({start: time});
-        localStorage.setItem(startTimeStorageKey, JSON.stringify(startTime));
-        console.log("start",JSON.parse(localStorage.getItem(startTimeStorageKey)));
-
+        localStorage.setItem("start", time);
     }
 
-    function getStartTime() {
-        let startTime = localStorage.getItem(startTimeStorageKey);
-        if (!startTime) {
-            return [];
-        } else {
-            return JSON.parse(startTime);
-        }
+    function setStop(time) {
+        localStorage.setItem("stop", time);
     }
 
     const startButton = document.getElementById("start");
+    const stopButton = document.getElementById("stop");
 
     const castesOfBees = ['queen', 'worker', 'male', 'unknown'];
     const beeButtons = castesOfBees.map((caste) => (
@@ -80,7 +70,11 @@
     renderSummary();
 
     startButton.addEventListener("click", () => {
-        setStart(new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }));
+        setStart(getHourAndMinute());
+    });
+
+    stopButton.addEventListener("click", () => {
+        setStop(getHourAndMinute());
     });
 
     beeButtons.forEach(({button, caste}) => {
@@ -95,6 +89,10 @@
         localStorage.clear();
         renderSummary();
     });
+
+    function getHourAndMinute() {
+        return new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
+    }
 
     function renderSummary() {
         const sightings = getSightings();
