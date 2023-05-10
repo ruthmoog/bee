@@ -23,6 +23,10 @@ export function setStart(time) {
     localStorage.setItem("start", time);
 }
 
+export function getStartTime() {
+    return localStorage.getItem("start");
+}
+
 export function setStop(time) {
     localStorage.setItem("stop", time);
 }

@@ -1,8 +1,10 @@
 import {createBeeSightingSummary} from "./beeSummary";
-import {addSighting, getSightings, setStart, setStop} from "./localStorage";
+import {addSighting, getSightings, setStart, setStop, getStartTime} from "./localStorage";
 
 const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")
+let hide = "True";
+stopButton.hidden = hide;
 
 const castesOfBees = ['queen', 'worker', 'male', 'unknown']
 const beeButtons = castesOfBees.map((caste) => (
@@ -15,6 +17,7 @@ renderSummary();
 
 startButton.addEventListener("click", () => {
     setStart(getHourAndMinute());
+    renderTime();
 })
 
 stopButton.addEventListener("click", () => {
@@ -36,6 +39,16 @@ clearButton.addEventListener("click", () => {
 
 function getHourAndMinute() {
     return new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
+}
+
+
+function renderTime() {
+    const startTime = getStartTime();
+    const stopButton = document.getElementById("stop")
+    const startButton = document.getElementById("start")
+    hide = !hide
+    stopButton.hidden = hide
+    startButton.outerText = startTime
 }
 
 function renderSummary() {

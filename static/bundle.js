@@ -53,12 +53,18 @@
         localStorage.setItem("start", time);
     }
 
+    function getStartTime() {
+        return localStorage.getItem("start");
+    }
+
     function setStop(time) {
         localStorage.setItem("stop", time);
     }
 
     const startButton = document.getElementById("start");
     const stopButton = document.getElementById("stop");
+    let hide = "True";
+    stopButton.hidden = hide;
 
     const castesOfBees = ['queen', 'worker', 'male', 'unknown'];
     const beeButtons = castesOfBees.map((caste) => (
@@ -71,6 +77,7 @@
 
     startButton.addEventListener("click", () => {
         setStart(getHourAndMinute());
+        renderTime();
     });
 
     stopButton.addEventListener("click", () => {
@@ -92,6 +99,16 @@
 
     function getHourAndMinute() {
         return new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
+    }
+
+
+    function renderTime() {
+        const startTime = getStartTime();
+        const stopButton = document.getElementById("stop");
+        const startButton = document.getElementById("start");
+        hide = !hide;
+        stopButton.hidden = hide;
+        startButton.outerText = startTime;
     }
 
     function renderSummary() {
