@@ -1,5 +1,5 @@
 import {createBeeSightingSummary} from "./beeSummary";
-import {addSighting, getSightings, setStart, setStop, getStartTime} from "./localStorage";
+import {addSighting, getSightings, setStart, setDate, setStop, getStartTime, getDate} from "./localStorage";
 
 const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")
@@ -17,6 +17,7 @@ renderSummary();
 
 startButton.addEventListener("click", () => {
     setStart(getHourAndMinute());
+    setDate(new Date().toLocaleDateString("en-GB"));
     renderTime();
 })
 
@@ -41,14 +42,12 @@ function getHourAndMinute() {
     return new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
 }
 
-
 function renderTime() {
     const startTime = getStartTime();
-    const stopButton = document.getElementById("stop")
-    const startButton = document.getElementById("start")
+    const date = getDate();
     hide = !hide
     stopButton.hidden = hide
-    startButton.outerText = startTime
+    startButton.outerText = "Date: " + date + "\nBeeWalk started: " + startTime
 }
 
 function renderSummary() {

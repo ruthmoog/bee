@@ -53,8 +53,16 @@
         localStorage.setItem("start", time);
     }
 
+    function setDate(day) {
+        localStorage.setItem("date", day);
+    }
+
     function getStartTime() {
         return localStorage.getItem("start");
+    }
+
+    function getDate() {
+        return localStorage.getItem("date");
     }
 
     function setStop(time) {
@@ -77,6 +85,7 @@
 
     startButton.addEventListener("click", () => {
         setStart(getHourAndMinute());
+        setDate(new Date().toLocaleDateString("en-GB"));
         renderTime();
     });
 
@@ -101,14 +110,12 @@
         return new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
     }
 
-
     function renderTime() {
         const startTime = getStartTime();
-        const stopButton = document.getElementById("stop");
-        const startButton = document.getElementById("start");
+        const date = getDate();
         hide = !hide;
         stopButton.hidden = hide;
-        startButton.outerText = startTime;
+        startButton.outerText = "Date: " + date + "\nBeeWalk started: " + startTime;
     }
 
     function renderSummary() {

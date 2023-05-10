@@ -23,8 +23,16 @@ export function setStart(time) {
     localStorage.setItem("start", time);
 }
 
+export function setDate(day) {
+    localStorage.setItem("date", day);
+}
+
 export function getStartTime() {
     return localStorage.getItem("start");
+}
+
+export function getDate() {
+    return localStorage.getItem("date");
 }
 
 export function setStop(time) {
