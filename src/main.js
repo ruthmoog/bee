@@ -1,9 +1,10 @@
 import {createBeeSightingSummary} from "./beeSummary";
-import {addSighting, getSightings, setStart, setDate, setStop, getStartTime, getDate} from "./localStorage";
+import {addSighting, getSightings, setStart, setDate, setStop, getStartTime, getEndTime, getDate} from "./localStorage";
 
 const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")
-let hide = "True";
+let hide = true;
+let started = false;
 stopButton.hidden = hide;
 
 const castesOfBees = ['queen', 'worker', 'male', 'unknown']
@@ -23,6 +24,7 @@ startButton.addEventListener("click", () => {
 
 stopButton.addEventListener("click", () => {
     setStop(getHourAndMinute());
+    renderTime();
 })
 
 beeButtons.forEach(({button, caste}) => {
@@ -44,10 +46,19 @@ function getHourAndMinute() {
 
 function renderTime() {
     const startTime = getStartTime();
+    const endTime = getEndTime();
     const date = getDate();
     hide = !hide
-    stopButton.hidden = hide
-    startButton.outerText = "Date: " + date + "\nBeeWalk started: " + startTime
+    if (started) {
+        stopButton.outerText = " ended: " + endTime;
+        stopButton.visible = "hidden"
+    }
+
+    if (!hide) {
+        startButton.outerText = "Date: " + date + "\nBeeWalk started: " + startTime;
+        stopButton.hidden = hide
+        started = !started;
+    }
 }
 
 function renderSummary() {

@@ -39,5 +39,7 @@ export function setStop(time) {
     localStorage.setItem("stop", time);
 }
 
-
+export function getEndTime() {
+    return localStorage.getItem("stop");
+}
 
