@@ -1,18 +1,80 @@
+html {
+    font-family: "American Typewriter";
+
+}
+
 fieldset {
     margin: 1em;
+    border-color: hotpink;
+    border-style: solid;
+    border-radius: 10px;
 }
 
-button {
+button, #species {
     width: 47%;
     margin: 2% 1%;
+    background-color: lightgoldenrodyellow;
+    border-radius: 5px;
+    box-shadow: 4px 3px 0px 1px hotpink;
+    border: none;
+    font-family: "American Typewriter";
+    padding: 1%;
+
 }
 
-select {
+table {
+    box-shadow: 4px 3px 0px 1px hotpink;
+    margin: 3% 0;
     width: 100%;
 }
+
+select, #species {
+    width: 100%;
+    padding: 3%;
+}
+
+
 
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
+    border: 1px solid lightpink;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 2px;
+    background-color: lightgoldenrodyellow;
+    border-radius: 9px;
+}
+
+th {
+    font-size: 75%;
+}
+
+body {
+    background-color: lightpink;
+    color: #222;
+    background-size: 20px 20px;
+    background-image:
+            linear-gradient(to right, pink 1px, transparent 0px),
+            linear-gradient(to bottom, pink 1px, transparent 0px);
+}
+
+
+h2 {
+    margin-bottom: 1%;
+}
+
+.selectSection {
+    background-color: lightgoldenrodyellow;
+    display: inline;
+    margin: 0.5%;
+    border-radius: 6px;
+    padding: 1.2%;
+}
+
+#clear {
+    margin: 3%;
+    background-color: crimson;
+    color: lightgoldenrodyellow;
 }

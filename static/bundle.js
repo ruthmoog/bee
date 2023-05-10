@@ -120,15 +120,15 @@
         const startTime = getStartTime();
         const endTime = getEndTime();
         const date = getDate();
-        hide = !hide;
+
         if (started) {
             stopButton.outerText = " ended: " + endTime;
             stopButton.visible = "hidden";
         }
 
-        if (!hide) {
+        if (!started) {
             startButton.outerText = "Date: " + date + "\nBeeWalk started: " + startTime;
-            stopButton.hidden = hide;
+            stopButton.hidden = started;
             started = !started;
         }
     }
