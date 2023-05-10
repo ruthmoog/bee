@@ -16,7 +16,7 @@
         margin: 2% 1%;
         background-color: lightgoldenrodyellow;
         border-radius: 5px;
-        box-shadow: 4px 3px 0px 1px hotpink;
+        box-shadow: 7px 7px 0px 1px powderblue;
         border: none;
         font-family: "American Typewriter";
         padding: 1%;
@@ -24,7 +24,7 @@
     }
 
     table {
-        box-shadow: 4px 3px 0px 1px hotpink;
+        box-shadow: 7px 7px 0px 1px powderblue;
         margin: 3% 0;
         width: 100%;
     }
@@ -36,9 +36,6 @@
 
 
     table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        text-align: center;
         border: 1px solid lightpink;
         border-collapse: collapse;
         text-align: center;
@@ -76,45 +73,34 @@
         margin: 3%;
         background-color: crimson;
         color: lightgoldenrodyellow;
+        box-shadow: 7px 7px 0px 1px hotpink;
+
     }
 }
 
 
-fieldset {
-
-    margin: 1em;
-
-}
+@media only screen and (min-width: 1090px) {
 
 
+    fieldset {
+        margin: 1em;
+    }
 
 
-button {
-
-    width: 47%;
-
-    margin: 2% 1%;
-
-}
+    button {
+        width: 47%;
+        margin: 2% 1%;
+    }
 
 
+    select {
+        width: 100%;
+    }
 
 
-select {
-
-    width: 100%;
-
-}
-
-
-
-
-table, th, td {
-
-    border: 1px solid black;
-
-    border-collapse: collapse;
-
-    text-align: center;
-
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: center;
+    }
 }
