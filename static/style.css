@@ -30,19 +30,21 @@
     }
 
     .funky {
-        position: relative;
-        display: inline-block;
-        top: -11px;
-        rotate: -28deg;
-        right: 0.6rem;
-        font-size: 1rem;
+        position:               relative;
+        display:                inline-block;
+        top:                    -11px;
+        rotate:                 -28deg;
+        right:                  0.6rem;
+        font-size:              1rem;
     }
 
-    fieldset {
+    fieldset, #time {
         margin:                 1em;
         border-color:           var(--border-color);
         border-style:           solid;
         border-radius:          10px;
+        border-width:           2px;
+        padding:                1rem;
     }
 
     /* Interactive elements */
