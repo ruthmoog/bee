@@ -1,6 +1,6 @@
 import {createBeeSightingSummary} from "./beeSummary";
-import {addSighting, getSightings, getStartTime, getEndTime, getDate} from "./localStorage";
-import {setStartDateTime, setStopTime} from "./timeAndDate.js";
+import {addSighting, getSightings} from "./localStorage";
+import {getDate, getEndTime, getStartTime, setStartDateTime, setStopTime} from "./timeAndDate.js";
 
 const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")
@@ -67,6 +67,7 @@ function renderTime() {
         startButton.hidden = started;
         stopButton.hidden = stopped;
     }
+
     if (stopped) {
         const endTime = getEndTime();
         dateTimeDisplay.innerText = "Date: " + date + "\nBeeWalk started: " + startTime + " ended: " + endTime;
