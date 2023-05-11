@@ -7,107 +7,104 @@
     --drop-shadow-color:        powderblue;
     --main-font-color:          #222;  /* dark grey */
     --alert-button-color:       crimson;
+
+    --preferred-fonts:          "American Typewriter", sans-serif;
 }
 
 
 @media only screen and (max-width: 1089px) {
     html {
-        font-family: "American Typewriter", sans-serif;
-    }
-
-    fieldset {
-        margin: 1em;
-        border-color: var(--border-color);
-        border-style: solid;
-        border-radius: 10px;
-    }
-
-    button, #species {
-        width: 47%;
-        margin: 2% 1%;
-        background-color: var(--field-color);
-        border-radius: 5px;
-        box-shadow: 7px 7px 0 1px var(--drop-shadow-color);
-        border: none;
-        font-family: "American Typewriter", sans-serif;
-        padding: 1%;
-
-    }
-
-    table {
-        box-shadow: 7px 7px 0 1px var(--drop-shadow-color);
-        margin: 3% 0;
-        width: 100%;
-    }
-
-    select, #species {
-        width: 100%;
-        padding: 3%;
-    }
-
-
-    table, th, td {
-        border: 1px solid var(--main-background-color);
-        border-collapse: collapse;
-        text-align: center;
-        padding: 2px;
-        background-color: var(--field-color);
-        border-radius: 9px;
-    }
-
-    th {
-        font-size: 75%;
+        font-family:            var(--preferred-fonts);
     }
 
     body {
-        background-color: var(--main-background-color);
-        color: var(--main-font-color);
-        background-size: 20px 20px;
-        background-image: linear-gradient(to right, var(--accent-background-color) 1px, transparent 0px),
-        linear-gradient(to bottom, var(--accent-background-color) 1px, transparent 0px);
+        background-color:       var(--main-background-color);
+        color:                  var(--main-font-color);
+        background-size:        20px 20px;
+        background-image:       linear-gradient(to right,   var(--accent-background-color) 1px, transparent 0),
+                                linear-gradient(to bottom,  var(--accent-background-color) 1px, transparent 0);
     }
 
-
     h2 {
-        margin-bottom: 1%;
+        margin-bottom:          1%;
+    }
+
+    fieldset {
+        margin:                 1em;
+        border-color:           var(--border-color);
+        border-style:           solid;
+        border-radius:          10px;
+    }
+
+    /* Interactive elements */
+
+    button, #species {
+        border:                 none;
+        width:                  47%;
+        margin:                 2% 1%;
+        padding:                1%;
+        font-family:            var(--preferred-fonts);
+        background-color:       var(--field-color);
+        border-radius:          5px;
+        box-shadow:             7px 7px 0 1px var(--drop-shadow-color);
+    }
+
+    select, #species {
+        width:                  100%;
+        padding:                3%;
     }
 
     .selectSection {
-        background-color: var(--field-color);
-        display: inline;
-        margin: 0.5%;
-        border-radius: 6px;
-        padding: 1.2%;
+        background-color:       var(--field-color);
+        display:                inline;
+        margin:                 0.5%;
+        border-radius:          6px;
+        padding:                1.2%;
     }
 
     #clear {
-        margin: 3%;
-        background-color: var(--alert-button-color);
-        color: var(--field-color);
-        box-shadow: 7px 7px 0 1px var(--border-color);
+        margin:                 3%;
+        background-color:       var(--alert-button-color);
+        color:                  var(--field-color);
+        box-shadow:             7px 7px 0 1px var(--border-color);
+    }
 
+    /* Presenting data */
+
+    table {
+        box-shadow:             7px 7px 0 1px var(--drop-shadow-color);
+        margin:                 3% 0;
+        width:                  100%;
+    }
+
+    table, th, td {
+        border:                 1px solid var(--main-background-color);
+        border-collapse:        collapse;
+        text-align:             center;
+        padding:                2px;
+        background-color:       var(--field-color);
+        border-radius:          9px;
+    }
+
+    th {
+        font-size:              75%;
     }
 }
 
-
 @media only screen and (min-width: 1090px) {
-
 
     fieldset {
         margin: 1em;
     }
-
 
     button {
         width: 47%;
         margin: 2% 1%;
     }
 
-
     select {
         width: 100%;
     }
-
 
     table, th, td {
         border: 1px solid black;
