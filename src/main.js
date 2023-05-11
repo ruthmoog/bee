@@ -1,11 +1,13 @@
 import {createBeeSightingSummary} from "./beeSummary";
-import {addSighting, getSightings, setStart, setDate, setStop, getStartTime, getEndTime, getDate} from "./localStorage";
+import {addSighting, getSightings, getStartTime, getEndTime, getDate} from "./localStorage";
+import {setStartDateTime, setStopTime} from "./timeAndDate.js";
 
 const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")
-let hide = true;
+let dateTimeDisplay = document.getElementById("dateTime")
 let started = false;
-stopButton.hidden = hide;
+let stopped = false;
+stopButton.hidden = !started;
 
 const castesOfBees = ['queen', 'worker', 'male', 'unknown']
 const beeButtons = castesOfBees.map((caste) => (
@@ -15,15 +17,15 @@ const speciesSelection = document.getElementById("species");
 const clearButton = document.getElementById("clear");
 
 renderSummary();
+renderTime();
 
 startButton.addEventListener("click", () => {
-    setStart(getHourAndMinute());
-    setDate(new Date().toLocaleDateString("en-GB"));
+    startBeeWalk();
     renderTime();
 })
 
 stopButton.addEventListener("click", () => {
-    setStop(getHourAndMinute());
+    stopBeeWalk();
     renderTime();
 })
 
@@ -44,24 +46,31 @@ clearButton.addEventListener("click", () => {
     }
 })
 
-function getHourAndMinute() {
-    return new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
+function startBeeWalk() {
+    started = true;
+    setStartDateTime();
+    renderTime();
+}
+
+function stopBeeWalk() {
+    stopped = true;
+    setStopTime();
+    renderTime();
 }
 
 function renderTime() {
     const startTime = getStartTime();
-    const endTime = getEndTime();
     const date = getDate();
 
     if (started) {
-        stopButton.outerText = " ended: " + endTime;
-        stopButton.visible = "hidden"
+        dateTimeDisplay.innerText = "Date: " + date + "\nBeeWalk started: " + startTime;
+        startButton.hidden = started;
+        stopButton.hidden = stopped;
     }
-
-    if (!started) {
-        startButton.outerText = "Date: " + date + "\nBeeWalk started: " + startTime;
-        stopButton.hidden = started
-        started = !started;
+    if (stopped) {
+        const endTime = getEndTime();
+        dateTimeDisplay.innerText = "Date: " + date + "\nBeeWalk started: " + startTime + " ended: " + endTime;
+        stopButton.hidden = stopped;
     }
 }
 
