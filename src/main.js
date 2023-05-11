@@ -36,8 +36,12 @@ beeButtons.forEach(({button, caste}) => {
 })
 
 clearButton.addEventListener("click", () => {
-    localStorage.clear();
-    location.reload();
+    const warningClearStoredData = "Make sure you have saved or submitted your data before proceeding.\n\n" +
+        "Delete forever?";
+    if (confirm(warningClearStoredData) == true) {
+        localStorage.clear();
+        location.reload();
+    }
 })
 
 function getHourAndMinute() {
