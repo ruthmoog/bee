@@ -109,7 +109,7 @@
 
     clearButton.addEventListener("click", () => {
         localStorage.clear();
-        renderSummary();
+        location.reload();
     });
 
     function getHourAndMinute() {
