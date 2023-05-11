@@ -1,12 +1,23 @@
+/* Global variables */
+:root {
+    --main-background-color:    lightpink;
+    --accent-background-color:  pink;
+    --border-color:             hotpink;
+    --field-color:              lightgoldenrodyellow;
+    --drop-shadow-color:        powderblue;
+    --main-font-color:          #222;  /* dark grey */
+    --alert-button-color:       crimson;
+}
+
+
 @media only screen and (max-width: 1089px) {
     html {
         font-family: "American Typewriter";
-
     }
 
     fieldset {
         margin: 1em;
-        border-color: hotpink;
+        border-color: var(--border-color);
         border-style: solid;
         border-radius: 10px;
     }
@@ -14,9 +25,9 @@
     button, #species {
         width: 47%;
         margin: 2% 1%;
-        background-color: lightgoldenrodyellow;
+        background-color: var(--field-color);
         border-radius: 5px;
-        box-shadow: 7px 7px 0px 1px powderblue;
+        box-shadow: 7px 7px 0px 1px var(--drop-shadow-color);
         border: none;
         font-family: "American Typewriter";
         padding: 1%;
@@ -24,7 +35,7 @@
     }
 
     table {
-        box-shadow: 7px 7px 0px 1px powderblue;
+        box-shadow: 7px 7px 0px 1px var(--drop-shadow-color);
         margin: 3% 0;
         width: 100%;
     }
@@ -36,11 +47,11 @@
 
 
     table, th, td {
-        border: 1px solid lightpink;
+        border: 1px solid var(--main-background-color);
         border-collapse: collapse;
         text-align: center;
         padding: 2px;
-        background-color: lightgoldenrodyellow;
+        background-color: var(--field-color);
         border-radius: 9px;
     }
 
@@ -49,11 +60,11 @@
     }
 
     body {
-        background-color: lightpink;
-        color: #222;
+        background-color: var(--main-background-color);
+        color: var(--main-font-color);
         background-size: 20px 20px;
-        background-image: linear-gradient(to right, pink 1px, transparent 0px),
-        linear-gradient(to bottom, pink 1px, transparent 0px);
+        background-image: linear-gradient(to right, var(--accent-background-color) 1px, transparent 0px),
+        linear-gradient(to bottom, var(--accent-background-color) 1px, transparent 0px);
     }
 
 
@@ -62,7 +73,7 @@
     }
 
     .selectSection {
-        background-color: lightgoldenrodyellow;
+        background-color: var(--field-color);
         display: inline;
         margin: 0.5%;
         border-radius: 6px;
@@ -71,9 +82,9 @@
 
     #clear {
         margin: 3%;
-        background-color: crimson;
-        color: lightgoldenrodyellow;
-        box-shadow: 7px 7px 0px 1px hotpink;
+        background-color: var(--alert-button-color);
+        color: var(--field-color);
+        box-shadow: 7px 7px 0px 1px var(--border-color);
 
     }
 }
