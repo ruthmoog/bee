@@ -54,5 +54,19 @@ test.describe('New BeeWalk', () => {
     // Expects the observations table to have another S1 Bombus WORKER.
     await expect(workerColumnRow1).toContainText('3');
 
+    await assertRecordCastes(page, '#maleSpotted', '5');
+
   });
 });
+
+async function assertRecordCastes(page, buttonId, column) {
+  await page.click(buttonId);
+
+  let workerColumnRow1 = page.locator('#observations tr:nth-child(1) td:nth-child(' + column + ')');
+  await expect(workerColumnRow1).toContainText('1');
+
+  await page.click(buttonId);
+  await page.click(buttonId);
+
+  await expect(workerColumnRow1).toContainText('3');
+}
