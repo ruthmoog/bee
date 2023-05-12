@@ -31,6 +31,28 @@ test.describe('New BeeWalk', () => {
     await page.click('#queenSpotted');
 
     // Expects the observations table to have a S1 Bombus QUEEN.
-    await expect(page.locator('#observations tr')).toHaveCount(1);
+    let queenColumnRow1 = page.locator('#observations tr:nth-child(1) td:nth-child(3)');
+    await expect(queenColumnRow1).toContainText('1');
+
+    // Spot another Queen
+    await page.click('#queenSpotted');
+
+    // Expects the observations table to have another S1 Bombus QUEEN.
+    await expect(queenColumnRow1).toContainText('2');
+
+    // Spot a Worker
+    await page.click('#workerSpotted');
+
+    // Expects the observations table to have a S1 Bombus WORKER.
+    let workerColumnRow1 = page.locator('#observations tr:nth-child(1) td:nth-child(4)');
+    await expect(workerColumnRow1).toContainText('1');
+
+    // Spot another two Workers
+    await page.click('#workerSpotted');
+    await page.click('#workerSpotted');
+
+    // Expects the observations table to have another S1 Bombus WORKER.
+    await expect(workerColumnRow1).toContainText('3');
+
   });
 });
