@@ -90,14 +90,10 @@
         setStop(hourAndMinute());
     }
 
-    async function setLocation(currentPosition) {
-        localStorage.setItem("longitude", currentPosition.coords.longitude.toString());
-        localStorage.setItem("latitude", currentPosition.coords.latitude.toString());
-
+    async function fetchWeather(currentPosition) {
         const lat = currentPosition.coords.latitude.toString();
         const lon = currentPosition.coords.latitude.toString();
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,cloudcover,windspeed_10m&forecast_days=1`;
-
 
         let res = await fetch(url);
         let json = await res.json();
@@ -105,13 +101,24 @@
     }
 
     function extractWeather(weatherResponse, currentDate) {
-        const temperature = weatherResponse.hourly.temperature_2m[currentDate.getHours() - 1];
+        const index = currentDate.getHours() - 1;
+        const temperature = weatherResponse.hourly.temperature_2m[index];
 
-        const weather = {
-            temperature
+        console.log("cloud cover", weatherResponse.hourly.cloudcover[index]);
+
+        let sunshine = "Cloudy";
+        if (weatherResponse.hourly.cloudcover[index] < 20) {
+            sunshine = "Sunny";
+        }
+
+        if(weatherResponse.hourly.cloudcover[index] >= 20 && weatherResponse.hourly.cloudcover[index] < 70) {
+            sunshine = "Sun/Cloud";
+        }
+
+        return {
+            temperature,
+            sunshine,
         };
-        setWeather(weather);
-        return weather
     }
 
     const weatherStorageKey = "weather";
@@ -174,7 +181,8 @@
         setStartDateTime();
 
         navigator.geolocation.getCurrentPosition(async (location) => {
-            await setLocation(location); //todo: maybe this should just return
+            const weather = await fetchWeather(location); //todo: maybe this should just return
+            setWeather(weather);
             renderMetaData();
         }, error);
     }
@@ -190,10 +198,12 @@
         const endTime = getEndTime();
         const weather = getWeather();
 
+        const temp = weather?.temperature ?? "fetching";
+
         if (startTime) {
             dateTimeDisplay.innerText = `Date: ${date}
 BeeWalk started: ${startTime}
-Temp (°C): ${weather?.temperature}`;
+Temp (°C): ${temp}`;
             startButton.hidden = true;
             stopButton.hidden = false;
         }
@@ -202,7 +212,7 @@ Temp (°C): ${weather?.temperature}`;
             dateTimeDisplay.innerText = `Date: ${date}
 BeeWalk started: ${startTime}
  ended: ${endTime}
- Temp (°C): ${weather?.temperature}`;
+ Temp (°C): ${temp}`;
             stopButton.hidden = true;
         }
     }

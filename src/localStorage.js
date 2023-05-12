@@ -75,6 +75,10 @@ export function extractWeather(weatherResponse, currentDate) {
         sunshine = "Sunny"
     }
 
+    if(weatherResponse.hourly.cloudcover[index] >= 20 && weatherResponse.hourly.cloudcover[index] < 70) {
+        sunshine = "Sun/Cloud"
+    }
+
     return {
         temperature,
         sunshine,

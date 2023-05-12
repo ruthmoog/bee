@@ -80,7 +80,7 @@ describe("extracting weather information", () => {
                 83,
                 91,
                 15,
-                94,
+                60,
                 98,
                 99,
                 100,
@@ -130,9 +130,14 @@ describe("extracting weather information", () => {
         assert.deepEqual(currentWeather.temperature, 13.7)
     })
 
-    it("extracts the sunshine level", () => {
+    it("extracts sunny when cloud cover below 20%", () => {
         const currentWeather = extractWeather(example, new Date(2023, 0, 5, 9))
         assert.deepEqual(currentWeather.sunshine, "Sunny")
+    })
+
+    it("extracts sun/cloud when cloud cover between 20 - 70%", () => {
+        const currentWeather = extractWeather(example, new Date(2023, 0, 5, 10))
+        assert.deepEqual(currentWeather.sunshine, "Sun/Cloud")
     })
 })
 
