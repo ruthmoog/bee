@@ -6,10 +6,10 @@ import {
     getSightings,
     getStartTime,
     getWeather,
-    fetchWeather,
     setStartDateTime,
     setStopTime, setWeather
 } from "./localStorage";
+import {fetchWeather} from "./weather.js";
 
 const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")

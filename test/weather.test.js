@@ -1,6 +1,7 @@
 import {describe, it} from 'node:test';
 import assert from 'assert';
-import {extractWeather} from "../src/localStorage.js";
+
+import {extractWeather} from "../src/weather.js";
 
 describe("extracting weather information", () => {
     const example = {
