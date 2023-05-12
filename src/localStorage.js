@@ -1,4 +1,4 @@
-import {hourAndMinute, date} from "./timeAndDate.js";
+import {date, hourAndMinute} from "./timeAndDate.js";
 
 const sightingsStorageKey = "sightings";
 
@@ -54,3 +54,7 @@ export function setStopTime() {
     setStop(hourAndMinute());
 }
 
+export function setLocation(currentPosition) {
+    localStorage.setItem("longitude", currentPosition.coords.longitude.toString());
+    localStorage.setItem("latitude", currentPosition.coords.latitude.toString());
+}

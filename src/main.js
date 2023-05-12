@@ -1,5 +1,14 @@
 import {createBeeSightingSummary} from "./beeSummary";
-import {addSighting, getSightings, getDate, getEndTime, getStartTime, setStartDateTime, setStopTime} from "./localStorage";
+import {
+    addSighting,
+    getDate,
+    getEndTime,
+    getSightings,
+    getStartTime,
+    setLocation,
+    setStartDateTime,
+    setStopTime
+} from "./localStorage";
 
 const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")
@@ -43,8 +52,14 @@ clearButton.addEventListener("click", () => {
 })
 
 function startBeeWalk() {
+    function error() {
+        //todo: what do we do if we cant get the position
+        alert('this wont work')
+    }
+
     setStartDateTime();
     renderTime();
+    navigator.geolocation.getCurrentPosition(setLocation, error)
 }
 
 function stopBeeWalk() {

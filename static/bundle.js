@@ -90,6 +90,11 @@
         setStop(hourAndMinute());
     }
 
+    function setLocation(currentPosition) {
+        localStorage.setItem("longitude", currentPosition.coords.longitude.toString());
+        localStorage.setItem("latitude", currentPosition.coords.latitude.toString());
+    }
+
     const startButton = document.getElementById("start");
     const stopButton = document.getElementById("stop");
     let dateTimeDisplay = document.getElementById("dateTime");
@@ -132,8 +137,14 @@
     });
 
     function startBeeWalk() {
+        function error() {
+            //todo: what do we do if we cant get the position
+            alert('this wont work');
+        }
+
         setStartDateTime();
         renderTime();
+        navigator.geolocation.getCurrentPosition(setLocation, error);
     }
 
     function stopBeeWalk() {
