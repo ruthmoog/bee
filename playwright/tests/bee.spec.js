@@ -46,6 +46,14 @@ test.describe('New BeeWalk', () => {
         await expect(page.locator('#S2')).toBeChecked();
         await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
         await assertCaste(page, '2', workerColumn, '3');
+
+        // Change species
+        await page.locator('#species').selectOption('Early');
+        await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
+
+        // End walk
+
+        // TODO: test clearing data & refresh page own test
     });
 });
 
@@ -64,3 +72,4 @@ async function assertCaste(page, row, column, count) {
     let workerColumnRow1 = page.locator(`#observations tr:nth-child(${row}) td:nth-child(${column})`);
     await expect(workerColumnRow1).toContainText(count);
 }
+
