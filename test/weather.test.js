@@ -97,8 +97,8 @@ describe("extracting weather information", () => {
                 83
             ],
             "windspeed_10m": [
-                8.7,
-                9,
+                1.9,
+                3,
                 9.2,
                 11.1,
                 11.4,
@@ -130,19 +130,35 @@ describe("extracting weather information", () => {
         assert.deepEqual(currentWeather.temperature, 13.7)
     })
 
-    it("extracts sunny when cloud cover below 20%", () => {
-        const currentWeather = extractWeather(example, new Date(2023, 0, 5, 9))
-        assert.deepEqual(currentWeather.sunshine, "Sunny")
+    describe("extracts sunshine", () => {
+        it("sunny when cloud cover below 20%", () => {
+            const currentWeather = extractWeather(example, new Date(2023, 0, 5, 9))
+            assert.deepEqual(currentWeather.sunshine, "Sunny")
+        })
+
+        it("sun/cloud when cloud cover between 20 - 70%", () => {
+            const currentWeather = extractWeather(example, new Date(2023, 0, 5, 10))
+            assert.deepEqual(currentWeather.sunshine, "Sun/Cloud")
+        })
+
+        it("cloudy when cloud cover above 70%", () => {
+            const currentWeather = extractWeather(example, new Date(2023, 0, 5, 11))
+            assert.deepEqual(currentWeather.sunshine, "Cloudy")
+        })
     })
 
-    it("extracts sun/cloud when cloud cover between 20 - 70%", () => {
-        const currentWeather = extractWeather(example, new Date(2023, 0, 5, 10))
-        assert.deepEqual(currentWeather.sunshine, "Sun/Cloud")
+
+    describe("extracts wind speed", () => {
+        it("scale 0 when wind speed below 2 km/h", () => {
+            const currentWeather = extractWeather(example, new Date(2023, 0, 5, 1))
+            assert.deepEqual(currentWeather.windSpeed, "0 Smoke rises vertically")
+        })
+
+        it("scale 1 when wind speed between 2–5 km/h", () => {
+            const currentWeather = extractWeather(example, new Date(2023, 0, 5, 2))
+            assert.deepEqual(currentWeather.windSpeed, "1 Slight smoke drift")
+        })
     })
 
-    it("extracts cloudy when cloud cover above 70%", () => {
-        const currentWeather = extractWeather(example, new Date(2023, 0, 5, 11))
-        assert.deepEqual(currentWeather.sunshine, "Cloudy")
-    })
 })
 

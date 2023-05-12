@@ -103,9 +103,8 @@
     function extractWeather(weatherResponse, currentDate) {
         const index = currentDate.getHours() - 1;
         const temperature = weatherResponse.hourly.temperature_2m[index];
-
         const cloudCover = weatherResponse.hourly.cloudcover[index];
-        console.log("cloud cover", cloudCover);
+        const windSpeed = weatherResponse.hourly.windspeed_10m[index];
 
         let sunshine = "Cloudy";
         if (cloudCover < 20) {
@@ -116,9 +115,21 @@
             sunshine = "Sun/Cloud";
         }
 
+        let beaufortScale = "0";
+
+        if (windSpeed < 2) {
+            beaufortScale = "0 Smoke rises vertically";
+        }
+        if (windSpeed >= 2 && windSpeed < 6 ) {
+            beaufortScale = "1 Slight smoke drift";
+        }
+
+
+
         return {
             temperature,
             sunshine,
+            windSpeed: beaufortScale,
         };
     }
 
