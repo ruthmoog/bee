@@ -1,5 +1,10 @@
 // @ts-check
 const {test, expect} = require('@playwright/test');
+const queenColumn = '3';
+const workerColumn = '4';
+const maleColumn = '5';
+const unknownCasteColumn = '6';
+
 
 test('has title', async ({page}) => {
     await page.goto('http://localhost:8080');
@@ -31,16 +36,16 @@ test.describe('New BeeWalk', () => {
         await expect(observations).toBeEmpty();
 
         // Spot some bees
-        await assertRecordCastes(page, '#queenSpotted',     '1', '3');
-        await assertRecordCastes(page, '#workerSpotted',    '1', '4');
-        await assertRecordCastes(page, '#maleSpotted',      '1', '5');
-        await assertRecordCastes(page, '#unknownSpotted',   '1', '6');
+        await assertRecordCastes(page, '#queenSpotted',     '1', queenColumn);
+        await assertRecordCastes(page, '#workerSpotted',    '1', workerColumn);
+        await assertRecordCastes(page, '#maleSpotted',      '1', maleColumn);
+        await assertRecordCastes(page, '#unknownSpotted',   '1', unknownCasteColumn);
 
         // Change section
         await page.click('#S2');
         await expect(page.locator('#S2')).toBeChecked();
-        await assertRecordCastes(page, '#queenSpotted', '1', '3');
-        await assertCaste(page, '2', '4', '3');
+        await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
+        await assertCaste(page, '2', workerColumn, '3');
     });
 });
 
