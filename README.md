@@ -5,6 +5,10 @@
 
 [Gist: Introducing Bee idea for Dev.to x GitHub Hackathon](https://gist.github.com/ruthmoog/3189d06a9a37defef5896562bc2f8180)
 
+## Deployed site
+
+https://purple-wood-8308.fly.dev/
+
 ## get started
 
 ### dependencies
@@ -21,5 +25,24 @@ Run `npm i` to fetch and install dependencies
 
 ### run tests
 
+#### Unit tests
 `npm test`
 (or run from `package.json`)
+
+### End to end tests
+
+To run all e2e tests including mobile view ports
+```bash
+cd playwright
+npx playwright test
+```
+
+To see tests run in a UI add the `--ui` flag
+```bash
+npx playwright test --ui
+```
+
+View test logs
+```bash
+npx playwright show-report
+```
