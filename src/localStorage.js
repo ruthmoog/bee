@@ -54,14 +54,10 @@ export function setStopTime() {
     setStop(hourAndMinute());
 }
 
-export async function setLocation(currentPosition) {
-    localStorage.setItem("longitude", currentPosition.coords.longitude.toString());
-    localStorage.setItem("latitude", currentPosition.coords.latitude.toString());
-
+export async function fetchWeather(currentPosition) {
     const lat = currentPosition.coords.latitude.toString()
     const lon = currentPosition.coords.latitude.toString()
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,cloudcover,windspeed_10m&forecast_days=1`
-
 
     let res = await fetch(url)
     let json = await res.json()
@@ -69,13 +65,20 @@ export async function setLocation(currentPosition) {
 }
 
 export function extractWeather(weatherResponse, currentDate) {
-    const temperature = weatherResponse.hourly.temperature_2m[currentDate.getHours() - 1]
+    const index = currentDate.getHours() - 1
+    const temperature = weatherResponse.hourly.temperature_2m[index]
 
-    const weather = {
-        temperature
+    console.log("cloud cover", weatherResponse.hourly.cloudcover[index])
+
+    let sunshine = "Cloudy"
+    if (weatherResponse.hourly.cloudcover[index] < 20) {
+        sunshine = "Sunny"
+    }
+
+    return {
+        temperature,
+        sunshine,
     };
-    setWeather(weather)
-    return weather
 }
 
 const weatherStorageKey = "weather"

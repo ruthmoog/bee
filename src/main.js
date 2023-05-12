@@ -6,9 +6,9 @@ import {
     getSightings,
     getStartTime,
     getWeather,
-    setLocation,
+    fetchWeather,
     setStartDateTime,
-    setStopTime
+    setStopTime, setWeather
 } from "./localStorage";
 
 const startButton = document.getElementById("start")
@@ -61,7 +61,8 @@ function startBeeWalk() {
     setStartDateTime();
 
     navigator.geolocation.getCurrentPosition(async (location) => {
-        await setLocation(location) //todo: maybe this should just return
+        const weather = await fetchWeather(location) //todo: maybe this should just return
+        setWeather(weather)
         renderMetaData()
     }, error)
 }
@@ -77,10 +78,12 @@ function renderMetaData() {
     const endTime = getEndTime();
     const weather = getWeather();
 
+    const temp = weather?.temperature ?? "fetching"
+
     if (startTime) {
         dateTimeDisplay.innerText = `Date: ${date}
 BeeWalk started: ${startTime}
-Temp (°C): ${weather?.temperature}`;
+Temp (°C): ${temp}`;
         startButton.hidden = true;
         stopButton.hidden = false;
     }
@@ -89,7 +92,7 @@ Temp (°C): ${weather?.temperature}`;
         dateTimeDisplay.innerText = `Date: ${date}
 BeeWalk started: ${startTime}
  ended: ${endTime}
- Temp (°C): ${weather?.temperature}`;
+ Temp (°C): ${temp}`;
         stopButton.hidden = true;
     }
 }
