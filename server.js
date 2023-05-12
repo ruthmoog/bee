@@ -1,4 +1,4 @@
-var StaticServer = require('static-server');
+import StaticServer from 'static-server';
 var server = new StaticServer({
     rootPath: './static',            // required, the root of the server file tree
     port: 5001,               // required, the port to listen
