@@ -46,3 +46,16 @@ View test logs
 ```bash
 npx playwright show-report
 ```
+
+Run on local browser or deployed app by updating `playwright/playwright.config.js` baseURL
+```javascript
+module.exports = defineConfig({
+    ...
+  use: {
+    /* Base URL to use in actions like `await page.goto('/')`. */
+    // baseURL: 'http://localhost:8080', 
+    baseURL: 'https://purple-wood-8308.fly.dev/', 
+    ...
+    }
+})
+```

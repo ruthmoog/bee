@@ -5,9 +5,8 @@ const workerColumn = '4';
 const maleColumn = '5';
 const unknownCasteColumn = '6';
 
-
 test('has title', async ({page}) => {
-    await page.goto('http://localhost:8080');
+    await page.goto('/');
     await expect(page).toHaveTitle(/Bee./);
 });
 
@@ -15,7 +14,7 @@ test.describe('New BeeWalk', () => {
 
     test('Do a walk and see some bees', async ({page}) => {
         // Visit web app.
-        await page.goto('http://localhost:8080');
+        await page.goto('/');
 
         // Expects no walk metadata yet.
         const walkMetaData = page.locator('#dateTime');
