@@ -6,12 +6,31 @@ test('has title', async ({ page }) => {
   await expect(page).toHaveTitle(/Bee./);
 });
 
-test('start walk', async ({ page }) => {
-  await page.goto('http://localhost:8080');
-  // Click the get started link.
-  await page.click('#start');
-  // Expects the URL to contain intro.
-  const locator = page.locator('#dateTime');
-  await expect(locator).toContainText('Date:');
-  await expect(locator).toContainText('BeeWalk started:');
+test.describe('New BeeWalk', () => {
+
+  test('Do a walk and see some bees', async ({page}) => {
+    // Visit web app.
+    await page.goto('http://localhost:8080');
+
+    // Expects no walk metadata yet.
+    const walkMetaData = page.locator('#dateTime');
+    await expect(walkMetaData).toBeEmpty();
+
+    // Click start button.
+    await page.click('#start');
+
+    // Expects the walk metadata to contain the start date time.
+    await expect(walkMetaData).toContainText('Date:');
+    await expect(walkMetaData).toContainText('BeeWalk started:');
+
+    // Expects no observations yet.
+    const observations = page.locator('#observations');
+    await expect(observations).toBeEmpty();
+
+    // Spot a Queen
+    await page.click('#queenSpotted');
+
+    // Expects the observations table to have a S1 Bombus QUEEN.
+    await expect(page.locator('#observations tr')).toHaveCount(1);
+  });
 });
