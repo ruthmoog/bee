@@ -6,12 +6,14 @@
     "build": "{src,test}/*.js"
   },
   "scripts": {
+    "run": "node server.js",
     "build": "rollup --config",
     "test": "node --test",
     "watch": "npm-watch"
   },
   "dependencies": {
-    "npm-watch": "^0.11.0"
+    "npm-watch": "^0.11.0",
+    "static-server": "^2.2.1"
   },
-  "type": "module"
+  "type": "commonjs"
 }

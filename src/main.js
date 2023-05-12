@@ -5,7 +5,6 @@ const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")
 let dateTimeDisplay = document.getElementById("dateTime")
 stopButton.hidden = !getStartTime();
-
 const castesOfBees = ['queen', 'worker', 'male', 'unknown']
 const beeButtons = castesOfBees.map((caste) => (
     {button: document.getElementById(caste + 'Spotted'), caste})
