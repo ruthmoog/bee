@@ -93,9 +93,7 @@
     const startButton = document.getElementById("start");
     const stopButton = document.getElementById("stop");
     let dateTimeDisplay = document.getElementById("dateTime");
-    let started;
-    let stopped;
-    stopButton.hidden = !started;
+    stopButton.hidden = !getStartTime();
 
     const castesOfBees = ['queen', 'worker', 'male', 'unknown'];
     const beeButtons = castesOfBees.map((caste) => (
@@ -135,13 +133,11 @@
     });
 
     function startBeeWalk() {
-        started = true;
         setStartDateTime();
         renderTime();
     }
 
     function stopBeeWalk() {
-        stopped = true;
         setStopTime();
         renderTime();
     }
@@ -149,17 +145,17 @@
     function renderTime() {
         const startTime = getStartTime();
         const date = getDate();
+        const endTime = getEndTime();
 
-        if (started) {
+        if (startTime) {
             dateTimeDisplay.innerText = "Date: " + date + "\nBeeWalk started: " + startTime;
-            startButton.hidden = started;
-            stopButton.hidden = stopped;
+            startButton.hidden = true;
+            stopButton.hidden = false;
         }
 
-        if (stopped) {
-            const endTime = getEndTime();
+        if (endTime) {
             dateTimeDisplay.innerText = "Date: " + date + "\nBeeWalk started: " + startTime + " ended: " + endTime;
-            stopButton.hidden = stopped;
+            stopButton.hidden = true;
         }
     }
 
