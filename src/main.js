@@ -7,20 +7,23 @@ import {
     getStartTime,
     getWeather,
     setStartDateTime,
-    setStopTime, setWeather
+    setStopTime,
+    setWeather
 } from "./localStorage";
 import {fetchWeather} from "./weather.js";
+import {castesOfBees} from "./bees.js";
 
 const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")
-let dateTimeDisplay = document.getElementById("dateTime")
+const dateTimeDisplay = document.getElementById("dateTime");
+const speciesSelection = document.getElementById("species");
+const clearButton = document.getElementById("clear");
+
+
 stopButton.hidden = !getStartTime();
-const castesOfBees = ['queen', 'worker', 'male', 'unknown']
 const beeButtons = castesOfBees.map((caste) => (
     {button: document.getElementById(caste + 'Spotted'), caste})
 )
-const speciesSelection = document.getElementById("species");
-const clearButton = document.getElementById("clear");
 
 renderSummary();
 renderMetaData();

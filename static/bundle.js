@@ -90,6 +90,16 @@
         setStop(hourAndMinute());
     }
 
+    const weatherStorageKey = "weather";
+
+    function getWeather() {
+        return JSON.parse(localStorage.getItem(weatherStorageKey))
+    }
+
+    function setWeather(weather) {
+        localStorage.setItem(weatherStorageKey, JSON.stringify(weather));
+    }
+
     async function fetchWeather(currentPosition) {
         const lat = currentPosition.coords.latitude.toString();
         const lon = currentPosition.coords.latitude.toString();
@@ -111,7 +121,7 @@
             sunshine = "Sunny";
         }
 
-        if(cloudCover >= 20 && cloudCover < 70) {
+        if (cloudCover >= 20 && cloudCover < 70) {
             sunshine = "Sun/Cloud";
         }
 
@@ -120,10 +130,10 @@
         if (windSpeed < 2) {
             beaufortScale = "0 Smoke rises vertically";
         }
-        if (windSpeed >= 2 && windSpeed < 6 ) {
+        if (windSpeed >= 2 && windSpeed < 6) {
             beaufortScale = "1 Slight smoke drift";
         }
-        if (windSpeed >= 6 && windSpeed < 12 ) {
+        if (windSpeed >= 6 && windSpeed < 12) {
             beaufortScale = "2 Wind felt on face, leaves rustle";
         }
 
@@ -132,16 +142,6 @@
             sunshine,
             windSpeed: beaufortScale,
         };
-    }
-
-    const weatherStorageKey = "weather";
-
-    function getWeather() {
-        return JSON.parse(localStorage.getItem(weatherStorageKey))
-    }
-
-    function setWeather(weather) {
-        localStorage.setItem(weatherStorageKey, JSON.stringify(weather));
     }
 
     const startButton = document.getElementById("start");
