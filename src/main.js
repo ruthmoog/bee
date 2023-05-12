@@ -5,6 +5,7 @@ import {
     getEndTime,
     getSightings,
     getStartTime,
+    getWeather,
     setLocation,
     setStartDateTime,
     setStopTime
@@ -60,8 +61,8 @@ function startBeeWalk() {
     setStartDateTime();
 
     navigator.geolocation.getCurrentPosition(async (location) => {
-        const weather = await setLocation(location) //todo: maybe this should just return
-        renderMetaData(weather)
+        await setLocation(location) //todo: maybe this should just return
+        renderMetaData()
     }, error)
 }
 
@@ -70,10 +71,11 @@ function stopBeeWalk() {
     renderMetaData();
 }
 
-function renderMetaData(weather) {
+function renderMetaData() {
     const startTime = getStartTime();
     const date = getDate();
     const endTime = getEndTime();
+    const weather = getWeather();
 
     if (startTime) {
         dateTimeDisplay.innerText = `Date: ${date}

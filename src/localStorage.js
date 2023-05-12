@@ -71,7 +71,19 @@ export async function setLocation(currentPosition) {
 export function extractWeather(weatherResponse, currentDate) {
     const temperature = weatherResponse.hourly.temperature_2m[currentDate.getHours() - 1]
 
-    return {
+    const weather = {
         temperature
-    }
+    };
+    setWeather(weather)
+    return weather
+}
+
+const weatherStorageKey = "weather"
+
+export function getWeather() {
+    return JSON.parse(localStorage.getItem(weatherStorageKey))
+}
+
+export function setWeather(weather) {
+    localStorage.setItem(weatherStorageKey, JSON.stringify(weather))
 }

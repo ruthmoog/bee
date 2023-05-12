@@ -107,9 +107,21 @@
     function extractWeather(weatherResponse, currentDate) {
         const temperature = weatherResponse.hourly.temperature_2m[currentDate.getHours() - 1];
 
-        return {
+        const weather = {
             temperature
-        }
+        };
+        setWeather(weather);
+        return weather
+    }
+
+    const weatherStorageKey = "weather";
+
+    function getWeather() {
+        return JSON.parse(localStorage.getItem(weatherStorageKey))
+    }
+
+    function setWeather(weather) {
+        localStorage.setItem(weatherStorageKey, JSON.stringify(weather));
     }
 
     const startButton = document.getElementById("start");
@@ -162,8 +174,8 @@
         setStartDateTime();
 
         navigator.geolocation.getCurrentPosition(async (location) => {
-            const weather = await setLocation(location); //todo: maybe this should just return
-            renderMetaData(weather);
+            await setLocation(location); //todo: maybe this should just return
+            renderMetaData();
         }, error);
     }
 
@@ -172,10 +184,11 @@
         renderMetaData();
     }
 
-    function renderMetaData(weather) {
+    function renderMetaData() {
         const startTime = getStartTime();
         const date = getDate();
         const endTime = getEndTime();
+        const weather = getWeather();
 
         if (startTime) {
             dateTimeDisplay.innerText = `Date: ${date}
