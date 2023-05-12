@@ -68,14 +68,15 @@ export function extractWeather(weatherResponse, currentDate) {
     const index = currentDate.getHours() - 1
     const temperature = weatherResponse.hourly.temperature_2m[index]
 
-    console.log("cloud cover", weatherResponse.hourly.cloudcover[index])
+    const cloudCover = weatherResponse.hourly.cloudcover[index];
+    console.log("cloud cover", cloudCover)
 
     let sunshine = "Cloudy"
-    if (weatherResponse.hourly.cloudcover[index] < 20) {
+    if (cloudCover < 20) {
         sunshine = "Sunny"
     }
 
-    if(weatherResponse.hourly.cloudcover[index] >= 20 && weatherResponse.hourly.cloudcover[index] < 70) {
+    if(cloudCover >= 20 && cloudCover < 70) {
         sunshine = "Sun/Cloud"
     }
 
