@@ -6,8 +6,7 @@ kill_timeout = 5
 processes = []
 
 [build]
-  builder = "paketobuildpacks/builder:base"
-  buildpacks = ["gcr.io/paketo-buildpacks/go"]
+  builder = "heroku/buildpacks:20"
 
 [build.args]
 BP_KEEP_FILES = "assets/*:templates/*:static/*:posts/*"

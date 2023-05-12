@@ -1,7 +1,10 @@
 import StaticServer from 'static-server';
-var server = new StaticServer({
+
+const port = process.env.PORT || 8080;
+
+const server = new StaticServer({
     rootPath: './static',            // required, the root of the server file tree
-    port: 8080,               // required, the port to listen
+    port,               // required, the port to listen
     name: 'bumblebees',   // optional, will set "X-Powered-by" HTTP header
     cors: '*',                // optional, defaults to undefined
     followSymlink: true,      // optional, defaults to a 404 error
