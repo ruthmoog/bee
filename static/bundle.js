@@ -90,9 +90,18 @@
         setStop(hourAndMinute());
     }
 
-    function setLocation(currentPosition) {
+    async function setLocation(currentPosition) {
         localStorage.setItem("longitude", currentPosition.coords.longitude.toString());
         localStorage.setItem("latitude", currentPosition.coords.latitude.toString());
+
+        const lat = currentPosition.coords.latitude.toString();
+        const lon = currentPosition.coords.latitude.toString();
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,cloudcover,windspeed_10m&forecast_days=1`;
+
+
+        let res = await fetch(url);
+        let json = await res.json();
+        console.log(json);
     }
 
     const startButton = document.getElementById("start");
