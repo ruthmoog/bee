@@ -1,5 +1,5 @@
-// @ts-check
-const {test, expect} = require('@playwright/test');
+import {test, expect} from '@playwright/test';
+
 const queenColumn = '3';
 const workerColumn = '4';
 const maleColumn = '5';

@@ -9,11 +9,17 @@
     "run": "node server.js",
     "build": "rollup --config",
     "test": "node --test",
-    "watch": "npm-watch"
+    "watch": "npm-watch",
+    "playwright-install": "npx playwright install",
+    "playwright-test": "npx playwright test",
+    "playwright-test-ui": "npx playwright test --ui"
   },
   "dependencies": {
     "npm-watch": "^0.11.0",
     "static-server": "^2.2.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.33.0"
   },
   "type": "module"
 }
