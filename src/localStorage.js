@@ -1,3 +1,5 @@
+import {hourAndMinute, date} from "./timeAndDate.js";
+
 const sightingsStorageKey = "sightings";
 
 export function addSighting(caste, species, section) {
@@ -19,12 +21,16 @@ export function getSightings() {
     }
 }
 
-export function setStart(time) {
+function setStart(time) {
     localStorage.setItem("start", time);
 }
 
-export function setDate(day) {
+function setDate(day) {
     localStorage.setItem("date", day);
+}
+
+function setStop(time) {
+    localStorage.setItem("stop", time);
 }
 
 export function getStartTime() {
@@ -35,11 +41,16 @@ export function getDate() {
     return localStorage.getItem("date");
 }
 
-export function setStop(time) {
-    localStorage.setItem("stop", time);
-}
-
 export function getEndTime() {
     return localStorage.getItem("stop");
+}
+
+export function setStartDateTime() {
+    setStart(hourAndMinute());
+    setDate(date());
+}
+
+export function setStopTime() {
+    setStop(hourAndMinute());
 }
 

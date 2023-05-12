@@ -1,12 +1,11 @@
 import {createBeeSightingSummary} from "./beeSummary";
-import {addSighting, getSightings} from "./localStorage";
-import {getDate, getEndTime, getStartTime, setStartDateTime, setStopTime} from "./timeAndDate.js";
+import {addSighting, getSightings, getDate, getEndTime, getStartTime, setStartDateTime, setStopTime} from "./localStorage";
 
 const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")
 let dateTimeDisplay = document.getElementById("dateTime")
-let started = false;
-let stopped = false;
+let started;
+let stopped;
 stopButton.hidden = !started;
 
 const castesOfBees = ['queen', 'worker', 'male', 'unknown']

@@ -28,6 +28,14 @@
         currentSection[sighting.species] = {[sighting.caste]: 1};
     }
 
+    function hourAndMinute() {
+        return new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
+    }
+
+    function date() {
+        return new Date().toLocaleDateString("en-GB");
+    }
+
     const sightingsStorageKey = "sightings";
 
     function addSighting(caste, species, section) {
@@ -57,6 +65,10 @@
         localStorage.setItem("date", day);
     }
 
+    function setStop(time) {
+        localStorage.setItem("stop", time);
+    }
+
     function getStartTime() {
         return localStorage.getItem("start");
     }
@@ -65,32 +77,24 @@
         return localStorage.getItem("date");
     }
 
-    function setStop(time) {
-        localStorage.setItem("stop", time);
-    }
-
     function getEndTime() {
         return localStorage.getItem("stop");
     }
 
-    function getHourAndMinute() {
-        return new Date().toLocaleTimeString([], {hour: "2-digit", minute: "2-digit"});
-    }
-
     function setStartDateTime() {
-        setStart(getHourAndMinute());
-        setDate(new Date().toLocaleDateString("en-GB"));
+        setStart(hourAndMinute());
+        setDate(date());
     }
 
     function setStopTime() {
-        setStop(getHourAndMinute());
+        setStop(hourAndMinute());
     }
 
     const startButton = document.getElementById("start");
     const stopButton = document.getElementById("stop");
     let dateTimeDisplay = document.getElementById("dateTime");
-    let started = false;
-    let stopped = false;
+    let started;
+    let stopped;
     stopButton.hidden = !started;
 
     const castesOfBees = ['queen', 'worker', 'male', 'unknown'];
@@ -124,7 +128,7 @@
     clearButton.addEventListener("click", () => {
         const warningClearStoredData = "Make sure you have saved or submitted your data before proceeding.\n\n" +
             "Delete forever?";
-        if (confirm(warningClearStoredData) == true) {
+        if (confirm(warningClearStoredData)) {
             localStorage.clear();
             location.reload();
         }
@@ -151,6 +155,7 @@
             startButton.hidden = started;
             stopButton.hidden = stopped;
         }
+
         if (stopped) {
             const endTime = getEndTime();
             dateTimeDisplay.innerText = "Date: " + date + "\nBeeWalk started: " + startTime + " ended: " + endTime;
