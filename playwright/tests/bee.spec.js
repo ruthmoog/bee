@@ -52,6 +52,10 @@ test.describe('New BeeWalk', () => {
         await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
 
         // End walk
+        await page.click('#stop');
+        await expect(walkMetaData).toContainText('Date:');
+        await expect(walkMetaData).toContainText('BeeWalk started:');
+        await expect(walkMetaData).toContainText('ended:');
 
         // TODO: test clearing data & refresh page own test
     });
