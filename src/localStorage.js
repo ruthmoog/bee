@@ -65,5 +65,13 @@ export async function setLocation(currentPosition) {
 
     let res = await fetch(url)
     let json = await res.json()
-    console.log(json)
+    return extractWeather(json, new Date());
+}
+
+export function extractWeather(weatherResponse, currentDate) {
+    const temperature = weatherResponse.hourly.temperature_2m[currentDate.getHours() - 1]
+
+    return {
+        temperature
+    }
 }

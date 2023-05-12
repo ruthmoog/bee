@@ -1,5 +1,6 @@
 import {describe, it} from 'node:test';
 import assert from 'assert';
+import {extractWeather} from "../src/localStorage.js";
 
 describe("extracting weather information", () => {
   it("extracts the current temperature", () => {
@@ -132,10 +133,3 @@ describe("extracting weather information", () => {
   })
 })
 
-function extractWeather(weatherResponse, currentDate) {
-  const temperature = weatherResponse.hourly.temperature_2m[currentDate.getHours() - 1]
-
-  return {
-    temperature
-  }
-}

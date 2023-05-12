@@ -26,6 +26,8 @@ test.describe('New BeeWalk', () => {
         // Expects the walk metadata to contain the start date time.
         await expect(walkMetaData).toContainText('Date:');
         await expect(walkMetaData).toContainText('BeeWalk started:');
+        await expect(walkMetaData).toContainText('Temp (°C)');
+
 
         // Expects S1 to be checked.
         await expect(page.locator('#S1')).toBeChecked();
@@ -55,6 +57,7 @@ test.describe('New BeeWalk', () => {
         await expect(walkMetaData).toContainText('Date:');
         await expect(walkMetaData).toContainText('BeeWalk started:');
         await expect(walkMetaData).toContainText('ended:');
+        await expect(walkMetaData).toContainText('Temp (°C)');
     });
 });
 

@@ -101,7 +101,15 @@
 
         let res = await fetch(url);
         let json = await res.json();
-        console.log(json);
+        return extractWeather(json, new Date());
+    }
+
+    function extractWeather(weatherResponse, currentDate) {
+        const temperature = weatherResponse.hourly.temperature_2m[currentDate.getHours() - 1];
+
+        return {
+            temperature
+        }
     }
 
     const startButton = document.getElementById("start");
@@ -116,16 +124,16 @@
     const clearButton = document.getElementById("clear");
 
     renderSummary();
-    renderTime();
+    renderMetaData();
 
     startButton.addEventListener("click", () => {
         startBeeWalk();
-        renderTime();
+        renderMetaData();
     });
 
     stopButton.addEventListener("click", () => {
         stopBeeWalk();
-        renderTime();
+        renderMetaData();
     });
 
     beeButtons.forEach(({button, caste}) => {
@@ -152,28 +160,36 @@
         }
 
         setStartDateTime();
-        renderTime();
-        navigator.geolocation.getCurrentPosition(setLocation, error);
+
+        navigator.geolocation.getCurrentPosition(async (location) => {
+            const weather = await setLocation(location); //todo: maybe this should just return
+            renderMetaData(weather);
+        }, error);
     }
 
     function stopBeeWalk() {
         setStopTime();
-        renderTime();
+        renderMetaData();
     }
 
-    function renderTime() {
+    function renderMetaData(weather) {
         const startTime = getStartTime();
         const date = getDate();
         const endTime = getEndTime();
 
         if (startTime) {
-            dateTimeDisplay.innerText = "Date: " + date + "\nBeeWalk started: " + startTime;
+            dateTimeDisplay.innerText = `Date: ${date}
+BeeWalk started: ${startTime}
+Temp (°C): ${weather?.temperature}`;
             startButton.hidden = true;
             stopButton.hidden = false;
         }
 
         if (endTime) {
-            dateTimeDisplay.innerText = "Date: " + date + "\nBeeWalk started: " + startTime + " ended: " + endTime;
+            dateTimeDisplay.innerText = `Date: ${date}
+BeeWalk started: ${startTime}
+ ended: ${endTime}
+ Temp (°C): ${weather?.temperature}`;
             stopButton.hidden = true;
         }
     }

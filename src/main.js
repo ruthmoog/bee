@@ -22,16 +22,16 @@ const speciesSelection = document.getElementById("species");
 const clearButton = document.getElementById("clear");
 
 renderSummary();
-renderTime();
+renderMetaData();
 
 startButton.addEventListener("click", () => {
     startBeeWalk();
-    renderTime();
+    renderMetaData();
 })
 
 stopButton.addEventListener("click", () => {
     stopBeeWalk();
-    renderTime();
+    renderMetaData();
 })
 
 beeButtons.forEach(({button, caste}) => {
@@ -58,28 +58,36 @@ function startBeeWalk() {
     }
 
     setStartDateTime();
-    renderTime();
-    navigator.geolocation.getCurrentPosition(setLocation, error)
+
+    navigator.geolocation.getCurrentPosition(async (location) => {
+        const weather = await setLocation(location) //todo: maybe this should just return
+        renderMetaData(weather)
+    }, error)
 }
 
 function stopBeeWalk() {
     setStopTime();
-    renderTime();
+    renderMetaData();
 }
 
-function renderTime() {
+function renderMetaData(weather) {
     const startTime = getStartTime();
     const date = getDate();
     const endTime = getEndTime();
 
     if (startTime) {
-        dateTimeDisplay.innerText = "Date: " + date + "\nBeeWalk started: " + startTime;
+        dateTimeDisplay.innerText = `Date: ${date}
+BeeWalk started: ${startTime}
+Temp (°C): ${weather?.temperature}`;
         startButton.hidden = true;
         stopButton.hidden = false;
     }
 
     if (endTime) {
-        dateTimeDisplay.innerText = "Date: " + date + "\nBeeWalk started: " + startTime + " ended: " + endTime;
+        dateTimeDisplay.innerText = `Date: ${date}
+BeeWalk started: ${startTime}
+ ended: ${endTime}
+ Temp (°C): ${weather?.temperature}`;
         stopButton.hidden = true;
     }
 }
