@@ -13,7 +13,6 @@ https://purple-wood-8308.fly.dev/
 
 ### dependencies
 
-- go
 - nodejs v20
 
 Run `npm i` to fetch and install dependencies
@@ -33,13 +32,12 @@ Run `npm i` to fetch and install dependencies
 
 Import playwright to run all e2e tests including mobile view ports
 ```bash
-cd playwright
-npx playwright test
+npm run playwright-test
 ```
 
 To see tests run in a UI add the `--ui` flag
 ```bash
-npx playwright test --ui
+npm playwright-test-ui
 ```
 
 View test logs
@@ -47,7 +45,7 @@ View test logs
 npx playwright show-report
 ```
 
-Run on local browser or deployed app by updating `playwright/playwright.config.js` baseURL
+Run on local browser or deployed app by updating `playwright.config.js` baseURL
 ```javascript
 module.exports = defineConfig({
     ...
