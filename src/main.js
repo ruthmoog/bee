@@ -79,11 +79,13 @@ function renderMetaData() {
     const weather = getWeather();
 
     const temp = weather?.temperature ?? "fetching"
+    const sunshine = weather?.sunshine ?? "fetching"
 
     if (startTime) {
         dateTimeDisplay.innerText = `Date: ${date}
 BeeWalk started: ${startTime}
-Temp (°C): ${temp}`;
+Temp (°C): ${temp}
+Sunshine: ${sunshine}`;
         startButton.hidden = true;
         stopButton.hidden = false;
     }
@@ -92,7 +94,8 @@ Temp (°C): ${temp}`;
         dateTimeDisplay.innerText = `Date: ${date}
 BeeWalk started: ${startTime}
  ended: ${endTime}
- Temp (°C): ${temp}`;
+ Temp (°C): ${temp}
+ Sunshine: ${sunshine}`;
         stopButton.hidden = true;
     }
 }
