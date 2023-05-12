@@ -91,8 +91,6 @@ export function extractWeather(weatherResponse, currentDate) {
         beaufortScale = "2 Wind felt on face, leaves rustle"
     }
 
-
-
     return {
         temperature,
         sunshine,
