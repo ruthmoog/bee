@@ -10,4 +10,8 @@ export class BeeTrackerPage {
     async startWalk() {
         await this.page.click('#start');
     }
+
+    async stopWalk() {
+        await this.page.click('#stop');
+    }
 }
