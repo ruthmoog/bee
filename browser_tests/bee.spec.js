@@ -1,4 +1,5 @@
-import {test, expect} from '@playwright/test';
+import {expect, test} from '@playwright/test';
+import {BeeTrackerPage} from "./beeTrackerPage.js";
 
 const queenColumn = '3';
 const workerColumn = '4';
@@ -13,15 +14,16 @@ test('has title', async ({page}) => {
 test.describe('New BeeWalk', () => {
 
     test('Do a walk and see some bees', async ({page}) => {
+        const beePage = new BeeTrackerPage(page);
         // Visit web app.
-        await page.goto('/');
+        await beePage.goto()
 
         // Expects no walk metadata yet.
         const walkMetaData = page.locator('#dateTime');
         await expect(walkMetaData).toBeEmpty();
 
         // Click start button.
-        await page.click('#start');
+        await beePage.startWalk()
 
         // Expects the walk metadata to contain the start date time.
         await expect(walkMetaData).toContainText('Date:');

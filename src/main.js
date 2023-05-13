@@ -19,14 +19,14 @@ const dateTimeDisplay = document.getElementById("dateTime");
 const speciesSelection = document.getElementById("species");
 const clearButton = document.getElementById("clear");
 
-
-stopButton.hidden = !getStartTime();
 const beeButtons = castesOfBees.map((caste) => (
     {button: document.getElementById(caste + 'Spotted'), caste})
 )
 
+stopButton.hidden = !getStartTime();
 renderSummary();
 renderMetaData();
+
 
 startButton.addEventListener("click", () => {
     startBeeWalk();
