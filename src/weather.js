@@ -1,10 +1,8 @@
 export const unableToFetchWindSpeed = "Unable to fetch wind speed";
 export const calm0 = "0 Smoke rises vertically";
-
 export const lightAir1 = "1 Slight smoke drift";
 export const lightBreeze2 = "2 Wind felt on face, leaves rustle";
 export const gentleBreeze3 = "3 Leaves and twigs in slight motion";
-
 export const moderateBreeze4 = "4 Dust raised and small branches move";
 export const freshBreeze5 = "5 Small trees in leaf begin to sway";
 export const strongBreeze6 = "6 Large branches move and trees sway";
