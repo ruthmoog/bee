@@ -1,7 +1,7 @@
 import {describe, it} from 'node:test';
 import assert from 'assert';
 
-import {extractWeather} from "../src/weather.js";
+import {calm0, extractWeather, lightAir1, lightBreeze2} from "../src/weather.js";
 
 describe("extracting weather information", () => {
     const example = {
@@ -105,7 +105,7 @@ describe("extracting weather information", () => {
                 26,
                 38,
                 49,
-                 ,
+                ,
                 116.6,
                 19.1,
                 18.5,
@@ -153,17 +153,17 @@ describe("extracting weather information", () => {
         // Beaufort scale is used for wind speed  https://en.wikipedia.org/wiki/Beaufort_scale
         it("scale 0 when wind speed below 2 km/h", () => {
             const currentWeather = extractWeather(example, new Date(2023, 0, 5, 1))
-            assert.deepEqual(currentWeather.windSpeed, "0 Smoke rises vertically")
+            assert.deepEqual(currentWeather.windSpeed, calm0)
         })
 
         it("scale 1 when wind speed between 2–5 km/h", () => {
             const currentWeather = extractWeather(example, new Date(2023, 0, 5, 2))
-            assert.deepEqual(currentWeather.windSpeed, "1 Slight smoke drift")
+            assert.deepEqual(currentWeather.windSpeed, lightAir1)
         })
 
         it("scale 2 when wind speed between 6–11 km/h", () => {
             const currentWeather = extractWeather(example, new Date(2023, 0, 5, 3))
-            assert.deepEqual(currentWeather.windSpeed, "2 Wind felt on face, leaves rustle")
+            assert.deepEqual(currentWeather.windSpeed, lightBreeze2)
         })
 
         it("scale 3 when wind speed between 12–19 km/h", () => {
