@@ -28,42 +28,41 @@ test.describe('New BeeWalk', () => {
         // Expects the walk metadata to contain the start date time.
         await expect(walkMetaData).toContainText('Date:');
         await expect(walkMetaData).toContainText('BeeWalk started:');
-        await expect(walkMetaData).toContainText('Temp (°C):');
         await expect(walkMetaData).toContainText('Sunshine:');
         await expect(walkMetaData).toContainText('Wind Speed');
+        await expect(walkMetaData).toContainText('Temp °C:');
+
         // Expects S1 to be checked.
-
-
         await expect(page.locator('#S1')).toBeChecked();
-        // Expects no observations yet.
 
+        // Expects no observations yet.
         const observations = page.locator('#observations');
         await expect(observations).toBeEmpty();
+
         // Spot some bees
+        await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
+        await assertRecordCastes(page, '#workerSpotted', '1', workerColumn);
+        await assertRecordCastes(page, '#maleSpotted', '1', maleColumn);
+        await assertRecordCastes(page, '#unknownSpotted', '1', unknownCasteColumn);
 
-        await assertRecordCastes(page, '#queenSpotted',     '1', queenColumn);
-        await assertRecordCastes(page, '#workerSpotted',    '1', workerColumn);
-        await assertRecordCastes(page, '#maleSpotted',      '1', maleColumn);
-        await assertRecordCastes(page, '#unknownSpotted',   '1', unknownCasteColumn);
         // Change section
-
         await page.click('#S2');
         await expect(page.locator('#S2')).toBeChecked();
         await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
         await assertCaste(page, '2', workerColumn, '3');
-        // Change species
 
+        // Change species
         await page.locator('#species').selectOption('Early');
         await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
-        // End walk
 
+        // End walk
         await beePage.stopWalk()
         await expect(walkMetaData).toContainText('Date:');
         await expect(walkMetaData).toContainText('BeeWalk started:');
         await expect(walkMetaData).toContainText('ended:');
-        await expect(walkMetaData).toContainText('Temp (°C)');
         await expect(walkMetaData).toContainText('Sunshine:');
         await expect(walkMetaData).toContainText('Wind Speed');
+        await expect(walkMetaData).toContainText('Temp °C');
     });
 });
 

@@ -87,21 +87,22 @@ function renderMetaData() {
 
     if (startTime) {
         dateTimeDisplay.innerText = `Date: ${date}
-BeeWalk started: ${startTime}
-Temp (°C): ${temp}
-Sunshine: ${sunshine}
-Wind Speed: ${windSpeed}`;
+        BeeWalk started: ${startTime}
+        Sunshine: ${sunshine}
+        Wind Speed: ${windSpeed}
+        Temp °C: ${temp}
+        `;
         startButton.hidden = true;
         stopButton.hidden = false;
     }
 
     if (endTime) {
         dateTimeDisplay.innerText = `Date: ${date}
-BeeWalk started: ${startTime}
- ended: ${endTime}
- Temp (°C): ${temp}
- Sunshine: ${sunshine}
- Wind Speed: ${windSpeed}`;
+        BeeWalk started: ${startTime} ended: ${endTime}
+        Sunshine: ${sunshine}
+        Wind Speed: ${windSpeed}
+        Temp °C: ${temp}
+        `;
         stopButton.hidden = true;
     }
 }
