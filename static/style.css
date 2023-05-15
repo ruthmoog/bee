@@ -62,6 +62,14 @@
         font-size:              smaller;
     }
 
+    .aboutWalkData {
+        padding:                0 0.5rem 0 0.5rem;
+        background-color:       var(--field-color);
+        box-shadow:             5px 3px 0 0px var(--drop-shadow-color);
+        border-radius:          5px;
+        line-height:            1.35rem;
+    }
+
     button, #species {
         border:                 none;
         width:                  47%;

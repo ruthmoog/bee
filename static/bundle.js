@@ -259,14 +259,14 @@
         const endTime = getEndTime();
         const weather = getWeather();
 
-        const pendingText = "fetching...";
+        const pendingText = "<small>fetching...</small>";
         const temp = weather?.temperature ?? pendingText;
         const sunshine = weather?.sunshine ?? pendingText;
         const windSpeed = weather?.windSpeed ?? pendingText;
 
         aboutWalkDisplay.innerHTML = "";
-        let dateTimeText = `Date: ${date}<br />BeeWalk started: ${startTime}`;
-        let weatherText =  `<br />Sunshine: ${sunshine}<br />Wind Speed: ${windSpeed}<br />Temp °C: ${temp}`;
+        let dateTimeText = `Date: <span class="aboutWalkData">${date}</span><br />BeeWalk started: <span class="aboutWalkData">${startTime}</span>`;
+        let weatherText =  `<br />Sunshine: <span class="aboutWalkData">${sunshine}</span><br />Wind Speed: <span class="aboutWalkData">${windSpeed}</span><br />Temp °C: <span class="aboutWalkData">${temp}</span>`;
 
         if (startTime) {
             aboutWalkDisplay.innerHTML = dateTimeText + weatherText;
@@ -275,7 +275,7 @@
         }
 
         if (endTime) {
-            aboutWalkDisplay.innerHTML = dateTimeText + ` ended: ${endTime} ` + weatherText;
+            aboutWalkDisplay.innerHTML = dateTimeText + `  ended: <span class="aboutWalkData">${endTime}</span> ` + weatherText;
             stopButton.hidden = true;
         }
     }
