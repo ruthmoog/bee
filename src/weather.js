@@ -8,30 +8,40 @@ export const freshBreeze5 = "5 Small trees in leaf begin to sway";
 export const strongBreeze6 = "6 Large branches move and trees sway";
 export const highWind7toHurricaneForce12 = "⚠️ Avoid or abandon in bad weather";
 
-export async function fetchWeather(currentPosition) {
+export const sunny = "Sunny";
+export const sunCloud = "Sun/Cloud";
+export const cloudy = "Cloudy";
+export const unableToFetchCloudCover = "Unable to fetch cloud cover";
 
+export async function fetchWeather(currentPosition) {
     const lat = currentPosition.coords.latitude.toString()
     const lon = currentPosition.coords.latitude.toString()
+
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,cloudcover,windspeed_10m&forecast_days=1`
     let res = await fetch(url)
-
     let json = await res.json()
     return extractWeather(json, new Date());
+
 }
 export function extractWeather(weatherResponse, currentDate) {
-
     const index = currentDate.getHours() - 1
+
     const temperature = weatherResponse.hourly.temperature_2m[index]
     const cloudCover = weatherResponse.hourly.cloudcover[index];
     const windSpeed = weatherResponse.hourly.windspeed_10m[index];
 
-    let sunshine = "Cloudy"
+    let sunshine = unableToFetchCloudCover
     if (cloudCover <= 10) {
-        sunshine = "Sunny"
+        sunshine = sunny
     }
     if (cloudCover > 10 && cloudCover <= 70) {
-        sunshine = "Sun/Cloud"
+        sunshine = sunCloud
     }
+    if (cloudCover > 70) {
+        sunshine = cloudy
+    }
+
+
     let beaufortScale = unableToFetchWindSpeed
     if (windSpeed < 2) {
         beaufortScale = calm0

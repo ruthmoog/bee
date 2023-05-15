@@ -2,13 +2,13 @@ import {describe, it} from 'node:test';
 import assert from 'assert';
 
 import {
-    calm0,
+    calm0, cloudy,
     extractWeather,
     freshBreeze5,
     gentleBreeze3, highWind7toHurricaneForce12,
     lightAir1,
     lightBreeze2,
-    moderateBreeze4, strongBreeze6, unableToFetchWindSpeed
+    moderateBreeze4, strongBreeze6, sunCloud, sunny, unableToFetchCloudCover, unableToFetchWindSpeed
 } from "../src/weather.js";
 
 describe("extracting weather information", () => {
@@ -91,7 +91,7 @@ describe("extracting weather information", () => {
                 10,
                 11,
                 98,
-                99,
+                 ,
                 100,
                 100,
                 100,
@@ -142,17 +142,22 @@ describe("extracting weather information", () => {
     describe("extracts sunshine", () => {
         it("sunny when cloud cover below 10%", () => {
             const currentWeather = extractWeather(example, new Date(2023, 0, 5, 9))
-            assert.deepEqual(currentWeather.sunshine, "Sunny")
+            assert.deepEqual(currentWeather.sunshine, sunny)
         })
 
         it("sun/cloud when cloud cover between 10 - 70%", () => {
             const currentWeather = extractWeather(example, new Date(2023, 0, 5, 10))
-            assert.deepEqual(currentWeather.sunshine, "Sun/Cloud")
+            assert.deepEqual(currentWeather.sunshine, sunCloud)
         })
 
         it("cloudy when cloud cover above 70%", () => {
             const currentWeather = extractWeather(example, new Date(2023, 0, 5, 11))
-            assert.deepEqual(currentWeather.sunshine, "Cloudy")
+            assert.deepEqual(currentWeather.sunshine, cloudy)
+        })
+
+        it("message if cloud cover was not determined", () => {
+            const currentWeather = extractWeather(example, new Date(2023, 0, 5, 12))
+            assert.deepEqual(currentWeather.sunshine, unableToFetchCloudCover)
         })
     })
 
@@ -194,12 +199,12 @@ describe("extracting weather information", () => {
             assert.deepEqual(currentWeather.windSpeed, strongBreeze6)
         })
 
-        it("Message if the wind speed was not determined", () => {
+        it("message if the wind speed was not determined", () => {
             const currentWeather = extractWeather(example, new Date(2023, 0, 5, 8))
             assert.deepEqual(currentWeather.windSpeed, unableToFetchWindSpeed)
         })
 
-        it("Message if the wind speed is higher than scale 6 (49 km/h)", () => {
+        it("message if the wind speed is higher than scale 6 (49 km/h)", () => {
             const currentWeather = extractWeather(example, new Date(2023, 0, 5, 9))
             assert.deepEqual(currentWeather.windSpeed, highWind7toHurricaneForce12)
         })
