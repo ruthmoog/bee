@@ -80,7 +80,7 @@ function renderMetaData() {
     const endTime = getEndTime();
     const weather = getWeather();
 
-    const pendingText = "<marquee>fetching</marquee>";
+    const pendingText = "fetching...";
     const temp = weather?.temperature ?? pendingText
     const sunshine = weather?.sunshine ?? pendingText
     const windSpeed = weather?.windSpeed ?? pendingText
