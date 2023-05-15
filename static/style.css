@@ -52,7 +52,7 @@
     }
 
     #time {
-        padding:                0 1rem 1rem 1rem;
+        padding:                0 1rem 0 1rem;
         margin:                 0;
     }
 
@@ -63,9 +63,8 @@
     }
 
     .aboutWalkData {
-        padding:                0 0.5rem 0 0.5rem;
+        padding:                1px 0.5rem 1px 0.5rem;
         background-color:       var(--field-color);
-        box-shadow:             5px 3px 0 0px var(--drop-shadow-color);
         border-radius:          5px;
         line-height:            1.35rem;
     }
