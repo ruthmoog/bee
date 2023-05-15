@@ -15,11 +15,11 @@ export function extractWeather(weatherResponse, currentDate) {
     const windSpeed = weatherResponse.hourly.windspeed_10m[index];
 
     let sunshine = "Cloudy"
-    if (cloudCover < 20) {
+    if (cloudCover <= 10) {
         sunshine = "Sunny"
     }
 
-    if (cloudCover >= 20 && cloudCover < 70) {
+    if (cloudCover > 10 && cloudCover <= 70) {
         sunshine = "Sun/Cloud"
     }
 
