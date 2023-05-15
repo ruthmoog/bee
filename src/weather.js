@@ -34,6 +34,9 @@ export function extractWeather(weatherResponse, currentDate) {
     if (windSpeed >= 6 && windSpeed < 12) {
         beaufortScale = "2 Wind felt on face, leaves rustle"
     }
+    if (windSpeed >= 12 && windSpeed < 20) {
+        beaufortScale = "3 Leaves and twigs in slight motion"
+    }
 
     return {
         temperature,

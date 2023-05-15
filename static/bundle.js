@@ -144,19 +144,22 @@
         };
     }
 
+    const castesOfBees = ['queen', 'worker', 'male', 'unknown'];
+
     const startButton = document.getElementById("start");
     const stopButton = document.getElementById("stop");
-    let dateTimeDisplay = document.getElementById("dateTime");
-    stopButton.hidden = !getStartTime();
-    const castesOfBees = ['queen', 'worker', 'male', 'unknown'];
-    const beeButtons = castesOfBees.map((caste) => (
-        {button: document.getElementById(caste + 'Spotted'), caste})
-    );
+    const dateTimeDisplay = document.getElementById("dateTime");
     const speciesSelection = document.getElementById("species");
     const clearButton = document.getElementById("clear");
 
+    const beeButtons = castesOfBees.map((caste) => (
+        {button: document.getElementById(caste + 'Spotted'), caste})
+    );
+
+    stopButton.hidden = !getStartTime();
     renderSummary();
     renderMetaData();
+
 
     startButton.addEventListener("click", () => {
         startBeeWalk();
