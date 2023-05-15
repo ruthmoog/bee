@@ -105,8 +105,8 @@ describe("extracting weather information", () => {
                 26,
                 38,
                 49,
-                ,
-                16.6,
+                 ,
+                116.6,
                 19.1,
                 18.5,
                 19.4,
@@ -150,6 +150,7 @@ describe("extracting weather information", () => {
 
 
     describe("extracts wind speed", () => {
+        // Beaufort scale is used for wind speed  https://en.wikipedia.org/wiki/Beaufort_scale
         it("scale 0 when wind speed below 2 km/h", () => {
             const currentWeather = extractWeather(example, new Date(2023, 0, 5, 1))
             assert.deepEqual(currentWeather.windSpeed, "0 Smoke rises vertically")
@@ -189,7 +190,11 @@ describe("extracting weather information", () => {
             const currentWeather = extractWeather(example, new Date(2023, 0, 5, 8))
             assert.deepEqual(currentWeather.windSpeed, "Unable to fetch wind speed")
         })
-    })
 
+        it("Message if the wind speed is higher than scale 6 (49 km/h)", () => {
+            const currentWeather = extractWeather(example, new Date(2023, 0, 5, 9))
+            assert.deepEqual(currentWeather.windSpeed, "⚠️ Avoid or abandon in bad weather")
+        })
+    })
 })
 
