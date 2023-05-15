@@ -23,7 +23,7 @@ export function extractWeather(weatherResponse, currentDate) {
         sunshine = "Sun/Cloud"
     }
 
-    let beaufortScale = "0"
+    let beaufortScale = "Unable to fetch wind speed"
 
     if (windSpeed < 2) {
         beaufortScale = "0 Smoke rises vertically"
@@ -42,6 +42,9 @@ export function extractWeather(weatherResponse, currentDate) {
     }
     if (windSpeed >= 29 && windSpeed < 39) {
         beaufortScale = "5 Small trees in leaf begin to sway"
+    }
+    if (windSpeed >= 39 && windSpeed <= 49) {
+        beaufortScale = "6 Large branches move and trees sway"
     }
 
     return {

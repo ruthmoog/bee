@@ -104,8 +104,8 @@ describe("extracting weather information", () => {
                 12,
                 26,
                 38,
-                14.3,
-                17.2,
+                49,
+                ,
                 16.6,
                 19.1,
                 18.5,
@@ -178,6 +178,16 @@ describe("extracting weather information", () => {
         it("scale 5 when wind speed between 29–38 km/h", () => {
             const currentWeather = extractWeather(example, new Date(2023, 0, 5, 6))
             assert.deepEqual(currentWeather.windSpeed, "5 Small trees in leaf begin to sway")
+        })
+
+        it("scale 6 when wind speed between 39–49 km/h", () => {
+            const currentWeather = extractWeather(example, new Date(2023, 0, 5, 7))
+            assert.deepEqual(currentWeather.windSpeed, "6 Large branches move and trees sway")
+        })
+
+        it("Message if the wind speed was not determined", () => {
+            const currentWeather = extractWeather(example, new Date(2023, 0, 5, 8))
+            assert.deepEqual(currentWeather.windSpeed, "Unable to fetch wind speed")
         })
     })
 
