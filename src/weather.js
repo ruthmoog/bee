@@ -40,6 +40,9 @@ export function extractWeather(weatherResponse, currentDate) {
     if (windSpeed >= 20 && windSpeed < 29) {
         beaufortScale = "4 Dust raised and small branches move"
     }
+    if (windSpeed >= 29 && windSpeed < 39) {
+        beaufortScale = "5 Small trees in leaf begin to sway"
+    }
 
     return {
         temperature,
