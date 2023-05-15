@@ -15,7 +15,7 @@ import {castesOfBees} from "./bees.js";
 
 const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")
-const dateTimeDisplay = document.getElementById("dateTime");
+const aboutWalkDisplay = document.getElementById("dateTime");
 const speciesSelection = document.getElementById("species");
 const clearButton = document.getElementById("clear");
 
@@ -86,7 +86,7 @@ function renderMetaData() {
     const windSpeed = weather?.windSpeed ?? "fetching"
 
     if (startTime) {
-        dateTimeDisplay.innerText = `Date: ${date}
+        aboutWalkDisplay.innerText = `Date: ${date}
         BeeWalk started: ${startTime}
         Sunshine: ${sunshine}
         Wind Speed: ${windSpeed}
@@ -97,7 +97,7 @@ function renderMetaData() {
     }
 
     if (endTime) {
-        dateTimeDisplay.innerText = `Date: ${date}
+        aboutWalkDisplay.innerText = `Date: ${date}
         BeeWalk started: ${startTime} ended: ${endTime}
         Sunshine: ${sunshine}
         Wind Speed: ${windSpeed}
