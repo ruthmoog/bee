@@ -58,6 +58,10 @@
 
     /* Interactive elements */
 
+    dfn {
+        font-size:              smaller;
+    }
+
     button, #species {
         border:                 none;
         width:                  47%;

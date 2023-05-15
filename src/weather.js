@@ -1,11 +1,11 @@
 export const unableToFetchWindSpeed = "Unable to fetch wind speed";
-export const calm0 = "0 Smoke rises vertically";
-export const lightAir1 = "1 Slight smoke drift";
-export const lightBreeze2 = "2 Wind felt on face, leaves rustle";
-export const gentleBreeze3 = "3 Leaves and twigs in slight motion";
-export const moderateBreeze4 = "4 Dust raised and small branches move";
-export const freshBreeze5 = "5 Small trees in leaf begin to sway";
-export const strongBreeze6 = "6 Large branches move and trees sway";
+export const calm0 = "0 <dfn>Smoke rises vertically</dfn>";
+export const lightAir1 = "1 <dfn>Slight smoke drift</dfn>";
+export const lightBreeze2 = "2 <dfn>Wind felt on face, leaves rustle</dfn>";
+export const gentleBreeze3 = "3 <dfn>Leaves and twigs in slight motion</dfn>";
+export const moderateBreeze4 = "4 <dfn>Dust raised and small branches move</dfn>";
+export const freshBreeze5 = "5 <dfn>Small trees in leaf begin to sway</dfn>";
+export const strongBreeze6 = "6 <dfn>Large branches move and trees sway</dfn>";
 export const highWind7toHurricaneForce12 = "⚠️ Avoid or abandon in bad weather";
 
 export const sunny = "Sunny";

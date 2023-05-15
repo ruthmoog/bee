@@ -101,13 +101,13 @@
     }
 
     const unableToFetchWindSpeed = "Unable to fetch wind speed";
-    const calm0 = "0 Smoke rises vertically";
-    const lightAir1 = "1 Slight smoke drift";
-    const lightBreeze2 = "2 Wind felt on face, leaves rustle";
-    const gentleBreeze3 = "3 Leaves and twigs in slight motion";
-    const moderateBreeze4 = "4 Dust raised and small branches move";
-    const freshBreeze5 = "5 Small trees in leaf begin to sway";
-    const strongBreeze6 = "6 Large branches move and trees sway";
+    const calm0 = "0 <dfn>Smoke rises vertically</dfn>";
+    const lightAir1 = "1 <dfn>Slight smoke drift</dfn>";
+    const lightBreeze2 = "2 <dfn>Wind felt on face, leaves rustle</dfn>";
+    const gentleBreeze3 = "3 <dfn>Leaves and twigs in slight motion</dfn>";
+    const moderateBreeze4 = "4 <dfn>Dust raised and small branches move</dfn>";
+    const freshBreeze5 = "5 <dfn>Small trees in leaf begin to sway</dfn>";
+    const strongBreeze6 = "6 <dfn>Large branches move and trees sway</dfn>";
     const highWind7toHurricaneForce12 = "⚠️ Avoid or abandon in bad weather";
 
     const sunny = "Sunny";
@@ -259,7 +259,7 @@
         const endTime = getEndTime();
         const weather = getWeather();
 
-        const pendingText = "<marquee>fetching</marquee>";
+        const pendingText = "fetching...";
         const temp = weather?.temperature ?? pendingText;
         const sunshine = weather?.sunshine ?? pendingText;
         const windSpeed = weather?.windSpeed ?? pendingText;
