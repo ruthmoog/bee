@@ -27,7 +27,6 @@ stopButton.hidden = !getStartTime();
 renderSummary();
 renderMetaData();
 
-
 startButton.addEventListener("click", () => {
     startBeeWalk();
     renderMetaData();
@@ -81,28 +80,23 @@ function renderMetaData() {
     const endTime = getEndTime();
     const weather = getWeather();
 
-    const temp = weather?.temperature ?? "fetching"
-    const sunshine = weather?.sunshine ?? "fetching"
-    const windSpeed = weather?.windSpeed ?? "fetching"
+    const pendingText = "<marquee>fetching</marquee>";
+    const temp = weather?.temperature ?? pendingText
+    const sunshine = weather?.sunshine ?? pendingText
+    const windSpeed = weather?.windSpeed ?? pendingText
+
+    aboutWalkDisplay.innerHTML = "";
+    let dateTimeText = `Date: ${date}<br />BeeWalk started: ${startTime}`;
+    let weatherText =  `<br />Sunshine: ${sunshine}<br />Wind Speed: ${windSpeed}<br />Temp °C: ${temp}`;
 
     if (startTime) {
-        aboutWalkDisplay.innerText = `Date: ${date}
-        BeeWalk started: ${startTime}
-        Sunshine: ${sunshine}
-        Wind Speed: ${windSpeed}
-        Temp °C: ${temp}
-        `;
+        aboutWalkDisplay.innerHTML = dateTimeText + weatherText;
         startButton.hidden = true;
         stopButton.hidden = false;
     }
 
     if (endTime) {
-        aboutWalkDisplay.innerText = `Date: ${date}
-        BeeWalk started: ${startTime} ended: ${endTime}
-        Sunshine: ${sunshine}
-        Wind Speed: ${windSpeed}
-        Temp °C: ${temp}
-        `;
+        aboutWalkDisplay.innerHTML = dateTimeText + ` ended: ${endTime} ` + weatherText;
         stopButton.hidden = true;
     }
 }

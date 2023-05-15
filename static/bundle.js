@@ -110,31 +110,58 @@
     const strongBreeze6 = "6 Large branches move and trees sway";
     const highWind7toHurricaneForce12 = "⚠️ Avoid or abandon in bad weather";
 
-    async function fetchWeather(currentPosition) {
+    const sunny = "Sunny";
+    const sunCloud = "Sun/Cloud";
+    const cloudy = "Cloudy";
+    const unableToFetchCloudCover = "Unable to fetch cloud cover";
 
+    async function fetchWeather(currentPosition) {
         const lat = currentPosition.coords.latitude.toString();
         const lon = currentPosition.coords.latitude.toString();
+
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,cloudcover,windspeed_10m&forecast_days=1`;
         let res = await fetch(url);
-
         let json = await res.json();
         return extractWeather(json, new Date());
-    }
-    function extractWeather(weatherResponse, currentDate) {
 
+    }
+
+    function extractWeather(weatherResponse, currentDate) {
         const index = currentDate.getHours() - 1;
+
         const temperature = weatherResponse.hourly.temperature_2m[index];
         const cloudCover = weatherResponse.hourly.cloudcover[index];
         const windSpeed = weatherResponse.hourly.windspeed_10m[index];
 
-        let sunshine = "Cloudy";
+        let sunshine = determineSunshine(cloudCover);
+        let beaufortScale = determineBeaufort(windSpeed);
+
+        return {
+            temperature,
+            sunshine,
+            windSpeed: beaufortScale,
+        };
+    }
+
+    function determineSunshine(cloudCover) {
+        let sunshine = unableToFetchCloudCover;
+
         if (cloudCover <= 10) {
-            sunshine = "Sunny";
+            sunshine = sunny;
         }
         if (cloudCover > 10 && cloudCover <= 70) {
-            sunshine = "Sun/Cloud";
+            sunshine = sunCloud;
         }
+        if (cloudCover > 70) {
+            sunshine = cloudy;
+        }
+
+        return sunshine;
+    }
+
+    function determineBeaufort(windSpeed) {
         let beaufortScale = unableToFetchWindSpeed;
+
         if (windSpeed < 2) {
             beaufortScale = calm0;
         }
@@ -160,18 +187,14 @@
             beaufortScale = highWind7toHurricaneForce12;
         }
 
-        return {
-            temperature,
-            sunshine,
-            windSpeed: beaufortScale,
-        };
+        return beaufortScale;
     }
 
     const castesOfBees = ['queen', 'worker', 'male', 'unknown'];
 
     const startButton = document.getElementById("start");
     const stopButton = document.getElementById("stop");
-    const dateTimeDisplay = document.getElementById("dateTime");
+    const aboutWalkDisplay = document.getElementById("dateTime");
     const speciesSelection = document.getElementById("species");
     const clearButton = document.getElementById("clear");
 
@@ -182,7 +205,6 @@
     stopButton.hidden = !getStartTime();
     renderSummary();
     renderMetaData();
-
 
     startButton.addEventListener("click", () => {
         startBeeWalk();
@@ -237,28 +259,23 @@
         const endTime = getEndTime();
         const weather = getWeather();
 
-        const temp = weather?.temperature ?? "fetching";
-        const sunshine = weather?.sunshine ?? "fetching";
-        const windSpeed = weather?.windSpeed ?? "fetching";
+        const pendingText = "<marquee>fetching</marquee>";
+        const temp = weather?.temperature ?? pendingText;
+        const sunshine = weather?.sunshine ?? pendingText;
+        const windSpeed = weather?.windSpeed ?? pendingText;
+
+        aboutWalkDisplay.innerHTML = "";
+        let dateTimeText = `Date: ${date}<br />BeeWalk started: ${startTime}`;
+        let weatherText =  `<br />Sunshine: ${sunshine}<br />Wind Speed: ${windSpeed}<br />Temp °C: ${temp}`;
 
         if (startTime) {
-            dateTimeDisplay.innerText = `Date: ${date}
-        BeeWalk started: ${startTime}
-        Sunshine: ${sunshine}
-        Wind Speed: ${windSpeed}
-        Temp °C: ${temp}
-        `;
+            aboutWalkDisplay.innerHTML = dateTimeText + weatherText;
             startButton.hidden = true;
             stopButton.hidden = false;
         }
 
         if (endTime) {
-            dateTimeDisplay.innerText = `Date: ${date}
-        BeeWalk started: ${startTime} ended: ${endTime}
-        Sunshine: ${sunshine}
-        Wind Speed: ${windSpeed}
-        Temp °C: ${temp}
-        `;
+            aboutWalkDisplay.innerHTML = dateTimeText + ` ended: ${endTime} ` + weatherText;
             stopButton.hidden = true;
         }
     }
