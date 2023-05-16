@@ -100,6 +100,11 @@
         localStorage.setItem(weatherStorageKey, JSON.stringify(weather));
     }
 
+    function editWalkData() {
+        let weather = localStorage.getItem(weatherStorageKey);
+        console.log(weather);
+    }
+
     const unableToFetchWindSpeed = "Unable to fetch wind speed";
     const calm0 = "0 <dfn>Smoke rises vertically</dfn>";
     const lightAir1 = "1 <dfn>Slight smoke drift</dfn>";
@@ -194,6 +199,8 @@
 
     const startButton = document.getElementById("start");
     const stopButton = document.getElementById("stop");
+    const editButton = document.getElementById("edit");
+    const saveButton = document.getElementById("save");
     const aboutWalkDisplay = document.getElementById("dateTime");
     const speciesSelection = document.getElementById("species");
     const clearButton = document.getElementById("clear");
@@ -203,6 +210,9 @@
     );
 
     stopButton.hidden = !getStartTime();
+    editButton.hidden = !getStartTime();
+    saveButton.hidden = true;
+
     renderSummary();
     renderMetaData();
 
@@ -222,6 +232,20 @@
             addSighting(caste, speciesSelection.value, section);
             renderSummary();
         });
+    });
+
+    editButton.addEventListener("click", () => {
+        if (aboutWalkDisplay.contentEditable === "true") {
+            aboutWalkDisplay.contentEditable = "false";
+            saveButton.hidden = true;
+        } else {
+            aboutWalkDisplay.contentEditable = "true";
+            saveButton.hidden = false;
+        }
+    });
+
+    saveButton.addEventListener("click", () => {
+        editWalkData();
     });
 
     clearButton.addEventListener("click", () => {
@@ -272,11 +296,13 @@
             aboutWalkDisplay.innerHTML = dateTimeText + weatherText;
             startButton.hidden = true;
             stopButton.hidden = false;
+            // editButton.hidden = false;
         }
 
         if (endTime) {
             aboutWalkDisplay.innerHTML = dateTimeText + `  ended: <span class="aboutWalkData">${endTime}</span> ` + weatherText;
             stopButton.hidden = true;
+            // editButton.hidden = false;
         }
     }
 

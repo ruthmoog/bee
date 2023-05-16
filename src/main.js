@@ -8,13 +8,16 @@ import {
     getWeather,
     setStartDateTime,
     setStopTime,
-    setWeather
+    setWeather,
+    editWalkData,
 } from "./localStorage";
 import {fetchWeather} from "./weather.js";
 import {castesOfBees} from "./bees.js";
 
 const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")
+const editButton = document.getElementById("edit")
+const saveButton = document.getElementById("save")
 const aboutWalkDisplay = document.getElementById("dateTime");
 const speciesSelection = document.getElementById("species");
 const clearButton = document.getElementById("clear");
@@ -24,6 +27,9 @@ const beeButtons = castesOfBees.map((caste) => (
 )
 
 stopButton.hidden = !getStartTime();
+editButton.hidden = !getStartTime();
+saveButton.hidden = true;
+
 renderSummary();
 renderMetaData();
 
@@ -43,6 +49,20 @@ beeButtons.forEach(({button, caste}) => {
         addSighting(caste, speciesSelection.value, section)
         renderSummary()
     })
+})
+
+editButton.addEventListener("click", () => {
+    if (aboutWalkDisplay.contentEditable === "true") {
+        aboutWalkDisplay.contentEditable = "false";
+        saveButton.hidden = true;
+    } else {
+        aboutWalkDisplay.contentEditable = "true";
+        saveButton.hidden = false;
+    }
+})
+
+saveButton.addEventListener("click", () => {
+    editWalkData();
 })
 
 clearButton.addEventListener("click", () => {
@@ -93,11 +113,13 @@ function renderMetaData() {
         aboutWalkDisplay.innerHTML = dateTimeText + weatherText;
         startButton.hidden = true;
         stopButton.hidden = false;
+        // editButton.hidden = false;
     }
 
     if (endTime) {
         aboutWalkDisplay.innerHTML = dateTimeText + `  ended: <span class="aboutWalkData">${endTime}</span> ` + weatherText;
         stopButton.hidden = true;
+        // editButton.hidden = false;
     }
 }
 

@@ -63,3 +63,8 @@ export function getWeather() {
 export function setWeather(weather) {
     localStorage.setItem(weatherStorageKey, JSON.stringify(weather))
 }
+
+export function editWalkData() {
+    let weather = localStorage.getItem(weatherStorageKey)
+    console.log(weather);
+}

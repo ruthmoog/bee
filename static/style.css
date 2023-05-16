@@ -23,8 +23,10 @@ body {
     linear-gradient(to bottom,  var(--accent-background-color) 1px, transparent 0);
 }
 
-
-
+#dateTime[contenteditable=true] .aboutWalkData {
+    background: white;
+    border: 1px inset var(--field-color)
+}
 
 .funky {
     position:               relative;
