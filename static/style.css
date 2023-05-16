@@ -60,6 +60,12 @@ button, #species {
     line-height:            1rem;
 }
 
+.selectSection {
+    background-color:       var(--field-color);
+    display:                inline;
+    border-radius:          6px;
+}
+
 
 @media only screen and (max-width: 1089px) {
 
