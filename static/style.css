@@ -152,66 +152,77 @@ table, th, td {
         --alert-button-color:       crimson;
     }
 
+    body {
+        margin:                     0 0 0 10%;
+    }
+
     .aboutWalkData {
-        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-        line-height: 3rem;
+        padding:                    0.5rem 0.5rem 0.5rem 0.5rem;
+        line-height:                3rem;
     }
 
     button, select, start, stop {
-        width: 61%;
-        margin: 1rem 0.5rem;
-        padding: 0.5rem;
+        width:                      61%;
+        margin:                     1rem 0.5rem;
+        padding:                    0.5rem;
     }
 
-    select {
-        width: 90%;
+    select,table {
+        width:                      90%;
     }
 
     #recording {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: flex-start;
-        align-content: flex-start;
-        gap: 1rem;
+        display:                    flex;
+        justify-content:            space-evenly;
+        align-items:                flex-start;
+        align-content:              flex-start;
+        gap:                        1rem;
     }
 
     #dateTime:empty {
-        display: none;
+        display:                    none;
     }
 
     #clear {
-        width: 25%;
-        box-shadow:             7px 7px 0 1px hotpink;
-        color: var(--drop-shadow-color);
+        width:                      25%;
+        box-shadow:                 7px 7px 0 1px hotpink;
+        color:                      var(--drop-shadow-color);
     }
 
     #dateTime {
-        background-color: var(--accent-background-color);
-        border-radius: 5px;
-        padding: 1rem;
-        background-size:        3rem 1.5rem;
-        background-image:       linear-gradient(to bottom,  var(--main-background-color) 1px, transparent 0);
-        box-shadow:             7px 7px 0 1px var(--field-color);
-        width: 100%;
+        background-color:           var(--accent-background-color);
+        border-radius:              5px;
+        padding:                    1rem;
+        background-size:            3rem 1.5rem;
+        background-image:           linear-gradient(to bottom,  var(--main-background-color) 1px, transparent 0);
+        box-shadow:                 7px 7px 0 1px var(--field-color);
+        width:                      100%;
     }
 
     .funky {
-        font-size:              2rem;
+        font-size:                  2rem;
     }
 
     .flexItem {
-        width: 30%;
-        margin: 0 1%;
+        width:                      30%;
+        margin:                     0 1%;
     }
 
     fieldset {
-        display: flex;
+        display:                    flex;
+        background:                 rgb(176,224,230,0.4); /* main-accent-color with transparency */
     }
 
     .selectSection {
-        padding: 1%;
-        text-align: center;
-        margin: 0.25rem;
-        width: fit-content;
+        padding:                    1%;
+        text-align:                 center;
+        margin:                     0.25rem;
+        width:                      fit-content;
+    }
+
+    td {
+        padding:                    0.25rem 0.25rem 0.25rem 1rem;
+        background-color:           var(--accent-background-color) ;
+        border-radius:              1px;
     }
 }
