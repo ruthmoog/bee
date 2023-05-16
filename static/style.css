@@ -179,7 +179,12 @@ table, th, td {
         display: none;
     }
 
+    #clear {
+        width: 25%;
+        box-shadow:             7px 7px 0 1px hotpink;
+        color: var(--drop-shadow-color);
     }
+
     #dateTime {
         background-color: var(--accent-background-color);
         border-radius: 5px;
