@@ -73,6 +73,18 @@ button, #species {
     box-shadow:             7px 7px 0 1px var(--border-color);
 }
 
+table {
+    box-shadow:             7px 7px 0 1px var(--drop-shadow-color);
+    width:                  100%;
+}
+
+table, th, td {
+    border:                 1px solid var(--main-background-color);
+    background-color:       var(--field-color);
+    border-radius:          9px;
+    border-collapse:        collapse;
+}
+
 
 @media only screen and (max-width: 1089px) {
 
@@ -116,18 +128,12 @@ button, #species {
     /* Presenting data */
 
     table {
-        box-shadow:             7px 7px 0 1px var(--drop-shadow-color);
         margin:                 3% 0;
-        width:                  100%;
     }
 
     table, th, td {
-        border:                 1px solid var(--main-background-color);
-        border-collapse:        collapse;
         text-align:             center;
         padding:                2px;
-        background-color:       var(--field-color);
-        border-radius:          9px;
     }
 
     th {
@@ -151,22 +157,19 @@ button, #species {
         line-height: 3rem;
     }
 
-    fieldset {
-        margin: 1em;
-    }
 
     button {
-        width: 47%;
+        width: 22%;
         margin: 2% 1%;
     }
 
-    select {
-        width: 100%;
-    }
+    /*select {*/
+    /*    width: 100%;*/
+    /*}*/
 
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        text-align: center;
-    }
+    /*table, th, td {*/
+    /*    border: 1px solid black;*/
+    /*    border-collapse: collapse;*/
+    /*    text-align: center;*/
+    /*}*/
 }
