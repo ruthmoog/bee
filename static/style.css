@@ -157,10 +157,10 @@ table, th, td {
         line-height: 3rem;
     }
 
-
     button {
-        width: 22%;
-        margin: 2% 1%;
+        width: 61%;
+        margin: 1rem 0.5rem;
+        padding: 0.5rem;
     }
 
     select {
@@ -175,5 +175,12 @@ table, th, td {
         gap: 1rem;
     }
 
-
+    #dateTime {
+        background-color: var(--accent-background-color);
+        border-radius: 5px;
+        padding: 1rem;
+        background-size:        3rem 1.5rem;
+        background-image:       linear-gradient(to bottom,  var(--main-background-color) 1px, transparent 0);
+        box-shadow:             7px 7px 0 1px var(--field-color);
+    }
 }
