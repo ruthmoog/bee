@@ -11,19 +11,21 @@
     --preferred-fonts:          "American Typewriter", sans-serif;
 }
 
+html {
+    font-family:            var(--preferred-fonts);
+}
+
+body {
+    background-color:       var(--main-background-color);
+    color:                  var(--main-font-color);
+    background-size:        20px 20px;
+    background-image:       linear-gradient(to right,   var(--accent-background-color) 1px, transparent 0),
+    linear-gradient(to bottom,  var(--accent-background-color) 1px, transparent 0);
+}
+
 
 @media only screen and (max-width: 1089px) {
-    html {
-        font-family:            var(--preferred-fonts);
-    }
 
-    body {
-        background-color:       var(--main-background-color);
-        color:                  var(--main-font-color);
-        background-size:        20px 20px;
-        background-image:       linear-gradient(to right,   var(--accent-background-color) 1px, transparent 0),
-                                linear-gradient(to bottom,  var(--accent-background-color) 1px, transparent 0);
-    }
 
     h1 {
         margin:                 0.5em 0.5em 0;
@@ -124,6 +126,16 @@
 }
 
 @media only screen and (min-width: 1090px) {
+
+    :root {
+        --main-background-color:    powderblue;
+        --accent-background-color:  aliceblue;
+        --border-color:             blue;
+        --field-color:              pink;
+        --drop-shadow-color:        lightgoldenrodyellow;
+        --alert-button-color:       crimson;
+    }
+
 
     fieldset {
         margin: 1em;
