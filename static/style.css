@@ -25,9 +25,6 @@ body {
 
 
 
-h1 {
-    margin:                 0.5em 0.5em 0;
-}
 
 .funky {
     position:               relative;
@@ -38,20 +35,30 @@ h1 {
     font-size:              1rem;
 }
 
+fieldset {
+    margin:                 1em;
+    border-color:           var(--border-color);
+    border-style:           solid;
+    border-radius:          10px;
+    border-width:           2px;
+    padding:                1rem;
+}
+
+.aboutWalkData {
+    padding:                1px 0.5rem 1px 0.5rem;
+    background-color:       var(--field-color);
+    border-radius:          5px;
+    line-height:            1.35rem;
+}
+
 @media only screen and (max-width: 1089px) {
+
+    h1 {
+        margin:                 0.5em 0.5em 0;
+    }
 
     h2 {
         margin-bottom:          1%;
-    }
-
-
-    fieldset {
-        margin:                 1em;
-        border-color:           var(--border-color);
-        border-style:           solid;
-        border-radius:          10px;
-        border-width:           2px;
-        padding:                1rem;
     }
 
     #time {
@@ -63,13 +70,6 @@ h1 {
 
     dfn {
         font-size:              smaller;
-    }
-
-    .aboutWalkData {
-        padding:                1px 0.5rem 1px 0.5rem;
-        background-color:       var(--field-color);
-        border-radius:          5px;
-        line-height:            1.35rem;
     }
 
     button, #species {
@@ -137,6 +137,10 @@ h1 {
         --alert-button-color:       crimson;
     }
 
+    .aboutWalkData {
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+        line-height: 3rem;
+    }
 
     fieldset {
         margin: 1em;
