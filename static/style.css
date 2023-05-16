@@ -166,4 +166,14 @@ table, th, td {
     select {
         width: 30%;
     }
+
+    #recording {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        align-content: flex-start;
+        gap: 1rem;
+    }
+
+
 }

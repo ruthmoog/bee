@@ -14,62 +14,68 @@
 
 <body><h1>Bee.</h1>
 
-<section id="time">
-    <p id="dateTime"></p>
-    <button id="start">Start</button>
-    <button id="stop">Stop</button>
+<section id="recording">
+    <section id="time" class="flexItem">
+        <p id="dateTime"></p>
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+    </section>
+
+    <div class="flexItem">
+        <fieldset>
+            <legend>Select a section:</legend>
+            <div class="selectSection">
+                <input type="radio" id="S1" value="S1" name="section" checked>
+                <label for="S1">S1</label>
+            </div>
+            <div class="selectSection">
+                <input type="radio" id="S2" value="S2" name="section">
+                <label for="S2">S2</label>
+            </div>
+            <div class="selectSection">
+                <input type="radio" id="S3" value="S3" name="section">
+                <label for="S3">S3</label>
+            </div>
+            <div class="selectSection">
+                <input type="radio" id="S4" value="S4" name="section">
+                <label for="S4">S4</label>
+            </div>
+            <div class="selectSection">
+                <input type="radio" id="S5" value="S5" name="section">
+                <label for="S5">S5</label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Choose a species:</legend>
+            <select id="species">
+                <option>Bumblebee</option>
+                <option>Honeybee</option>
+                <option>Common carder</option>
+                <option>White-tailed agg.</option>
+                <option>Red-tailed</option>
+                <option>Early</option>
+                <option>Buff-tailed</option>
+                <option>White-tailed</option>
+                <option>Garden</option>
+                <option>Tree</option>
+                <option>Brown-banded carder</option>
+                <option>Moss carder</option>
+                <option>Red-shanked</option>
+                <option>Ruderal</option>
+                <option>Shrill carder</option>
+                <option>Short-haired</option>
+            </select>
+        </fieldset>
+    </div>
+
+    <div class="flexItem">
+        <button id="queenSpotted"><span class="funky">👑</span>Queen</button>
+        <button id="workerSpotted"><span class="funky">🌸</span>Worker</button>
+        <button id="maleSpotted"><span class="funky">💛</span>Male</button>
+        <button id="unknownSpotted"><span class="funky">🔎</span>Unknown</button>
+    </div>
 </section>
-
-<fieldset>
-    <legend>Select a section:</legend>
-    <div class="selectSection">
-        <input type="radio" id="S1" value="S1" name="section" checked>
-        <label for="S1">S1</label>
-    </div>
-    <div class="selectSection">
-        <input type="radio" id="S2" value="S2" name="section">
-        <label for="S2">S2</label>
-    </div>
-    <div class="selectSection">
-        <input type="radio" id="S3" value="S3" name="section">
-        <label for="S3">S3</label>
-    </div>
-    <div class="selectSection">
-        <input type="radio" id="S4" value="S4" name="section">
-        <label for="S4">S4</label>
-    </div>
-    <div class="selectSection">
-        <input type="radio" id="S5" value="S5" name="section">
-        <label for="S5">S5</label>
-    </div>
-</fieldset>
-
-<fieldset>
-    <legend>Choose a species:</legend>
-    <select id="species">
-        <option>Bumblebee</option>
-        <option>Honeybee</option>
-        <option>Common carder</option>
-        <option>White-tailed agg.</option>
-        <option>Red-tailed</option>
-        <option>Early</option>
-        <option>Buff-tailed</option>
-        <option>White-tailed</option>
-        <option>Garden</option>
-        <option>Tree</option>
-        <option>Brown-banded carder</option>
-        <option>Moss carder</option>
-        <option>Red-shanked</option>
-        <option>Ruderal</option>
-        <option>Shrill carder</option>
-        <option>Short-haired</option>
-    </select>
-</fieldset>
-
-<button id="queenSpotted"><span class="funky">👑</span>Queen</button>
-<button id="workerSpotted"><span class="funky">🌸</span>Worker</button>
-<button id="maleSpotted"><span class="funky">💛</span>Male</button>
-<button id="unknownSpotted"><span class="funky">🔎</span>Unknown</button>
 
 <h2>Your observations</h2>
 <table>
