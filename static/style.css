@@ -66,6 +66,13 @@ button, #species {
     border-radius:          6px;
 }
 
+#clear {
+    margin:                 3%;
+    background-color:       var(--alert-button-color);
+    color:                  var(--field-color);
+    box-shadow:             7px 7px 0 1px var(--border-color);
+}
+
 
 @media only screen and (max-width: 1089px) {
 
@@ -101,18 +108,9 @@ button, #species {
     }
 
     .selectSection {
-        background-color:       var(--field-color);
-        display:                inline;
         margin:                 0.5%;
         border-radius:          6px;
         padding:                1.2%;
-    }
-
-    #clear {
-        margin:                 3%;
-        background-color:       var(--alert-button-color);
-        color:                  var(--field-color);
-        box-shadow:             7px 7px 0 1px var(--border-color);
     }
 
     /* Presenting data */
