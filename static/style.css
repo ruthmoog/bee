@@ -51,6 +51,16 @@ fieldset {
     line-height:            1.35rem;
 }
 
+button, #species {
+    border:                 none;
+    font-family:            var(--preferred-fonts);
+    background-color:       var(--field-color);
+    border-radius:          5px;
+    box-shadow:             7px 7px 0 1px var(--drop-shadow-color);
+    line-height:            1rem;
+}
+
+
 @media only screen and (max-width: 1089px) {
 
     h1 {
@@ -73,14 +83,9 @@ fieldset {
     }
 
     button, #species {
-        border:                 none;
         width:                  47%;
         margin:                 2% 1%;
         padding:                1%;
-        font-family:            var(--preferred-fonts);
-        background-color:       var(--field-color);
-        border-radius:          5px;
-        box-shadow:             7px 7px 0 1px var(--drop-shadow-color);
         line-height:            1rem;
     }
 
