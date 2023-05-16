@@ -146,7 +146,7 @@ table, th, td {
     :root {
         --main-background-color:    powderblue;
         --accent-background-color:  aliceblue;
-        --border-color:             blue;
+        --border-color:             lightgoldenrodyellow;
         --field-color:              pink;
         --drop-shadow-color:        lightgoldenrodyellow;
         --alert-button-color:       crimson;
@@ -157,14 +157,14 @@ table, th, td {
         line-height: 3rem;
     }
 
-    button {
+    button, select, start, stop {
         width: 61%;
         margin: 1rem 0.5rem;
         padding: 0.5rem;
     }
 
     select {
-        width: 30%;
+        width: 90%;
     }
 
     #recording {
@@ -175,6 +175,11 @@ table, th, td {
         gap: 1rem;
     }
 
+    #dateTime:empty {
+        display: none;
+    }
+
+    }
     #dateTime {
         background-color: var(--accent-background-color);
         border-radius: 5px;
@@ -182,5 +187,26 @@ table, th, td {
         background-size:        3rem 1.5rem;
         background-image:       linear-gradient(to bottom,  var(--main-background-color) 1px, transparent 0);
         box-shadow:             7px 7px 0 1px var(--field-color);
+        width: 100%;
+    }
+
+    .funky {
+        font-size:              2rem;
+    }
+
+    .flexItem {
+        width: 30%;
+        margin: 0 1%;
+    }
+
+    fieldset {
+        display: flex;
+    }
+
+    .selectSection {
+        padding: 1%;
+        text-align: center;
+        margin: 0.25rem;
+        width: fit-content;
     }
 }
