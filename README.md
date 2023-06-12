@@ -5,6 +5,8 @@
 
 [Gist: Introducing Bee idea for Dev.to x GitHub Hackathon](https://gist.github.com/ruthmoog/3189d06a9a37defef5896562bc2f8180)
 
+["Bee, a mobile app for citizen science." on Dev.to](https://dev.to/ruthmoog/bee-2op1)
+
 ## Deployed site
 
 https://purple-wood-8308.fly.dev/
