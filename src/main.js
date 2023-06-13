@@ -107,19 +107,19 @@ function renderMetaData() {
 
     aboutWalkDisplay.innerHTML = "";
     let dateTimeText = `Date: <span class="aboutWalkData">${date}</span><br />BeeWalk started: <span class="aboutWalkData">${startTime}</span>`;
-    let weatherText =  `<br />Sunshine: <span class="aboutWalkData">${sunshine}</span><br />Wind Speed: <span class="aboutWalkData">${windSpeed}</span><br />Temp °C: <span class="aboutWalkData">${temp}</span>`;
+    let weatherText =  `<br />Sunshine: <span id="sunshine" class="aboutWalkData">${sunshine}</span><br />Wind Speed: <span id="windSpeed" class="aboutWalkData">${windSpeed}</span><br />Temp °C: <span id="temp"class="aboutWalkData">${temp}</span>`;
 
     if (startTime) {
         aboutWalkDisplay.innerHTML = dateTimeText + weatherText;
         startButton.hidden = true;
         stopButton.hidden = false;
-        // editButton.hidden = false;
+        editButton.hidden = false;
     }
 
     if (endTime) {
         aboutWalkDisplay.innerHTML = dateTimeText + `  ended: <span class="aboutWalkData">${endTime}</span> ` + weatherText;
         stopButton.hidden = true;
-        // editButton.hidden = false;
+        editButton.hidden = false;
     }
 }
 

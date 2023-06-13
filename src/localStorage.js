@@ -65,6 +65,9 @@ export function setWeather(weather) {
 }
 
 export function editWalkData() {
-    let weather = localStorage.getItem(weatherStorageKey)
-    console.log(weather);
+    const temperature = document.getElementById("temp").innerText;
+    const sunshine = document.getElementById("sunshine").innerText;
+    const windSpeed = document.getElementById("windSpeed").innerText;
+
+    setWeather({"temperature":temperature,"sunshine":sunshine,"windSpeed":windSpeed})
 }
