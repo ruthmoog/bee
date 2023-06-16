@@ -229,6 +229,7 @@
 
     stopButton.hidden = !getStartTime();
     editButton.hidden = !getStartTime();
+    walkData.hidden   = !getStartTime();
     saveButton.hidden = true;
 
     renderSummary();
@@ -244,35 +245,21 @@
         renderMetaData();
     });
 
+    editButton.addEventListener("click", () => {
+        makeMetaDataEditable(true);
+    });
+
+    saveButton.addEventListener("click", () => {
+        editWalkData();
+        makeMetaDataEditable(false);
+    });
+
     beeButtons.forEach(({button, caste}) => {
         button.addEventListener("click", () => {
             const section = document.querySelector('input[name="section"]:checked').value;
             addSighting(caste, speciesSelection.value, section);
             renderSummary();
         });
-    });
-
-    editButton.addEventListener("click", () => {
-            dateDisplay.contentEditable = "true";
-            startTimeDisplay.contentEditable = "true";
-            endTimeDisplay.contentEditable = "true";
-            tempDisplay.contentEditable = "true";
-            windSpeedDisplay.contentEditable = "true";
-            sunshineDisplay.contentEditable = "true";
-            saveButton.hidden = false;
-            editButton.hidden = true;
-    });
-
-    saveButton.addEventListener("click", () => {
-        editWalkData();
-        dateDisplay.contentEditable = "false";
-        startTimeDisplay.contentEditable = "false";
-        endTimeDisplay.contentEditable = "false";
-        tempDisplay.contentEditable = "false";
-        windSpeedDisplay.contentEditable = "false";
-        sunshineDisplay.contentEditable = "false";
-        saveButton.hidden = true;
-        editButton.hidden = false;
     });
 
     clearButton.addEventListener("click", () => {
@@ -283,6 +270,17 @@
             location.reload();
         }
     });
+
+    function makeMetaDataEditable(isEditable) {
+        dateDisplay.contentEditable = isEditable;
+        startTimeDisplay.contentEditable = isEditable;
+        endTimeDisplay.contentEditable = isEditable;
+        tempDisplay.contentEditable = isEditable;
+        windSpeedDisplay.contentEditable = isEditable;
+        sunshineDisplay.contentEditable = isEditable;
+        editButton.hidden = isEditable;
+        saveButton.hidden = !isEditable;
+    }
 
     function startBeeWalk() {
         walkData.hidden = false;
@@ -315,12 +313,6 @@
         const temp = weather?.temperature ?? pendingText;
         const sunshine = weather?.sunshine ?? pendingText;
         const windSpeed = weather?.windSpeed ?? pendingText;
-
-        if (startTime){
-            walkData.hidden = false;
-        } else {
-            walkData.hidden = true;
-        }
 
         dateDisplay.innerHTML = "";
         startTimeDisplay.innerHTML = "";
