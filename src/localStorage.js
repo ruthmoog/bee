@@ -65,9 +65,15 @@ export function setWeather(weather) {
 }
 
 export function editWalkData() {
-    const temperature = document.getElementById("temp").innerText;
-    const sunshine = document.getElementById("sunshine").innerText;
-    const windSpeed = document.getElementById("windSpeed").innerText;
+    const date = document.getElementById("dateDisplay").innerText;
+    const startTime = document.getElementById("startTimeDisplay").innerText;
+    const endTime = document.getElementById("endTimeDisplay").innerText;
+    const temperature = document.getElementById("tempDisplay").innerText;
+    const sunshine = document.getElementById("sunshineDisplay").innerText;
+    const windSpeed = document.getElementById("windSpeedDisplay").innerText;
 
+    setDate(date);
+    setStart(startTime);
+    setStop(endTime);
     setWeather({"temperature":temperature,"sunshine":sunshine,"windSpeed":windSpeed})
 }

@@ -18,7 +18,14 @@ const startButton = document.getElementById("start")
 const stopButton = document.getElementById("stop")
 const editButton = document.getElementById("edit")
 const saveButton = document.getElementById("save")
-const aboutWalkDisplay = document.getElementById("dateTime");
+
+const dateDisplay = document.getElementById("dateDisplay");
+const startTimeDisplay = document.getElementById("startTimeDisplay");
+const endTimeDisplay = document.getElementById("endTimeDisplay");
+const tempDisplay = document.getElementById("tempDisplay");
+const sunshineDisplay = document.getElementById("sunshineDisplay");
+const windSpeedDisplay = document.getElementById("windSpeedDisplay");
+
 const speciesSelection = document.getElementById("species");
 const clearButton = document.getElementById("clear");
 
@@ -52,11 +59,22 @@ beeButtons.forEach(({button, caste}) => {
 })
 
 editButton.addEventListener("click", () => {
-    if (aboutWalkDisplay.contentEditable === "true") {
-        aboutWalkDisplay.contentEditable = "false";
+    console.log("temp display editable?: " + tempDisplay.contentEditable)
+    if (tempDisplay.contentEditable === "true") {
+        dateDisplay.contentEditable = "false";
+        startTimeDisplay.contentEditable = "false";
+        endTimeDisplay.contentEditable = "false";
+        tempDisplay.contentEditable = "false";
+        windSpeedDisplay.contentEditable = "false";
+        sunshineDisplay.contentEditable = "false";
         saveButton.hidden = true;
     } else {
-        aboutWalkDisplay.contentEditable = "true";
+        dateDisplay.contentEditable = "true";
+        startTimeDisplay.contentEditable = "true";
+        endTimeDisplay.contentEditable = "true";
+        tempDisplay.contentEditable = "true";
+        windSpeedDisplay.contentEditable = "true";
+        sunshineDisplay.contentEditable = "true";
         saveButton.hidden = false;
     }
 })
@@ -105,19 +123,27 @@ function renderMetaData() {
     const sunshine = weather?.sunshine ?? pendingText
     const windSpeed = weather?.windSpeed ?? pendingText
 
-    aboutWalkDisplay.innerHTML = "";
-    let dateTimeText = `Date: <span class="aboutWalkData">${date}</span><br />BeeWalk started: <span class="aboutWalkData">${startTime}</span>`;
-    let weatherText =  `<br />Sunshine: <span id="sunshine" class="aboutWalkData">${sunshine}</span><br />Wind Speed: <span id="windSpeed" class="aboutWalkData">${windSpeed}</span><br />Temp °C: <span id="temp"class="aboutWalkData">${temp}</span>`;
+    dateDisplay.innerHTML = "";
+    startTimeDisplay.innerHTML = "";
+    endTimeDisplay.innerHTML = "";
+    tempDisplay.innerHTML = "";
+    sunshineDisplay.innerHTML = "";
+    windSpeedDisplay.innerHTML = "";
 
     if (startTime) {
-        aboutWalkDisplay.innerHTML = dateTimeText + weatherText;
+        dateDisplay.innerHTML = `${date}`;
+        startTimeDisplay.innerHTML = `${startTime}`;
+        tempDisplay.innerHTML = `${temp}`;
+        sunshineDisplay.innerHTML = `${sunshine}`;
+        windSpeedDisplay.innerHTML = `${windSpeed}`;
+
         startButton.hidden = true;
         stopButton.hidden = false;
         editButton.hidden = false;
     }
 
     if (endTime) {
-        aboutWalkDisplay.innerHTML = dateTimeText + `  ended: <span class="aboutWalkData">${endTime}</span> ` + weatherText;
+        endTimeDisplay.innerHTML = `${endTime}`;
         stopButton.hidden = true;
         editButton.hidden = false;
     }
