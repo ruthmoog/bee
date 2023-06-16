@@ -19,8 +19,8 @@ test.describe('New BeeWalk', () => {
         await beePage.goto()
 
         // Expects no walk metadata yet.
-        const walkMetaData = page.locator('#dateTime');
-        await expect(walkMetaData).toBeEmpty();
+        const walkMetaData = page.locator('#walkData');
+        await expect(walkMetaData).toBeHidden();
 
         // Click start button.
         await beePage.startWalk()
