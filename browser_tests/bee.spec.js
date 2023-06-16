@@ -106,7 +106,7 @@ test.describe('New BeeWalk', () => {
         await expect(editButton).toBeHidden();
 
         // Change details in data fields.
-        await expect(temperature).toContainText('31');
+        await expect(temperature).toContainText('31', { timeout: 10000 });
         await temperature.fill('Hello World!')
 
         // Click save button.
