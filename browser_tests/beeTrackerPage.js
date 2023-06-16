@@ -14,4 +14,12 @@ export class BeeTrackerPage {
     async stopWalk() {
         await this.page.click('#stop');
     }
+
+    async editMetaData() {
+        await this.page.click('#edit');
+    }
+
+    async saveMetaData() {
+        await this.page.click('#save');
+    }
 }

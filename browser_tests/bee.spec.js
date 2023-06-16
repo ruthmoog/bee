@@ -16,14 +16,14 @@ test.describe('New BeeWalk', () => {
     test('Do a walk and see some bees', async ({page}) => {
         const beePage = new BeeTrackerPage(page);
         // Visit web app.
-        await beePage.goto()
+        await beePage.goto();
 
         // Expects no walk metadata yet.
         const walkMetaData = page.locator('#walkData');
         await expect(walkMetaData).toBeHidden();
 
         // Click start button.
-        await beePage.startWalk()
+        await beePage.startWalk();
 
         // Expects the walk metadata to contain the start date time.
         await expect(walkMetaData).toContainText('Date:');
@@ -63,6 +63,76 @@ test.describe('New BeeWalk', () => {
         await expect(walkMetaData).toContainText('Sunshine:');
         await expect(walkMetaData).toContainText('Wind Speed');
         await expect(walkMetaData).toContainText('Temp °C');
+    });
+
+    test('Change walk meta data', async ({page}) => {
+        const beePage = new BeeTrackerPage(page);
+        // Visit web app.
+        await beePage.goto();
+
+        // Expects no edit buttons yet.
+        const editButton = page.locator('#edit');
+        const saveButton = page.locator('#save');
+        await expect(editButton).toBeHidden();
+        await expect(saveButton).toBeHidden();
+
+        // Click start button.
+        await beePage.startWalk();
+
+        // Expects edit button to be visible.
+        await expect(editButton).toBeEnabled();
+        await expect(saveButton).toBeHidden();
+
+        // Click edit button.
+        await beePage.editMetaData();
+
+        // Expects fields to be editable.
+        const date = page.locator('#dateDisplay');
+        const startTime = page.locator('#startTimeDisplay');
+        const endTime = page.locator('#endTimeDisplay');
+        const sunshine = page.locator('#sunshineDisplay');
+        const windSpeed = page.locator('#windSpeedDisplay');
+        const temperature = page.locator('#tempDisplay');
+
+        await expect(date).toBeEditable();
+        await expect(startTime).toBeEditable();
+        await expect(sunshine).toBeEditable();
+        await expect(windSpeed).toBeEditable();
+        await expect(temperature).toBeEditable();
+        await expect(endTime).toBeHidden();
+
+        // Expects save button to be visible.
+        await expect(saveButton).toBeEnabled();
+        await expect(editButton).toBeHidden();
+
+        // Change details in data fields.
+        await expect(temperature).toContainText('31');
+        await temperature.fill('Hello World!')
+
+        // Click save button.
+        await beePage.saveMetaData();
+
+        // Expects data to be updated.
+        await expect(temperature).toContainText('Hello World!');
+        await expect(temperature).not.toContainText('31');
+        await expect(endTime).toBeHidden();
+
+        // Expects fields to be non-editable. TODO
+
+        // Click end button.
+        await expect(endTime).toBeEnabled();
+
+        // Click edit button.
+        await beePage.editMetaData();
+
+        // Expects fields to be editable.
+        await expect(endTime).toBeEditable();
+
+        // Click save button.
+        await beePage.saveMetaData();
+
+        // Expects fields to be non-editable. TODO
+        // await expect(endTime).not.toBeEditable();
     });
 });
 
