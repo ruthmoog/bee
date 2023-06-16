@@ -253,16 +253,6 @@
     });
 
     editButton.addEventListener("click", () => {
-        console.log("temp display editable?: " + tempDisplay.contentEditable);
-        if (tempDisplay.contentEditable === "true") {
-            dateDisplay.contentEditable = "false";
-            startTimeDisplay.contentEditable = "false";
-            endTimeDisplay.contentEditable = "false";
-            tempDisplay.contentEditable = "false";
-            windSpeedDisplay.contentEditable = "false";
-            sunshineDisplay.contentEditable = "false";
-            saveButton.hidden = true;
-        } else {
             dateDisplay.contentEditable = "true";
             startTimeDisplay.contentEditable = "true";
             endTimeDisplay.contentEditable = "true";
@@ -270,11 +260,19 @@
             windSpeedDisplay.contentEditable = "true";
             sunshineDisplay.contentEditable = "true";
             saveButton.hidden = false;
-        }
+            editButton.hidden = true;
     });
 
     saveButton.addEventListener("click", () => {
         editWalkData();
+        dateDisplay.contentEditable = "false";
+        startTimeDisplay.contentEditable = "false";
+        endTimeDisplay.contentEditable = "false";
+        tempDisplay.contentEditable = "false";
+        windSpeedDisplay.contentEditable = "false";
+        sunshineDisplay.contentEditable = "false";
+        saveButton.hidden = true;
+        editButton.hidden = false;
     });
 
     clearButton.addEventListener("click", () => {
