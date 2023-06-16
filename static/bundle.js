@@ -211,12 +211,14 @@
     const editButton = document.getElementById("edit");
     const saveButton = document.getElementById("save");
 
+    const walkData = document.getElementById("walkData");
     const dateDisplay = document.getElementById("dateDisplay");
     const startTimeDisplay = document.getElementById("startTimeDisplay");
     const endTimeDisplay = document.getElementById("endTimeDisplay");
     const tempDisplay = document.getElementById("tempDisplay");
     const sunshineDisplay = document.getElementById("sunshineDisplay");
     const windSpeedDisplay = document.getElementById("windSpeedDisplay");
+    const ended = document.getElementById("ended");
 
     const speciesSelection = document.getElementById("species");
     const clearButton = document.getElementById("clear");
@@ -285,6 +287,7 @@
     });
 
     function startBeeWalk() {
+        walkData.hidden = false;
         function error() {
             //todo: what do we do if we cant get the position
             alert('this wont work');
@@ -315,6 +318,12 @@
         const sunshine = weather?.sunshine ?? pendingText;
         const windSpeed = weather?.windSpeed ?? pendingText;
 
+        if (startTime){
+            walkData.hidden = false;
+        } else {
+            walkData.hidden = true;
+        }
+
         dateDisplay.innerHTML = "";
         startTimeDisplay.innerHTML = "";
         endTimeDisplay.innerHTML = "";
@@ -323,6 +332,7 @@
         windSpeedDisplay.innerHTML = "";
 
         if (startTime) {
+            ended.hidden = true;
             dateDisplay.innerHTML = `${date}`;
             startTimeDisplay.innerHTML = `${startTime}`;
             tempDisplay.innerHTML = `${temp}`;
@@ -335,6 +345,7 @@
         }
 
         if (endTime) {
+            ended.hidden = false;
             endTimeDisplay.innerHTML = `${endTime}`;
             stopButton.hidden = true;
             editButton.hidden = false;

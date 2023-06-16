@@ -180,7 +180,7 @@ table, th, td {
         gap:                        1rem;
     }
 
-    #dateTime:empty {
+    #walkData:empty {
         display:                    none;
     }
 
@@ -190,7 +190,7 @@ table, th, td {
         color:                      var(--drop-shadow-color);
     }
 
-    #dateTime {
+    #walkData {
         background-color:           var(--accent-background-color);
         border-radius:              5px;
         padding:                    1rem;
