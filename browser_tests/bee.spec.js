@@ -106,15 +106,16 @@ test.describe('New BeeWalk', () => {
         await expect(editButton).toBeHidden();
 
         // Change details in data fields.
-        await expect(temperature).toContainText('31', { timeout: 10000 });
-        await temperature.fill('Hello World!')
+        await expect(date).toContainText('16/06/2023');
+        await date.fill('')
+        await date.fill('Hello World!')
 
         // Click save button.
         await beePage.saveMetaData();
 
         // Expects data to be updated.
-        await expect(temperature).toContainText('Hello World!');
-        await expect(temperature).not.toContainText('31');
+        const updatedDate = page.locator('#dateDisplay');
+        await expect(updatedDate).toContainText('Hello World!');
         await expect(endTime).toBeHidden();
 
         // Expects fields to be non-editable. TODO
