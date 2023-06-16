@@ -22,4 +22,9 @@ export class BeeTrackerPage {
     async saveMetaData() {
         await this.page.click('#save');
     }
+
+    async clearAllData() {
+        this.page.on('dialog', dialog => dialog.accept());
+        await this.page.click('#clear');
+    }
 }

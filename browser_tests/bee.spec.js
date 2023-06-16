@@ -134,6 +134,35 @@ test.describe('New BeeWalk', () => {
         // Expects fields to be non-editable. TODO
         // await expect(endTime).not.toBeEditable();
     });
+
+    test('Finish a walk and clear data', async ({page}) => {
+        const beePage = new BeeTrackerPage(page);
+        // Visit web app.
+        await beePage.goto();
+
+        // Click start button.
+        await beePage.startWalk();
+
+        // Record some sightings.
+        const walkData = page.locator('#walkData');
+        await expect(walkData).toContainText('16/06/2023');
+        await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
+        await assertRecordCastes(page, '#workerSpotted', '1', workerColumn);
+        await assertRecordCastes(page, '#maleSpotted', '1', maleColumn);
+        await assertRecordCastes(page, '#unknownSpotted', '1', unknownCasteColumn);
+
+        // End walk.
+        await beePage.stopWalk();
+
+        // Clear all data.
+        await beePage.clearAllData();
+
+        // Data is no longer displayed.
+        const observations = page.locator('#observations');
+        await expect(walkData).toBeHidden();
+        await expect(walkData).not.toContainText('16/06/2023', { timeout: 10000 });
+        await expect(observations).toBeEmpty();
+    });
 });
 
 async function assertRecordCastes(page, buttonId, row, column) {
