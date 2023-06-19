@@ -3,8 +3,10 @@
 
 
 [![Bee web app status](https://img.shields.io/website?down_color=lightgrey&down_message=offline&label=bee&style=for-the-badge&up_color=pink&up_message=online&url=https%3A%2F%2Fpurple-wood-8308.fly.dev%2F)](https://purple-wood-8308.fly.dev/)
+[![GitHub x Dev Hackathon 2023](https://img.shields.io/website?down_color=pink&down_message=🏅%20Runner%20Up&label=GitHub%20x%20Dev%20Hackathon%202023&style=for-the-badge&up_color=pink&up_message=🏅%20Runner%20Up&url=https%3A%2F%2Fpurple-wood-8308.fly.dev%2F)]([https://purple-wood-8308.fly.dev/](https://dev.to/devteam/github-dev-2023-hackathon-winners-announced-236o))  
 
-Deployed site: https://purple-wood-8308.fly.dev/
+
+- Deployed site: https://purple-wood-8308.fly.dev/
 
 
 ## info
