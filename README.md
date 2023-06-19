@@ -11,35 +11,42 @@
 
 - Deployed site: https://purple-wood-8308.fly.dev/
 
+![Bee Project](https://github.com/ruthmoog/portfolio/blob/master/public/images/projects/bee.webp)
 
-## info
 
-[Bumblebee Conservation Trust: Bee Walk Survey Scheme](https://beewalk.org.uk/)
 
-[Gist: Introducing Bee idea for Dev.to x GitHub Hackathon](https://gist.github.com/ruthmoog/3189d06a9a37defef5896562bc2f8180)
+## Info and Background
 
-["Bee, a mobile app for citizen science." on Dev.to](https://dev.to/ruthmoog/bee-2op1)
+### [Bumblebee Conservation Trust: Bee Walk Survey Scheme](https://beewalk.org.uk/)
+BeeWalk is a national recording scheme run by the Bumblebee Conservation Trust to monitor the abundance of bumblebees on transects across the country. 
 
-## get started
+### [Gist: Introducing Bee idea for Dev.to x GitHub Hackathon](https://gist.github.com/ruthmoog/3189d06a9a37defef5896562bc2f8180)
+Project summary including the original Bee Walk process, domain definitions, and user stories.
 
-### dependencies
+### ["Bee, a mobile app for citizen science." on Dev.to](https://dev.to/ruthmoog/bee-2op1)
+Our submission to the GitHub x Dev.to Hackathon 2023, Phone Friendly category. "Developers can use Codespaces or Actions to create mobile applications that work on both iOS and Android devices, as well as set up automation workflows and CI/CD pipelines for their PWA ready apps."
+
+
+## Getting Started
+
+### Dependencies
 
 - nodejs v20
 
 Run `npm i` to fetch and install dependencies
 
-### build
+### Build
 
 `npm run watch`
 (or run from `package.json`)
 
-### run tests
+### Run tests
 
 #### Unit tests
 `npm test`
 (or run from `package.json`)
 
-### End to end tests
+#### End to end tests
 
 Import playwright to run all e2e tests including mobile view ports
 ```bash
@@ -56,6 +63,8 @@ View test logs
 npx playwright show-report
 ```
 
+### Run the app
+
 Run on local browser or deployed app by updating `playwright.config.js` baseURL
 ```javascript
 module.exports = defineConfig({
@@ -68,3 +77,8 @@ module.exports = defineConfig({
     }
 })
 ```
+
+### Deploy
+
+Continuous deployment is enabled through github actions; push to main to deploy automatically.
+
