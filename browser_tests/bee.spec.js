@@ -6,6 +6,11 @@ const workerColumn = '4';
 const maleColumn = '5';
 const unknownCasteColumn = '6';
 
+let localDate = new Date();
+let dateToday = localDate.getDate().toString().padStart(2, "0");
+let monthToday = (localDate.getMonth()+1).toString().padStart(2, "0");
+const today = dateToday+'/'+monthToday+'/'+localDate.getFullYear();
+
 test('has title', async ({page}) => {
     await page.goto('/');
     await expect(page).toHaveTitle(/Bee./);
@@ -106,9 +111,14 @@ test.describe('New BeeWalk', () => {
         await expect(editButton).toBeHidden();
 
         // Change details in data fields.
-        await expect(date).toContainText('16/06/2023');
-        await date.fill('')
-        await date.fill('Hello World!')
+        await expect(date).toContainText(today);
+
+        await date.fill('');
+        await expect(date).toContainText('');
+
+        await date.fill('Hello World!');
+        await expect(date).toContainText('Hello World!');
+
 
         // Click save button.
         await beePage.saveMetaData();
@@ -146,7 +156,7 @@ test.describe('New BeeWalk', () => {
 
         // Record some sightings.
         const walkData = page.locator('#walkData');
-        await expect(walkData).toContainText('16/06/2023');
+        await expect(walkData).toContainText(today);
         await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
         await assertRecordCastes(page, '#workerSpotted', '1', workerColumn);
         await assertRecordCastes(page, '#maleSpotted', '1', maleColumn);
@@ -161,8 +171,31 @@ test.describe('New BeeWalk', () => {
         // Data is no longer displayed.
         const observations = page.locator('#observations');
         await expect(walkData).toBeHidden();
-        await expect(walkData).not.toContainText('16/06/2023', { timeout: 10000 });
+        await expect(walkData).not.toContainText(today);
         await expect(observations).toBeEmpty();
+    });
+
+    test('Refresh page and persist data', async ({page}) => {
+        const beePage = new BeeTrackerPage(page);
+        // Visit web app.
+        await beePage.goto();
+
+        // Start walk and record a sighting.
+        await beePage.startWalk();
+        await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
+
+        // Confirm data is displayed
+        const walkData = page.locator('#walkData');
+        const observations = page.locator('#observations');
+        await expect(walkData).toContainText(today);
+        await expect(observations).toContainText('Bumblebee');
+
+        // Refresh page.
+        await page.reload();
+
+        // The same data is still displayed.
+        await expect(walkData).toContainText(today);
+        await expect(observations).toContainText('Bumblebee');
     });
 });
 
