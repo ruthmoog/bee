@@ -173,10 +173,7 @@ function renderSummary() {
                 row.insertCell(i + 2).innerText = casteCounts[caste] ? casteCounts[caste] : "";
             })
 
-            const comment = comments.filter(comments => comments.species === species && comments.section === section).at(0);
-
-            console.log("this is what i got ", comment);
-            if (comment) {
+            if (comments.filter(comments => comments.species === species && comments.section === section).at(0)) {
                 row.insertCell(6).innerHTML = '💬';
             } else {
                 row.insertCell(6).innerHTML = '';
