@@ -37,6 +37,7 @@
     }
 
     const sightingsStorageKey = "sightings";
+    const commentsStorageKey = "comments";
 
     function addSighting(caste, species, section) {
         let sightings = getSightings();
@@ -54,6 +55,15 @@
             return [];
         } else {
             return JSON.parse(sightings);
+        }
+    }
+
+    function getComments() {
+        let comments = localStorage.getItem(commentsStorageKey);
+        if (!comments) {
+            return [];
+        } else {
+            return JSON.parse(comments);
         }
     }
 
@@ -344,6 +354,7 @@
 
     function renderSummary() {
         const sightings = getSightings();
+        const comments = getComments();
 
         const beeSightingsSummary = createBeeSightingSummary(sightings);
 
@@ -363,6 +374,15 @@
                 castesOfBees.forEach((caste, i) => {
                     row.insertCell(i + 2).innerText = casteCounts[caste] ? casteCounts[caste] : "";
                 });
+
+                const comment = comments.filter(comments => comments.species === species && comments.section === section).at(0);
+
+                console.log("this is what i got ", comment);
+                if (comment) {
+                    row.insertCell(6).innerHTML = '💬';
+                } else {
+                    row.insertCell(6).innerHTML = '';
+                }
             }
         }
     }

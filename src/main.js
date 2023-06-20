@@ -9,7 +9,7 @@ import {
     setStartDateTime,
     setStopTime,
     setWeather,
-    editWalkData,
+    editWalkData, getComments,
 } from "./localStorage";
 import {fetchWeather} from "./weather.js";
 import {castesOfBees} from "./bees.js";
@@ -152,6 +152,7 @@ function renderMetaData() {
 
 function renderSummary() {
     const sightings = getSightings();
+    const comments = getComments();
 
     const beeSightingsSummary = createBeeSightingSummary(sightings);
 
@@ -171,6 +172,15 @@ function renderSummary() {
             castesOfBees.forEach((caste, i) => {
                 row.insertCell(i + 2).innerText = casteCounts[caste] ? casteCounts[caste] : "";
             })
+
+            const comment = comments.filter(comments => comments.species === species && comments.section === section).at(0);
+
+            console.log("this is what i got ", comment);
+            if (comment) {
+                row.insertCell(6).innerHTML = '💬';
+            } else {
+                row.insertCell(6).innerHTML = '';
+            }
         }
     }
 }

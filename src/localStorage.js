@@ -1,6 +1,7 @@
 import {date, hourAndMinute} from "./timeAndDate.js";
 
 const sightingsStorageKey = "sightings";
+const commentsStorageKey = "comments";
 
 export function addSighting(caste, species, section) {
     let sightings = getSightings();
@@ -18,6 +19,15 @@ export function getSightings() {
         return [];
     } else {
         return JSON.parse(sightings);
+    }
+}
+
+export function getComments() {
+    let comments = localStorage.getItem(commentsStorageKey);
+    if (!comments) {
+        return [];
+    } else {
+        return JSON.parse(comments);
     }
 }
 
