@@ -28,6 +28,10 @@ const sunshineDisplay = document.getElementById("sunshineDisplay");
 const windSpeedDisplay = document.getElementById("windSpeedDisplay");
 const ended = document.getElementById("ended");
 
+const addCommentButton = document.getElementsByClassName("addComment"); //TODO find how to pass row data
+const commentBox = document.getElementById("commentText");
+const commentSaveButton = document.getElementById("saveComment");
+
 const speciesSelection = document.getElementById("species");
 const clearButton = document.getElementById("clear");
 
@@ -39,6 +43,8 @@ stopButton.hidden = !getStartTime();
 editButton.hidden = !getStartTime();
 walkData.hidden   = !getStartTime();
 saveButton.hidden = true;
+commentBox.hidden = true;
+commentSaveButton.hidden = true;
 
 renderSummary();
 renderMetaData();
@@ -77,6 +83,18 @@ clearButton.addEventListener("click", () => {
         localStorage.clear();
         location.reload();
     }
+})
+
+addCommentButton.addEventListener("click", () => {
+    //get the element id to work out the species and the section to pass to the save button
+    commentBox.hidden = false;
+    commentSaveButton.hidden = false;
+})
+
+commentSaveButton.addEventListener("click", () => {
+    addComment();
+    commentSaveButton.hidden = true;
+    commentBox.hidden = true;
 })
 
 function makeMetaDataEditable(isEditable) {
@@ -174,9 +192,9 @@ function renderSummary() {
             })
 
             if (comments.filter(comments => comments.species === species && comments.section === section).at(0)) {
-                row.insertCell(6).innerHTML = '💬';
+                row.insertCell(6).innerHTML = '<span class="addComment">💬</span>';
             } else {
-                row.insertCell(6).innerHTML = '';
+                row.insertCell(6).innerHTML = '<span class="addComment">➕</span>';
             }
         }
     }

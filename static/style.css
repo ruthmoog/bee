@@ -226,4 +226,26 @@ table, th, td {
         background-color:           var(--accent-background-color) ;
         border-radius:              1px;
     }
+
+}
+
+#commentText {
+    width: 90%;
+    position: fixed;
+    height: 50%;
+    left: 4%;
+    bottom: 25%;
+    opacity: 90%;
+    background-color: var(--drop-shadow-color);
+    border: var(--accent-background-color) 3px solid;
+    border-radius: 11px;
+    text-align: start;
+    line-height: normal;
+    resize: none;
+}
+
+#saveComment {
+    position: absolute;
+    bottom: 26%;
+    right: 8%;
 }

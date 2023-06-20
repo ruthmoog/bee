@@ -22,6 +22,16 @@ export function getSightings() {
     }
 }
 
+export function addComment(section, species, comment) {
+    let comments = getComments();
+    comments.push({
+        section,
+        species,
+        comment,
+    })
+    localStorage.setItem(commentsStorageKey, JSON.stringify(comments));
+}
+
 export function getComments() {
     let comments = localStorage.getItem(commentsStorageKey);
     if (!comments) {
