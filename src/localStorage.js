@@ -34,10 +34,22 @@ export function addComment(section, species, comment) {
 
 export function getComments() {
     let comments = localStorage.getItem(commentsStorageKey);
+
     if (!comments) {
         return [];
     } else {
         return JSON.parse(comments);
+    }
+}
+
+export function getComment(species, section) {
+    const allComments = getComments();
+    const matchedComment = allComments.filter(comment => comment.species === species && comment.section === section).at(0);
+
+    if (matchedComment) {
+        return matchedComment.comment;
+    } else {
+        return [];
     }
 }
 

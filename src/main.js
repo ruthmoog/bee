@@ -9,7 +9,7 @@ import {
     setStartDateTime,
     setStopTime,
     setWeather,
-    editWalkData, getComments,
+    editWalkData, getComments, addComment, getComment,
 } from "./localStorage";
 import {fetchWeather} from "./weather.js";
 import {castesOfBees} from "./bees.js";
@@ -28,7 +28,6 @@ const sunshineDisplay = document.getElementById("sunshineDisplay");
 const windSpeedDisplay = document.getElementById("windSpeedDisplay");
 const ended = document.getElementById("ended");
 
-const addCommentButton = document.getElementsByClassName("addComment"); //TODO find how to pass row data
 const commentBox = document.getElementById("commentText");
 const commentSaveButton = document.getElementById("saveComment");
 
@@ -85,14 +84,9 @@ clearButton.addEventListener("click", () => {
     }
 })
 
-addCommentButton.addEventListener("click", () => {
-    //get the element id to work out the species and the section to pass to the save button
-    commentBox.hidden = false;
-    commentSaveButton.hidden = false;
-})
-
 commentSaveButton.addEventListener("click", () => {
-    addComment();
+    addComment(); // section, species, comment
+    console.log("click save");
     commentSaveButton.hidden = true;
     commentBox.hidden = true;
 })
@@ -192,9 +186,16 @@ function renderSummary() {
             })
 
             if (comments.filter(comments => comments.species === species && comments.section === section).at(0)) {
-                row.insertCell(6).innerHTML = '<span class="addComment">💬</span>';
+                row.insertCell(6).innerHTML = '💬';
             } else {
-                row.insertCell(6).innerHTML = '<span class="addComment">➕</span>';
+                row.insertCell(6).innerHTML = '';
+            }
+
+            row.onclick = () => {
+                //get the element id to work out the species and the section to pass to the save button
+                commentBox.hidden = !commentBox.hidden;
+                commentBox.innerText = getComment(species, section);
+                commentSaveButton.hidden = !commentSaveButton.hidden;
             }
         }
     }

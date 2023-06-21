@@ -58,12 +58,37 @@
         }
     }
 
+    function addComment(section, species, comment) {
+        let comments = getComments();
+        comments.push({
+            section,
+            species,
+            comment,
+        });
+        localStorage.setItem(commentsStorageKey, JSON.stringify(comments));
+    }
+
     function getComments() {
         let comments = localStorage.getItem(commentsStorageKey);
+
+        console.log("getComments list is like this: " + comments);
         if (!comments) {
             return [];
         } else {
             return JSON.parse(comments);
+        }
+    }
+
+    function getComment(species, section) {
+        const allComments = getComments();
+        console.log("getCOMMENT list is like this: ", allComments);
+
+        const matchedComment = allComments.filter(comment => comment.species === species && comment.section === section).at(0);
+
+        if (matchedComment) {
+            return matchedComment.comment;
+        } else {
+            return [];
         }
     }
 
@@ -230,7 +255,6 @@
     const windSpeedDisplay = document.getElementById("windSpeedDisplay");
     const ended = document.getElementById("ended");
 
-    const addCommentButton = document.getElementsByClassName("addComment");
     const commentBox = document.getElementById("commentText");
     const commentSaveButton = document.getElementById("saveComment");
 
@@ -287,14 +311,9 @@
         }
     });
 
-    addCommentButton.addEventListener("click", () => {
-        //get the element id to work out the species and the section to pass to the save button
-        commentBox.hidden = false;
-        commentSaveButton.hidden = false;
-    });
-
     commentSaveButton.addEventListener("click", () => {
-        addComment();
+        addComment(); // section, species, comment
+        console.log("click save");
         commentSaveButton.hidden = true;
         commentBox.hidden = true;
     });
@@ -394,10 +413,17 @@
                 });
 
                 if (comments.filter(comments => comments.species === species && comments.section === section).at(0)) {
-                    row.insertCell(6).innerHTML = '<span class="addComment">💬</span>';
+                    row.insertCell(6).innerHTML = '💬';
                 } else {
-                    row.insertCell(6).innerHTML = '<span class="addComment">➕</span>';
+                    row.insertCell(6).innerHTML = '';
                 }
+
+                row.onclick = () => {
+                    //get the element id to work out the species and the section to pass to the save button
+                    commentBox.hidden = !commentBox.hidden;
+                    commentBox.innerText = getComment(species, section);
+                    commentSaveButton.hidden = !commentSaveButton.hidden;
+                };
             }
         }
     }
