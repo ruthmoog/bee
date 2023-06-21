@@ -30,6 +30,7 @@ const ended = document.getElementById("ended");
 
 const commentBox = document.getElementById("commentText");
 const commentSaveButton = document.getElementById("saveComment");
+const discardCommentButton = document.getElementById("discardComment");
 
 const speciesSelection = document.getElementById("species");
 const clearButton = document.getElementById("clear");
@@ -44,6 +45,7 @@ walkData.hidden   = !getStartTime();
 saveButton.hidden = true;
 commentBox.hidden = true;
 commentSaveButton.hidden = true;
+discardCommentButton.hidden = true;
 
 renderSummary();
 renderMetaData();
@@ -87,8 +89,15 @@ clearButton.addEventListener("click", () => {
 commentSaveButton.addEventListener("click", () => {
     addComment(document.getElementById("commentText").value);
     commentSaveButton.hidden = true;
+    discardCommentButton.hidden = true;
     commentBox.hidden = true;
     renderSummary();
+})
+
+discardCommentButton.addEventListener("click", () => {
+    commentBox.hidden = true;
+    commentSaveButton.hidden = true;
+    discardCommentButton.hidden = true;
 })
 
 function makeMetaDataEditable(isEditable) {
@@ -192,10 +201,10 @@ function renderSummary() {
             }
 
             row.onclick = () => {
-                //get the element id to work out the species and the section to pass to the save button
                 commentBox.hidden = !commentBox.hidden;
                 commentBox.innerText = getComment(species, section);
                 commentSaveButton.hidden = !commentSaveButton.hidden;
+                discardCommentButton.hidden = !discardCommentButton.hidden;
             }
         }
     }

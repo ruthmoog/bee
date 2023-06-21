@@ -7,6 +7,7 @@
     --drop-shadow-color:        powderblue;
     --main-font-color:          #222;  /* dark grey */
     --alert-button-color:       crimson;
+    --comments-color:           honeydew;
     --preferred-fonts:          "American Typewriter", sans-serif;
 }
 
@@ -236,16 +237,20 @@ table, th, td {
     left: 4%;
     bottom: 25%;
     opacity: 90%;
-    background-color: var(--drop-shadow-color);
-    border: var(--accent-background-color) 3px solid;
+    background-color: var(--comments-color);
+    border: var(--border-color) 3px solid;
     border-radius: 11px;
     text-align: start;
     line-height: normal;
     resize: none;
 }
 
-#saveComment {
+.commentButton {
     position: absolute;
     bottom: 26%;
     right: 8%;
+}
+
+#discardComment {
+    bottom: 32%;
 }
