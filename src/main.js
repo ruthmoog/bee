@@ -88,6 +88,7 @@ commentSaveButton.addEventListener("click", () => {
     addComment(document.getElementById("commentText").value);
     commentSaveButton.hidden = true;
     commentBox.hidden = true;
+    renderSummary();
 })
 
 function makeMetaDataEditable(isEditable) {

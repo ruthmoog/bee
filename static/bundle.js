@@ -319,9 +319,9 @@
 
     commentSaveButton.addEventListener("click", () => {
         addComment(document.getElementById("commentText").value);
-        console.log("click save");
         commentSaveButton.hidden = true;
         commentBox.hidden = true;
+        renderSummary();
     });
 
     function makeMetaDataEditable(isEditable) {
