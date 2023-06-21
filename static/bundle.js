@@ -38,7 +38,6 @@
 
     const sightingsStorageKey = "sightings";
     const commentsStorageKey = "comments";
-    let currentRow = new Map();
 
     function addSighting(caste, species, section) {
         let sightings = getSightings();
@@ -59,19 +58,17 @@
         }
     }
 
-    function addComment(comment) {
+    function addComment(species, section, comment) {
         let storedComments = getComments();
 
-        const species = currentRow.get("species");
-        const section = currentRow.get("section");
-        const comments = storedComments.filter(comment => comment.species !== species && comment.section !== section);
+        storedComments = storedComments.filter(comment => comment.species !== species && comment.section !== section);
 
-        comments.push({
+        storedComments.push({
             species,
             section,
             comment,
         });
-        localStorage.setItem(commentsStorageKey, JSON.stringify(comments));
+        localStorage.setItem(commentsStorageKey, JSON.stringify(storedComments));
     }
 
     function getComments() {
@@ -85,9 +82,6 @@
     }
 
     function getComment(species, section) {
-        currentRow.set("species",species);
-        currentRow.set("section",section);
-
         const allComments = getComments();
         const matchedComment = allComments.filter(comment => comment.species === species && comment.section === section).at(0);
 
@@ -272,6 +266,8 @@
         {button: document.getElementById(caste + 'Spotted'), caste})
     );
 
+    let currentRow = new Map;
+
     stopButton.hidden = !getStartTime();
     editButton.hidden = !getStartTime();
     walkData.hidden   = !getStartTime();
@@ -320,18 +316,26 @@
     });
 
     commentSaveButton.addEventListener("click", () => {
-        addComment(document.getElementById("commentText").value);
+        const species = currentRow.get("species");
+        const section = currentRow.get("section");
+        const comment = document.getElementById("commentText").value;
+
+        console.log("species, section, comment: ", species, section, comment);
+        addComment(species, section, comment);
         commentSaveButton.hidden = true;
         discardCommentButton.hidden = true;
         commentBox.hidden = true;
+        console.log("comment to display: ",getComment(species, section));
+        commentBox.innerText = getComment(species, section);
+
         renderSummary();
     });
 
     discardCommentButton.addEventListener("click", () => {
-        commentBox.value = getComment(currentRow.get("species"), currentRow.get("section"));
         commentBox.hidden = true;
         commentSaveButton.hidden = true;
         discardCommentButton.hidden = true;
+        commentBox.innerText = getComment(currentRow.get("species"), currentRow.get("section"));
     });
 
     function makeMetaDataEditable(isEditable) {
@@ -435,8 +439,12 @@
                 }
 
                 row.onclick = () => {
+                    currentRow.set("species", species);
+                    currentRow.set("section", section);
+
+                    // commentBox.innerText = getComment(species, section);
+                    commentBox.value = getComment(species, section);
                     commentBox.hidden = !commentBox.hidden;
-                    commentBox.innerText = getComment(species, section);
                     commentSaveButton.hidden = !commentSaveButton.hidden;
                     discardCommentButton.hidden = !discardCommentButton.hidden;
                 };

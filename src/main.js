@@ -9,7 +9,7 @@ import {
     setStartDateTime,
     setStopTime,
     setWeather,
-    editWalkData, getComments, addComment, getComment, currentRow,
+    editWalkData, getComments, addComment, getComment,
 } from "./localStorage";
 import {fetchWeather} from "./weather.js";
 import {castesOfBees} from "./bees.js";
@@ -38,6 +38,8 @@ const clearButton = document.getElementById("clear");
 const beeButtons = castesOfBees.map((caste) => (
     {button: document.getElementById(caste + 'Spotted'), caste})
 )
+
+let currentRow = new Map;
 
 stopButton.hidden = !getStartTime();
 editButton.hidden = !getStartTime();
@@ -87,18 +89,26 @@ clearButton.addEventListener("click", () => {
 })
 
 commentSaveButton.addEventListener("click", () => {
-    addComment(document.getElementById("commentText").value);
+    const species = currentRow.get("species");
+    const section = currentRow.get("section");
+    const comment = document.getElementById("commentText").value
+
+    console.log("species, section, comment: ", species, section, comment);
+    addComment(species, section, comment);
     commentSaveButton.hidden = true;
     discardCommentButton.hidden = true;
     commentBox.hidden = true;
+    console.log("comment to display: ",getComment(species, section));
+    commentBox.innerText = getComment(species, section);
+
     renderSummary();
 })
 
 discardCommentButton.addEventListener("click", () => {
-    commentBox.value = getComment(currentRow.get("species"), currentRow.get("section"));
     commentBox.hidden = true;
     commentSaveButton.hidden = true;
     discardCommentButton.hidden = true;
+    commentBox.innerText = getComment(currentRow.get("species"), currentRow.get("section"));
 })
 
 function makeMetaDataEditable(isEditable) {
@@ -202,8 +212,12 @@ function renderSummary() {
             }
 
             row.onclick = () => {
+                currentRow.set("species", species);
+                currentRow.set("section", section);
+
+                // commentBox.innerText = getComment(species, section);
+                commentBox.value = getComment(species, section);
                 commentBox.hidden = !commentBox.hidden;
-                commentBox.innerText = getComment(species, section);
                 commentSaveButton.hidden = !commentSaveButton.hidden;
                 discardCommentButton.hidden = !discardCommentButton.hidden;
             }
