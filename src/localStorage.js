@@ -2,6 +2,7 @@ import {date, hourAndMinute} from "./timeAndDate.js";
 
 const sightingsStorageKey = "sightings";
 const commentsStorageKey = "comments";
+let currentRow = new Map();
 
 export function addSighting(caste, species, section) {
     let sightings = getSightings();
@@ -22,11 +23,16 @@ export function getSightings() {
     }
 }
 
-export function addComment(section, species, comment) {
-    let comments = getComments();
+export function addComment(comment) {
+    let storedComments = getComments();
+
+    const species = currentRow.get("species");
+    const section = currentRow.get("section");
+    const comments = storedComments.filter(comment => comment.species !== species && comment.section !== section);
+
     comments.push({
-        section,
         species,
+        section,
         comment,
     })
     localStorage.setItem(commentsStorageKey, JSON.stringify(comments));
@@ -43,6 +49,9 @@ export function getComments() {
 }
 
 export function getComment(species, section) {
+    currentRow.set("species",species);
+    currentRow.set("section",section);
+
     const allComments = getComments();
     const matchedComment = allComments.filter(comment => comment.species === species && comment.section === section).at(0);
 

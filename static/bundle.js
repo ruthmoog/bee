@@ -38,6 +38,7 @@
 
     const sightingsStorageKey = "sightings";
     const commentsStorageKey = "comments";
+    let currentRow = new Map();
 
     function addSighting(caste, species, section) {
         let sightings = getSightings();
@@ -58,11 +59,16 @@
         }
     }
 
-    function addComment(section, species, comment) {
-        let comments = getComments();
+    function addComment(comment) {
+        let storedComments = getComments();
+
+        const species = currentRow.get("species");
+        const section = currentRow.get("section");
+        const comments = storedComments.filter(comment => comment.species !== species && comment.section !== section);
+
         comments.push({
-            section,
             species,
+            section,
             comment,
         });
         localStorage.setItem(commentsStorageKey, JSON.stringify(comments));
@@ -71,7 +77,6 @@
     function getComments() {
         let comments = localStorage.getItem(commentsStorageKey);
 
-        console.log("getComments list is like this: " + comments);
         if (!comments) {
             return [];
         } else {
@@ -80,9 +85,10 @@
     }
 
     function getComment(species, section) {
-        const allComments = getComments();
-        console.log("getCOMMENT list is like this: ", allComments);
+        currentRow.set("species",species);
+        currentRow.set("section",section);
 
+        const allComments = getComments();
         const matchedComment = allComments.filter(comment => comment.species === species && comment.section === section).at(0);
 
         if (matchedComment) {
@@ -312,7 +318,7 @@
     });
 
     commentSaveButton.addEventListener("click", () => {
-        addComment(); // section, species, comment
+        addComment(document.getElementById("commentText").value);
         console.log("click save");
         commentSaveButton.hidden = true;
         commentBox.hidden = true;

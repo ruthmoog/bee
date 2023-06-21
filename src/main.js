@@ -85,8 +85,7 @@ clearButton.addEventListener("click", () => {
 })
 
 commentSaveButton.addEventListener("click", () => {
-    addComment(); // section, species, comment
-    console.log("click save");
+    addComment(document.getElementById("commentText").value);
     commentSaveButton.hidden = true;
     commentBox.hidden = true;
 })
