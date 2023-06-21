@@ -223,13 +223,18 @@ test.describe('New BeeWalk', () => {
         await expect(saveButton).not.toBeHidden();
         await expect(discardButton).not.toBeHidden();
 
-
-
         // Add and save a comment
+        await textArea.fill("Lavender");
+        await saveButton.click();
 
-        // Comment bubble should be present
+        // Expect comment column to have indicator visible
+        await expect(page.getByText('💬')).toBeVisible();
 
-        // Clicking the same row should show the saved comment
+        // Click the same row
+        await observations.nth(0).click();
+
+        // Expect the saved comment displayed in text area
+        await expect(textArea).toContainText("Lavender");
 
         // Remove the text and save the comment
 
