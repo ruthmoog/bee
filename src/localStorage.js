@@ -2,7 +2,7 @@ import {date, hourAndMinute} from "./timeAndDate.js";
 
 const sightingsStorageKey = "sightings";
 const commentsStorageKey = "comments";
-let currentRow = new Map();
+export let currentRow = new Map();
 
 export function addSighting(caste, species, section) {
     let sightings = getSightings();

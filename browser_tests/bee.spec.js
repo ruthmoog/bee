@@ -190,6 +190,13 @@ test.describe('New BeeWalk', () => {
         // Confirm data is displayed
         const walkData = page.locator('#walkData');
         const observations = page.locator('#observations');
+        await observations.nth(0).click();
+        const textArea = page.locator('#commentText');
+        await textArea.fill("Vetch");
+        await page.locator('#saveComment').click();
+        await observations.nth(0).click();
+
+        await expect(textArea).toContainText("Vetch");
         await expect(walkData).toContainText(today);
         await expect(observations).toContainText('Bumblebee');
 
@@ -199,6 +206,8 @@ test.describe('New BeeWalk', () => {
         // The same data is still displayed.
         await expect(walkData).toContainText(today);
         await expect(observations).toContainText('Bumblebee');
+        await observations.nth(0).click();
+        await expect(textArea).toContainText("Vetch");
     });
 
     test('Add comments', async ({page}) => {
@@ -228,6 +237,9 @@ test.describe('New BeeWalk', () => {
         await saveButton.click();
 
         // Expect comment column to have indicator visible
+        await expect(textArea).toBeHidden();
+        await expect(saveButton).toBeHidden();
+        await expect(discardButton).toBeHidden();
         await expect(page.getByText('💬')).toBeVisible();
 
         // Click the same row
@@ -243,23 +255,25 @@ test.describe('New BeeWalk', () => {
         // Expect no comment bubble to be displayed
         await expect(page.getByText('💬')).not.toBeVisible();
 
-
-        // Click another row should not show the other comment
+        // Click another row
         await page.click('#S2');
         await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
+        const otherRow = page.getByText("S2").nth(1);
+        await otherRow.click();
 
-        // Edit the text and discard the changes - should not be saved
+        // Expect no comment to be displayed
+        await expect(textArea).not.toContainText("Lavender");
+        await expect(textArea).toBeEmpty;
 
-        // Click again
+        // Edit the text and discard the changes
+        await textArea.fill("Cornflower");
+        await discardButton.click();
 
-        // Add and save a comment
-
-        // Click the same row and edit and save the comment
-
-        // Expect the comment to be updated when clicking the row again
-
-
-
+        // Expect changes not saved
+        await expect(page.getByText('💬')).not.toBeVisible();
+        await otherRow.click();
+        await expect(textArea).not.toContainText("Cornflower");
+        await expect(textArea).toBeEmpty();
     });
 });
 

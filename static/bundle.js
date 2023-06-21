@@ -328,6 +328,7 @@
     });
 
     discardCommentButton.addEventListener("click", () => {
+        commentBox.value = getComment(currentRow.get("species"), currentRow.get("section"));
         commentBox.hidden = true;
         commentSaveButton.hidden = true;
         discardCommentButton.hidden = true;

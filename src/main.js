@@ -9,7 +9,7 @@ import {
     setStartDateTime,
     setStopTime,
     setWeather,
-    editWalkData, getComments, addComment, getComment,
+    editWalkData, getComments, addComment, getComment, currentRow,
 } from "./localStorage";
 import {fetchWeather} from "./weather.js";
 import {castesOfBees} from "./bees.js";
@@ -95,6 +95,7 @@ commentSaveButton.addEventListener("click", () => {
 })
 
 discardCommentButton.addEventListener("click", () => {
+    commentBox.value = getComment(currentRow.get("species"), currentRow.get("section"));
     commentBox.hidden = true;
     commentSaveButton.hidden = true;
     discardCommentButton.hidden = true;
