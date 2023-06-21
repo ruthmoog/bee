@@ -200,6 +200,58 @@ test.describe('New BeeWalk', () => {
         await expect(walkData).toContainText(today);
         await expect(observations).toContainText('Bumblebee');
     });
+
+    test('Add comments', async ({page}) => {
+        const beePage = new BeeTrackerPage(page);
+        // Visit web app.
+        await beePage.goto();
+
+        // Start walk and record a sighting.
+        await beePage.startWalk();
+        await assertRecordCastes(page, '#unknownSpotted', '1', unknownCasteColumn);
+
+        // Click the row
+        const observations = page.locator('#observations');
+        await observations.nth(0).click();
+
+        // Expect the comment interface to be visible
+        const textArea = page.locator('#commentText');
+        const saveButton = page.locator('#saveComment');
+        const discardButton = page.locator('#discardComment');
+
+        await expect(textArea).not.toBeHidden();
+        await expect(saveButton).not.toBeHidden();
+        await expect(discardButton).not.toBeHidden();
+
+
+
+        // Add and save a comment
+
+        // Comment bubble should be present
+
+        // Clicking the same row should show the saved comment
+
+        // Remove the text and save the comment
+
+        // Expect no comment bubble to be displayed
+
+        // Click another row should not show the other comment
+        await page.click('#S2');
+        await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
+
+        // Edit the text and discard the changes - should not be saved
+
+        // Click again
+
+        // Add and save a comment
+
+        // Click the same row and edit and save the comment
+
+        // Expect the comment to be updated when clicking the row again
+
+
+
+    });
 });
 
 async function assertRecordCastes(page, buttonId, row, column) {
