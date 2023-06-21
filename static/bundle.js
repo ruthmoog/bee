@@ -427,7 +427,7 @@
                     row.insertCell(i + 2).innerText = casteCounts[caste] ? casteCounts[caste] : "";
                 });
 
-                if (comments.filter(comments => comments.species === species && comments.section === section).at(0)) {
+                if (comments.filter(comment => comment.species === species && comment.section === section && comment.comment != "").at(0)) {
                     row.insertCell(6).innerHTML = '💬';
                 } else {
                     row.insertCell(6).innerHTML = '';
