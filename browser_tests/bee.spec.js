@@ -237,8 +237,12 @@ test.describe('New BeeWalk', () => {
         await expect(textArea).toContainText("Lavender");
 
         // Remove the text and save the comment
+        await textArea.fill("");
+        await saveButton.click();
 
         // Expect no comment bubble to be displayed
+        await expect(page.getByText('💬')).not.toBeVisible();
+
 
         // Click another row should not show the other comment
         await page.click('#S2');
