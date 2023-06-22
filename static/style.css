@@ -66,6 +66,7 @@ button, #species {
     background-color:       var(--field-color);
     display:                inline;
     border-radius:          6px;
+    line-height:            1.75rem;
 }
 
 #clear {
