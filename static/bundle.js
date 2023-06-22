@@ -61,15 +61,7 @@
     function addComment(species, section, comment) {
         let storedComments = getComments();
 
-        console.log("getting all stored comments: ", storedComments);
-        console.log("comment.species: ", comment.species);
-        console.log("species passed in: ", species);
-        console.log("comment.section: ", comment.section);
-        console.log("section passed in: ", section);
-
-        if(storedComments) {
-            storedComments = storedComments.filter(i => i.species !== species && i.section !== section);
-        }
+        storedComments = storedComments.filter(comment => comment.species !== species || comment.section !== section);
 
         storedComments.push({
             species,
@@ -329,12 +321,11 @@
         const section = currentRow.get("section");
         const comment = document.getElementById("commentText").value;
 
-        console.log("species, section, comment: ", species, section, comment);
         addComment(species, section, comment);
+
         commentSaveButton.hidden = true;
         discardCommentButton.hidden = true;
         commentBox.hidden = true;
-        console.log("comment to display: ",getComment(species, section));
         commentBox.innerText = getComment(species, section);
 
         renderSummary();

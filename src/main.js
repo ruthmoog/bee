@@ -93,12 +93,11 @@ commentSaveButton.addEventListener("click", () => {
     const section = currentRow.get("section");
     const comment = document.getElementById("commentText").value
 
-    console.log("species, section, comment: ", species, section, comment);
     addComment(species, section, comment);
+
     commentSaveButton.hidden = true;
     discardCommentButton.hidden = true;
     commentBox.hidden = true;
-    console.log("comment to display: ",getComment(species, section));
     commentBox.innerText = getComment(species, section);
 
     renderSummary();
@@ -205,7 +204,7 @@ function renderSummary() {
                 row.insertCell(i + 2).innerText = casteCounts[caste] ? casteCounts[caste] : "";
             })
 
-            if (comments.filter(comment => comment.species === species && comment.section === section && comment.comment != "").at(0)) {
+            if (comments.filter(comment => comment.species === species && comment.section === section && comment.comment !== "").at(0)) {
                 row.insertCell(6).innerHTML = '💬';
             } else {
                 row.insertCell(6).innerHTML = '';

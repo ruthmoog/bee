@@ -259,8 +259,8 @@ test.describe('New BeeWalk', () => {
         // Click another row
         await page.click('#S2');
         await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
-        const otherRow = page.getByText("S2").nth(1);
-        await otherRow.click();
+        const s2Row = page.getByText("S2").nth(1);
+        await s2Row.click();
 
         // Expect no comment to be displayed
         await expect(textArea).not.toContainText("Lavender");
@@ -272,9 +272,49 @@ test.describe('New BeeWalk', () => {
 
         // Expect changes not saved
         await expect(page.getByText('💬')).not.toBeVisible();
-        await otherRow.click();
+        await s2Row.click();
         await expect(textArea).not.toContainText("Cornflower");
         await expect(textArea).toBeEmpty();
+    });
+
+    test('Add multiple comments', async ({page}) => {
+        const beePage = new BeeTrackerPage(page);
+        const textArea = page.locator('#commentText');
+        const saveButton = page.locator('#saveComment');
+        const discardButton = page.locator('#discardComment');
+        const s1Row = page.getByText("S1").nth(1);
+        const s2Row = page.getByText("S2").nth(1);
+
+        // Visit web app, add some bees
+        await beePage.goto();
+        await assertRecordCastes(page, '#unknownSpotted', '1', unknownCasteColumn);
+        await page.click('#S2');
+        await assertRecordCastes(page, '#queenSpotted', '1', queenColumn);
+
+        // Add multiple comments
+        await s1Row.click();
+        await textArea.fill("Knapweed");
+        await saveButton.click();
+
+        await s2Row.click();
+        await textArea.fill("Sage");
+        await saveButton.click();
+
+        // Expect both rows to have a comment
+        await expect(page.getByText('💬')).toHaveCount(2);
+
+        // Expect each row to display the correct text
+        await s1Row.click();
+        await expect(page.getByText('Knapweed')).toBeVisible;
+        await expect(page.getByText('Sage')).not.toBeVisible;
+
+        // Close the text area
+        await discardButton.click();
+
+        // Expect each row to display the correct text
+        await s2Row.click();
+        await expect(page.getByText('Knapweed')).not.toBeVisible;
+        await expect(page.getByText('Sage')).toBeVisible;
     });
 });
 
