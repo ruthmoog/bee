@@ -61,13 +61,22 @@
     function addComment(species, section, comment) {
         let storedComments = getComments();
 
-        storedComments = storedComments.filter(comment => comment.species !== species && comment.section !== section);
+        console.log("getting all stored comments: ", storedComments);
+        console.log("comment.species: ", comment.species);
+        console.log("species passed in: ", species);
+        console.log("comment.section: ", comment.section);
+        console.log("section passed in: ", section);
+
+        if(storedComments) {
+            storedComments = storedComments.filter(i => i.species !== species && i.section !== section);
+        }
 
         storedComments.push({
             species,
             section,
             comment,
         });
+
         localStorage.setItem(commentsStorageKey, JSON.stringify(storedComments));
     }
 
@@ -432,7 +441,7 @@
                     row.insertCell(i + 2).innerText = casteCounts[caste] ? casteCounts[caste] : "";
                 });
 
-                if (comments.filter(comment => comment.species === species && comment.section === section && comment.comment != "").at(0)) {
+                if (comments.filter(comment => comment.species === species && comment.section === section && comment.comment !== "").at(0)) {
                     row.insertCell(6).innerHTML = '💬';
                 } else {
                     row.insertCell(6).innerHTML = '';
