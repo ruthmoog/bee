@@ -43,7 +43,6 @@ fieldset {
     border-style:           solid;
     border-radius:          10px;
     border-width:           2px;
-    padding:                1rem;
 }
 
 .aboutWalkData {
@@ -131,6 +130,7 @@ th {
         margin:                 0.5%;
         border-radius:          6px;
         padding:                1.2%;
+        white-space:            nowrap;
     }
 
     /* Presenting data */
