@@ -79,7 +79,7 @@ button, #species {
 
 table {
     box-shadow:             7px 7px 0 1px var(--drop-shadow-color);
-    width:                  100%;
+    width:                  86%;
 }
 
 table, th, td {
@@ -87,6 +87,10 @@ table, th, td {
     background-color:       var(--field-color);
     border-radius:          9px;
     border-collapse:        collapse;
+}
+
+th {
+    width: fit-content;
 }
 
 
