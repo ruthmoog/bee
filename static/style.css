@@ -241,26 +241,27 @@ th {
 }
 
 #commentText {
-    width: 90%;
-    position: fixed;
-    height: 50%;
-    left: 4%;
-    bottom: 25%;
-    opacity: 90%;
-    background-color: var(--comments-color);
-    border: var(--border-color) 3px solid;
-    border-radius: 11px;
-    text-align: start;
-    line-height: normal;
-    resize: none;
+    width:                          90%;
+    position:                       fixed;
+    height:                         50%;
+    left:                           4%;
+    bottom:                         25%;
+    opacity:                        90%;
+    background-color:               var(--comments-color);
+    border:                         var(--border-color) 3px solid;
+    border-radius:                  11px;
+    text-align:                     start;
+    line-height:                    normal;
+    resize:                         none;
 }
 
 .commentButton {
-    position: absolute;
-    bottom: 26%;
-    right: 8%;
+    position:                       fixed;
+    bottom:                         28%;
+    right:                          8%;
 }
 
 #discardComment {
-    bottom: 32%;
+    bottom:                         32%;
+    margin-bottom:                  4%;
 }
