@@ -62,6 +62,12 @@ button, #species {
     line-height:            1rem;
 }
 
+button:active {
+    color:                  var(--border-color);
+    box-shadow:             7px 7px 0 1px var(--border-color);
+
+}
+
 .selectSection {
     background-color:       var(--field-color);
     display:                inline;
