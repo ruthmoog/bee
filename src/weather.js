@@ -27,7 +27,7 @@ export async function fetchWeather(currentPosition) {
 export function extractWeather(weatherResponse, currentDate) {
     const index = currentDate.getHours() - 1
 
-    const temperature = weatherResponse.hourly.temperature_2m[index]
+    const temperature = Math.round(weatherResponse.hourly.temperature_2m[index])
     const cloudCover = weatherResponse.hourly.cloudcover[index];
     const windSpeed = weatherResponse.hourly.windspeed_10m[index];
 

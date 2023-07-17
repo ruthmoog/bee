@@ -91,7 +91,7 @@ describe("extracting weather information", () => {
                 10,
                 11,
                 98,
-                 ,
+                undefined,
                 100,
                 100,
                 100,
@@ -113,7 +113,7 @@ describe("extracting weather information", () => {
                 26,
                 38,
                 49,
-                ,
+                undefined,
                 116.6,
                 19.1,
                 18.5,
@@ -136,7 +136,7 @@ describe("extracting weather information", () => {
 
     it("extracts the current temperature", () => {
         const currentWeather = extractWeather(example, new Date(2023, 0, 5, 9))
-        assert.deepEqual(currentWeather.temperature, 13.7)
+        assert.deepEqual(currentWeather.temperature, 14)
     })
 
     describe("extracts sunshine", () => {
