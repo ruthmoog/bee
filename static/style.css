@@ -23,9 +23,11 @@ body {
     linear-gradient(to bottom,  var(--accent-background-color) 1px, transparent 0);
 }
 
-span[contenteditable=true]{
-    background: white;
-    border: 1px inset var(--field-color);
+span[contenteditable=true], #windSelect {
+    background:             white;
+    border:                 1px inset var(--field-color);
+    width:                  inherit;
+    font-family:            inherit;
 }
 
 .funky {

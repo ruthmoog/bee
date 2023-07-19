@@ -142,7 +142,12 @@
         const endTime = document.getElementById("endTimeDisplay").innerText;
         const temperature = document.getElementById("tempDisplay").innerText;
         const sunshine = document.getElementById("sunshineDisplay").innerText;
-        const windSpeed = document.getElementById("windSpeedDisplay").innerText;
+        console.log("value: ", document.getElementById("windSelect").value);
+        console.log("select inner text: ", document.getElementById("windSelect").innerText);
+        console.log("span inner text: ", document.getElementById("windSpeedDisplay").innerText);
+
+        console.log("Try this :" , document.getElementById("windSelect").options[document.getElementById("windSelect").selectedIndex].text);
+        const windSpeed = document.getElementById("windSelect").value ? document.getElementById("windSelect").options[document.getElementById("windSelect").selectedIndex].text : document.getElementById("windSpeedDisplay").innerText;
 
         setDate(date);
         setStart(startTime);
@@ -173,7 +178,6 @@
         let res = await fetch(url);
         let json = await res.json();
         return extractWeather(json, new Date());
-
     }
 
     function extractWeather(weatherResponse, currentDate) {
@@ -254,6 +258,7 @@
     const tempDisplay = document.getElementById("tempDisplay");
     const sunshineDisplay = document.getElementById("sunshineDisplay");
     const windSpeedDisplay = document.getElementById("windSpeedDisplay");
+    const windSpeedSelector = document.getElementById("windSelect");
     const ended = document.getElementById("ended");
 
     const commentBox = document.getElementById("commentText");
@@ -272,6 +277,7 @@
     stopButton.hidden = !getStartTime();
     editButton.hidden = !getStartTime();
     walkData.hidden   = !getStartTime();
+    windSpeedSelector.hidden = true;
     saveButton.hidden = true;
     commentBox.hidden = true;
     commentSaveButton.hidden = true;
@@ -297,6 +303,7 @@
     saveButton.addEventListener("click", () => {
         editWalkData();
         makeMetaDataEditable(false);
+        renderMetaData();
     });
 
     beeButtons.forEach(({button, caste}) => {
@@ -343,8 +350,11 @@
         startTimeDisplay.contentEditable = isEditable;
         endTimeDisplay.contentEditable = isEditable;
         tempDisplay.contentEditable = isEditable;
-        windSpeedDisplay.contentEditable = isEditable;
         sunshineDisplay.contentEditable = isEditable;
+
+        windSpeedDisplay.hidden = isEditable;
+        windSpeedSelector.hidden = !isEditable;
+
         editButton.hidden = isEditable;
         saveButton.hidden = !isEditable;
     }

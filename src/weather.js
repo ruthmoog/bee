@@ -1,3 +1,4 @@
+
 export const unableToFetchWindSpeed = "Unable to fetch wind speed";
 export const calm0 = "0 <dfn>Smoke rises vertically</dfn>";
 export const lightAir1 = "1 <dfn>Slight smoke drift</dfn>";
@@ -21,7 +22,6 @@ export async function fetchWeather(currentPosition) {
     let res = await fetch(url)
     let json = await res.json()
     return extractWeather(json, new Date());
-
 }
 
 export function extractWeather(weatherResponse, currentDate) {

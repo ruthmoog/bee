@@ -11,7 +11,9 @@ import {
     setWeather,
     editWalkData, getComments, addComment, getComment,
 } from "./localStorage";
-import {fetchWeather} from "./weather.js";
+import {
+    fetchWeather,
+} from "./weather.js";
 import {castesOfBees} from "./bees.js";
 
 const startButton = document.getElementById("start")
@@ -26,6 +28,7 @@ const endTimeDisplay = document.getElementById("endTimeDisplay");
 const tempDisplay = document.getElementById("tempDisplay");
 const sunshineDisplay = document.getElementById("sunshineDisplay");
 const windSpeedDisplay = document.getElementById("windSpeedDisplay");
+const windSpeedSelector = document.getElementById("windSelect");
 const ended = document.getElementById("ended");
 
 const commentBox = document.getElementById("commentText");
@@ -44,6 +47,7 @@ let currentRow = new Map;
 stopButton.hidden = !getStartTime();
 editButton.hidden = !getStartTime();
 walkData.hidden   = !getStartTime();
+windSpeedSelector.hidden = true;
 saveButton.hidden = true;
 commentBox.hidden = true;
 commentSaveButton.hidden = true;
@@ -69,6 +73,7 @@ editButton.addEventListener("click", () => {
 saveButton.addEventListener("click", () => {
     editWalkData();
     makeMetaDataEditable(false);
+    renderMetaData();
 })
 
 beeButtons.forEach(({button, caste}) => {
@@ -115,8 +120,11 @@ function makeMetaDataEditable(isEditable) {
     startTimeDisplay.contentEditable = isEditable;
     endTimeDisplay.contentEditable = isEditable;
     tempDisplay.contentEditable = isEditable;
-    windSpeedDisplay.contentEditable = isEditable;
     sunshineDisplay.contentEditable = isEditable;
+
+    windSpeedDisplay.hidden = isEditable;
+    windSpeedSelector.hidden = !isEditable;
+
     editButton.hidden = isEditable;
     saveButton.hidden = !isEditable;
 }

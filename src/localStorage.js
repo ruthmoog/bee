@@ -106,7 +106,7 @@ export function editWalkData() {
     const endTime = document.getElementById("endTimeDisplay").innerText;
     const temperature = document.getElementById("tempDisplay").innerText;
     const sunshine = document.getElementById("sunshineDisplay").innerText;
-    const windSpeed = document.getElementById("windSpeedDisplay").innerText;
+    const windSpeed = document.getElementById("windSelect").value ? document.getElementById("windSelect").options[document.getElementById("windSelect").selectedIndex].text : document.getElementById("windSpeedDisplay").innerText;
 
     setDate(date);
     setStart(startTime);
