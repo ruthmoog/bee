@@ -122,6 +122,7 @@ function makeMetaDataEditable(isEditable) {
     tempDisplay.contentEditable = isEditable;
     sunshineDisplay.contentEditable = isEditable;
 
+    windSpeedSelector.selected = windSpeedDisplay.innerText;
     windSpeedDisplay.hidden = isEditable;
     windSpeedSelector.hidden = !isEditable;
 

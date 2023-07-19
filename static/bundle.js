@@ -142,11 +142,6 @@
         const endTime = document.getElementById("endTimeDisplay").innerText;
         const temperature = document.getElementById("tempDisplay").innerText;
         const sunshine = document.getElementById("sunshineDisplay").innerText;
-        console.log("value: ", document.getElementById("windSelect").value);
-        console.log("select inner text: ", document.getElementById("windSelect").innerText);
-        console.log("span inner text: ", document.getElementById("windSpeedDisplay").innerText);
-
-        console.log("Try this :" , document.getElementById("windSelect").options[document.getElementById("windSelect").selectedIndex].text);
         const windSpeed = document.getElementById("windSelect").value ? document.getElementById("windSelect").options[document.getElementById("windSelect").selectedIndex].text : document.getElementById("windSpeedDisplay").innerText;
 
         setDate(date);
@@ -352,6 +347,7 @@
         tempDisplay.contentEditable = isEditable;
         sunshineDisplay.contentEditable = isEditable;
 
+        windSpeedSelector.selected = windSpeedDisplay.innerText;
         windSpeedDisplay.hidden = isEditable;
         windSpeedSelector.hidden = !isEditable;
 
