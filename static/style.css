@@ -64,6 +64,10 @@ button, #species {
     line-height:            1rem;
 }
 
+button#toggleTransect {
+    box-shadow: 7px 7px 0 1px var(--border-color);
+}
+
 button:active {
     color:                  var(--border-color);
     box-shadow:             7px 7px 0 1px var(--border-color);
