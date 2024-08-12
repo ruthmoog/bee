@@ -35,6 +35,9 @@ const commentBox = document.getElementById("commentText");
 const commentSaveButton = document.getElementById("saveComment");
 const discardCommentButton = document.getElementById("discardComment");
 
+const transectToggleButton = document.getElementById("toggleTransect");
+const coalDropsSections = document.getElementById("coalDropsYard");
+
 const speciesSelection = document.getElementById("species");
 const clearButton = document.getElementById("clear");
 
@@ -52,9 +55,15 @@ saveButton.hidden = true;
 commentBox.hidden = true;
 commentSaveButton.hidden = true;
 discardCommentButton.hidden = true;
+coalDropsSections.hidden = true;
 
 renderSummary();
 renderMetaData();
+
+transectToggleButton.addEventListener("click", () => {
+    toggleTransect();
+    renderMetaData();
+})
 
 startButton.addEventListener("click", () => {
     startBeeWalk();
@@ -130,6 +139,16 @@ function makeMetaDataEditable(isEditable) {
     saveButton.hidden = !isEditable;
 }
 
+function toggleTransect() {
+        // show the relevant sections
+        coalDropsSections.hidden = !coalDropsSections.hidden;
+
+        // update label
+        let labelText = transectToggleButton.innerText;
+        labelText === "Castle Hill" ? labelText = "Coal Drops Yard" : labelText = "Castle Hill";
+        transectToggleButton.innerText = labelText;
+}
+
 function startBeeWalk() {
     walkData.hidden = false;
     function error() {
@@ -138,6 +157,7 @@ function startBeeWalk() {
     }
 
     setStartDateTime();
+    setTransect();
 
     navigator.geolocation.getCurrentPosition(async (location) => {
         const weather = await fetchWeather(location) //todo: maybe this should just return
